@@ -1,5 +1,8 @@
 const client = require('./client');
 const { createCollection } = require('./collection');
+const { createCart } = require('./cart');
+const { createProduct } = require('./product');
+
 const {
   getUserByToken,
   createUser,
@@ -67,7 +70,24 @@ const syncAndSeed = async()=> {
 
   const firstCollection = await createCollection({name: "Lego® City"});
   console.log("---- seeded Collection -----");
-  console.log(firstCollection)
+  console.log(firstCollection);
+
+  const firstProduct = await createProduct({
+    name: "legosnowman",
+    description: "here is the description",
+    collectionId: 1,
+    price: 100,
+    imageUrl: "www.image2.com", 
+    pieceCount: 324,
+    quantity: 3
+  });
+  console.log("---- seeded Product -----");
+  console.log(firstProduct);
+
+
+  const firstCart = await createCart({ id: moe.id });
+  console.log("---- seeded Cart -----");
+  console.log(firstCart);
 };
 
 
