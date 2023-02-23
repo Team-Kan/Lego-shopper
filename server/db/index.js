@@ -1,4 +1,5 @@
 const client = require('./client');
+const { createCollection } = require('./collection');
 const {
   getUserByToken,
   createUser,
@@ -63,6 +64,10 @@ const syncAndSeed = async()=> {
   console.log('--- seeded users ---');
   console.log(moe);
   console.log(lucy);
+
+  const firstCollection = await createCollection({name: "Lego® City"});
+  console.log("---- seeded Collection -----");
+  console.log(firstCollection)
 };
 
 
