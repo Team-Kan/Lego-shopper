@@ -1,6 +1,6 @@
-const client = require('./client');
-const { createCart } = require('../../db/cart');
-const { createUser } = require('../../db/User');
+const { client } = require("../../server/db");
+const { createCart } = require('../../server/db/cart');
+const { createUser } = require('../../server/db/User');
 
 client.connect();
 
@@ -9,12 +9,11 @@ describe('Testing Create Cart Function', () => {
         const user = await createUser({ username: "Bob", password: "password123"});
         const cart = await createCart({ id: user.id });
         expect(cart).toEqual(
-            objectContaining({
+            expect.objectContaining({
                 id: expect.any(Number),
-                userId: expect.toEqual(user.id),
-                isActive: expect.toBe(true)
+                userId: user.id,
+                isActive: true
             })
         );
-    })
-    
+    })  
 });

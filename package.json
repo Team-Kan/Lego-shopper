@@ -7,9 +7,9 @@
     "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development",
     "start:dev": "JWT=felix nodemon server/index.js --ignore dist/ --ignore src/ & npm run build:dev", 
-    "test": "jest",
-    "test:db": "jest db",
-    "test:api": "jest api"
+    "test": "jest --detectOpenHandles",
+    "test:db": "jest db --detectOpenHandles",
+    "test:api": "jest api --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
