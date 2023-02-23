@@ -20,7 +20,7 @@ const syncTables = async()=> {
   );
   CREATE TABLE collections(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
+    name VARCHAR(100) UNIQUE NOT NULL
   );
   CREATE TABLE carts(
     id SERIAL PRIMARY KEY,
@@ -35,13 +35,13 @@ const syncTables = async()=> {
     price INTEGER NOT NULL,
     "imageUrl" VARCHAR NOT NULL,
     "pieceCount" INTEGER NOT NULL,
-    quantity INTEGER
+    quantity INTEGER NOT NULL
   );
   CREATE TABLE carts_products(
     id SERIAL PRIMARY KEY,
     "cartId" INTEGER REFERENCES carts (id),
     "productId" INTEGER REFERENCES products (id),
-    quantity INTEGER,
+    quantity INTEGER NOT NULL,
     UNIQUE ("cartId", "productId")
   );
   `;
