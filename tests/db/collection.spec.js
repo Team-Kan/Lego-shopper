@@ -1,20 +1,23 @@
 const { client } = require("../../server/db");
 const { createCollection } = require("../../server/db/collection");
+const setup = require("../setup");
+const tearDown = require("../tearDown");
 
-client.connect()
+beforeAll(async () => {
+  await setup();
+});
 
-describe('Testing createCollection({name})', () => {
-    it('creates a collection {name, id}', async () => {
-       
-        const [first, second] = [
-          {name: 'Sample®'},
-          {name: 'Ninjago®'},
-        ] 
+afterAll(async () => {
+  await tearDown();
+});
 
-        const firstCollection = await createCollection(first)
-        const secondCollection = await createCollection(second)
-        expect(firstCollection.name).toBe('Sample®');
-        expect(secondCollection.name).toBe('Ninjago®');
+describe("Testing createCollection({name})", () => {
+  it("creates a collection {name, id}", async () => {
+    const [first, second] = [{ name: "Sample®" }, { name: "Ninjago®" }];
 
-      });
-  })
+    const firstCollection = await createCollection(first);
+    const secondCollection = await createCollection(second);
+    expect(firstCollection.name).toBe("Sample®");
+    expect(secondCollection.name).toBe("Ninjago®");
+  });
+});
