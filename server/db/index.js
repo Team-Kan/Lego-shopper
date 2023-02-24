@@ -94,6 +94,7 @@ const syncAndSeed = async()=> {
 module.exports = {
   syncAndSeed,
   createUser,
+  syncTables,
   authenticate,
   getUserByToken,
   client
