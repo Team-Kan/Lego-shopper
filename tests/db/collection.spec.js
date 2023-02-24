@@ -21,3 +21,14 @@ describe("Testing createCollection({name})", () => {
     expect(secondCollection.name).toBe("Ninjago®");
   });
 });
+
+describe("Testing getAllCollections()", () => {
+  it("pulls all of the collections", async () =>{
+    const collections = await getAllCollections();
+    expect(collections.length).toBe(2);
+   });
+    it("pulls all of the collections", async () =>{
+    const collections = await getAllCollections();
+    expect(collections[0].name).toBe("Sample®");
+   });
+});
