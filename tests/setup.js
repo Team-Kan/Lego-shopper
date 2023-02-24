@@ -1,9 +1,9 @@
-const { syncAndSeed, client } = require('../server/db/index');
+const { syncAndSeed, client, syncTables } = require("../server/db/index");
 
 const setup = async () => {
   console.log("--- JEST SETUP ---");
-  client.connect()
-  await syncAndSeed()
-}
+  await client.connect();
+  await syncTables();
+};
 
 module.exports = setup;
