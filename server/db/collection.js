@@ -11,6 +11,33 @@ const createCollection = async ({name}) => {
   return collection;
 }
 
+const getAllCollections = async () => {
+  try {
+    const { rows } = await client.query(`
+    SELECT * FROM collections;
+    `)
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const deleteCollection = async (id) => {
+  try {
+    const {rows: [deletedCollection]} = await client.query(`
+    DELETE
+    FROM collection
+    WHERE "id"=$1
+    RETURNING *;`, [id] )
+    return deletedCollection;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   createCollection,
+  getAllCollections,
+  deleteCollection,
+
 }
