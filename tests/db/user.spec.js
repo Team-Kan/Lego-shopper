@@ -1,7 +1,6 @@
 //make sure to make a dummy database to test out the data and functions on
 //need to make sure we don't save it in the main branch that way, but add it to the local client
-const { createUser } = require("../../server/db");
-const { editIsAdmin } = require("../../server/db/User");
+const { editIsAdmin, getAllUsers, createUser } = require("../../server/db/User");
 const setup = require("../setup");
 const tearDown = require("../tearDown");
 
@@ -42,3 +41,12 @@ describe("editIsAdmin() editing isAdmin, with true or false.", () => {
     expect(goodbyeAdmin.isAdmin).toBe(false);
   });
 });
+
+describe("getAllUsers() expects a array of all users", () => {
+  it("returns all the users, without passwords", async () => {
+    const allUsers = await getAllUsers()
+
+    expect(allUsers.length).toBe(3)
+    expect(allUsers[0].password).toBe(undefined)
+  })
+})

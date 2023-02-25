@@ -47,6 +47,15 @@ const authenticate = async ({ username, password }) => {
   return jwt.sign({ id: response.rows[0].id }, JWT);
 };
 
+const getAllUsers = async () => {
+  const { rows: users} = await client.query(`
+    SELECT id, username "isAdmin"
+    FROM users
+  `)
+
+  return users
+}
+
 const editIsAdmin = async ({ id, isAdmin }) => {
   const {
     rows: [user],
@@ -69,5 +78,6 @@ module.exports = {
   createUser,
   authenticate,
   getUserByToken,
+  getAllUsers,
   editIsAdmin,
 };
