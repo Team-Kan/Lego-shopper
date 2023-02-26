@@ -54,25 +54,29 @@ const syncTables = async () => {
   await client.query(SQL);
 };
 const createInitialUsers = async () => {
-  const [anthony, lucy] = await Promise.all([
+  const [nabeel, kristy, anthony] = await Promise.all([
+    createUser({
+      username: "nabeel",
+      password: "nabeel_password",
+    }),
+    createUser({
+      username: "kristy",
+      password: "kristy_password",
+    }),
     createUser({
       username: "actninswitch@gmail.com",
       password: "SomethingSecret",
-    }),
-    createUser({
-      username: "lucy",
-      password: "lucy_password",
     }),
   ]);
 
   console.log("--- seeded users ---");
   console.log(anthony);
-  console.log(lucy);
+  console.log(nabeel);
   // await editIsAdmin(nabeel);
   // await editIsAdmin(kristy);
   await editIsAdmin(anthony);
 
-  return { anthony, lucy };
+  return { nabeel, kristy, anthony };
 };
 
 const createInitialCollections = async () => {
@@ -102,7 +106,7 @@ const createInitialCollections = async () => {
 };
 
 const createInitialProducts = async () => {
-  const [firstProduct, secondProduct, thirdProduct, fourthProduct] =
+  const [firstProduct, secondProduct, thirdProduct, fourthProduct, fifthProduct] =
     await Promise.all([
       createProduct({
         name: "Lunar Research Base",
@@ -147,6 +151,16 @@ const createInitialProducts = async () => {
         pieceCount: 5686,
         quantity: 2,
       }),
+      createProduct({
+        name: "Millenium Falcon Microfighter",
+        description: "Series 8",
+        collectionId: 4,
+        price: 19.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/810mIHggsfL._AC_SX679_.jpg",
+        pieceCount: 101,
+        quantity: 1,
+      }),
     ]);
 
   console.log("---- seeded Product -----");
@@ -154,8 +168,9 @@ const createInitialProducts = async () => {
   console.log(secondProduct);
   console.log(thirdProduct);
   console.log(fourthProduct);
-  return { firstProduct, secondProduct, thirdProduct, fourthProduct };
+  return { firstProduct, secondProduct, thirdProduct, fourthProduct, fifthProduct };
 };
+
 const createInitialCartProducts = async (firstCart, products) => {
   const { firstProduct, secondProduct, thirdProduct, fourthProduct } = products;
   const [cartProduct1, cartProduct2, cartProduct3] = await Promise.all([
@@ -163,6 +178,11 @@ const createInitialCartProducts = async (firstCart, products) => {
       cartId: firstCart.id,
       productId: firstProduct.id,
       quantity: 1,
+    }),
+    AttachProductToCart({
+      cartId: firstCart.id,
+      productId: secondProduct.id,
+      quantity: 2,
     }),
     AttachProductToCart({
       cartId: firstCart.id,

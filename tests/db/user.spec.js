@@ -44,9 +44,10 @@ describe("editIsAdmin() editing isAdmin, with true or false.", () => {
 
 describe("getAllUsers() expects a array of all users", () => {
   it("returns all the users, without passwords", async () => {
-    const allUsers = await getAllUsers()
+    const allUsers = await getAllUsers();
 
     expect(allUsers.length).toBe(3)
     expect(allUsers[0].password).toBe(undefined)
+    expect(allUsers[0].username).toBe("dan")
   })
 })

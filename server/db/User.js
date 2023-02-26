@@ -1,16 +1,23 @@
 const client = require("./client");
 const jwt = require("jsonwebtoken");
 const JWT = process.env.JWT;
+const bcrypt = require("bcryptjs");
+const saltRounds = process.env.SALT_ROUNDS;
+const salt = bcrypt.genSaltSync(saltRounds);
 
 const createUser = async ({ username, password }) => {
   // we are now not returning the password
+  // We are now hashing the passwords before they are sent to the database
+  const hash = bcrypt.hashSync(password, salt)
   const SQL = `
     INSERT INTO users(username, password)
     VALUES($1, $2) 
     RETURNING id, username, "isAdmin"
   `;
-  const response = await client.query(SQL, [username, password]);
-  return response.rows[0];
+
+  const {rows: [user]} = await client.query(SQL, [username, salt]);
+
+  return user;
 };
 
 const getUserByToken = async (token) => {
@@ -37,8 +44,10 @@ const authenticate = async ({ username, password }) => {
     FROM users
     WHERE username = $1 and password = $2
   `;
-  const response = await client.query(SQL, [username, password]);
-  console.log(response);
+  const hash = bcrypt.hashSync(password, salt)
+
+  const response = await client.query(SQL, [username, hash]);
+  
   if (!response.rows.length) {
     const error = Error("not authorized");
     error.status = 401;
@@ -49,9 +58,9 @@ const authenticate = async ({ username, password }) => {
 
 const getAllUsers = async () => {
   const { rows: users} = await client.query(`
-    SELECT id, username "isAdmin"
+    SELECT id, username, "isAdmin"
     FROM users
-  `)
+  `);
 
   return users
 }
