@@ -7,10 +7,19 @@ const AttachProductToCart = async({ cartId, productId, quantity }) => {
     RETURNING *`;
 
     const { rows: [cart_product]} = await client.query(SQL, [ cartId, productId, quantity ]);
-    console.log(cart_product);
     return cart_product;
 }
 
+const getCartProductsByCartId = async({ id }) => {
+    const SQL = `
+    SELECT * FROM carts_products
+    WHERE "cartId" = $1`;
+
+    const { rows } = await client.query(SQL, [id]);
+    return rows;
+}
+
 module.exports = {
-    AttachProductToCart
+    AttachProductToCart,
+    getCartProductsByCartId
 }
