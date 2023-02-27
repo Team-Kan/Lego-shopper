@@ -65,7 +65,7 @@ const createInitialUsers = async () => {
     }),
     createUser({
       username: "actninswitch@gmail.com",
-      password: "SomethingSecret",
+      password: process.env.ANTHONY_PASSWORD,
     }),
   ]);
 
