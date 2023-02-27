@@ -33,16 +33,16 @@ describe("Testing getAllCollections()", () => {
    });
 });
 
-// describe("Testing deleteCollection()", () => {
-//   it("removed collection from database", async () => {
-//     const { fakeCollection } = await createFakeCollection("ToyStory");
-//     await deleteCollection(fakeCollection.id);
+describe("Testing deleteCollection()", () => {
+  it("removed collection from database", async () => {
+    const  fakeCollection  = await createCollection({name:"ToyStory"});
+    await deleteCollection(fakeCollection.id);
 
-//     const { rows: [collection]} = await client.query(`
-//     SELECT *
-//     FROM collection
-//     WHERE id = $1;
-//     `, [fakeCollection.id])
-//     expect(collection).toBeFalsy();
-//   })
-// });
+    const { rows: [collection]} = await client.query(`
+    SELECT *
+    FROM collection
+    WHERE id = $1;
+    `, [fakeCollection.id])
+    expect(collection).toBeFalsy();
+  })
+});
