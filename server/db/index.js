@@ -2,7 +2,7 @@ const client = require("./client");
 const { createCollection } = require("./collection");
 const { createCart } = require("./cart");
 const { createProduct } = require("./product");
-const { AttachProductToCart } = require("./cart_product");
+const { addProductToCart } = require("./cart_product");
 
 const {
   getUserByToken,
@@ -174,22 +174,22 @@ const createInitialProducts = async () => {
 const createInitialCartProducts = async (firstCart, products) => {
   const { firstProduct, secondProduct, thirdProduct, fourthProduct } = products;
   const [cartProduct1, cartProduct2, cartProduct3] = await Promise.all([
-    AttachProductToCart({
+    addProductToCart({
       cartId: firstCart.id,
       productId: firstProduct.id,
       quantity: 1,
     }),
-    AttachProductToCart({
+    addProductToCart({
       cartId: firstCart.id,
       productId: secondProduct.id,
       quantity: 2,
     }),
-    AttachProductToCart({
+    addProductToCart({
       cartId: firstCart.id,
       productId: thirdProduct.id,
       quantity: 1,
     }),
-    AttachProductToCart({
+    addProductToCart({
       cartId: firstCart.id,
       productId: fourthProduct.id,
       quantity: 1,
