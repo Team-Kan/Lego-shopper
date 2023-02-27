@@ -13,8 +13,22 @@ const createProduct = async ({name, description, collectionId, price, imageUrl, 
   return product
 }
 
-
+const getAllProducts = async () => {
+  try {
+    const{ rows: product} = await client.query(`
+    SELECT products.*, 
+    collections.name AS "collectionName"
+    FROM products
+    JOIN collections ON collections.id = "collectionId"
+    ORDER BY Id
+    `)
+    return product;
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 module.exports={
-  createProduct
+  createProduct,
+  getAllProducts
 }
