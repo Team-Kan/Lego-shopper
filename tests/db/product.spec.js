@@ -78,5 +78,5 @@ describe("Testing getAllProducts()", () => {
       quantity: 3,
       collectionName: "sample",
     }))
-  })
-})
+  });
+});
