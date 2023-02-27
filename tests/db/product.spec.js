@@ -1,6 +1,6 @@
 const { createCollection } = require("../../server/db/collection");
 const { client } = require("../../server/db/index");
-const { createProduct } = require("../../server/db/product");
+const { createProduct, getAllProducts } = require("../../server/db/product");
 const setup = require("../setup");
 const tearDown = require("../tearDown");
 
@@ -64,3 +64,19 @@ describe("Testing createProduct({name, description, collectionId, price, imageUr
     );
   });
 });
+
+describe("Testing getAllProducts()", () => {
+  it("returns all products with collection name", async () => {
+    const product = await getAllProducts();
+    expect(product[0]).toEqual(expect.objectContaining( {
+      name: "legoman",
+      description: "here is a description",
+      collectionId: 1,
+      price: 100,
+      imageUrl: "www.image.com",
+      pieceCount: 10000,
+      quantity: 3,
+      collectionName: "sample",
+    }))
+  })
+})
