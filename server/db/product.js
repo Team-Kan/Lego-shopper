@@ -13,6 +13,8 @@ const createProduct = async ({name, description, collectionId, price, imageUrl, 
   return product
 }
 
+const getAllProducts = async
+
 module.exports={
   createProduct
 }
