@@ -1,5 +1,5 @@
 const { client } = require("../../server/db");
-const { createCollection, getAllCollections, deleteCollection } = require("../../server/db/collection");
+const { createCollection, getAllCollections, deleteCollection, editCollection } = require("../../server/db/collection");
 const setup = require("../setup");
 const tearDown = require("../tearDown");
 
@@ -46,3 +46,10 @@ describe("Testing deleteCollection()", () => {
     expect(collection).toBeFalsy();
   })
 });
+
+describe("Testing editCollection({id, name})", () => {
+  it("edits collection in database", async () => {
+    const fakeEditCollection = await editCollection({id:1, name: "React!"});
+    expect(fakeEditCollection.name).toBe("React!")
+  })
+})

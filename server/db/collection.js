@@ -35,9 +35,24 @@ const deleteCollection = async (id) => {
   }
 }
 
+const editCollection = async ({id, name}) => {
+  try {
+    const {rows: [collection]} = await client.query(`
+    UPDATE collections
+    SET name = $1
+    WHERE id = $2
+    RETURNING *
+    `, [name,id ])
+    return collection;
+
+  } catch (error) {
+    console.log(error);
+  }
+} 
+
 module.exports = {
   createCollection,
   getAllCollections,
   deleteCollection,
-
+  editCollection,
 }
