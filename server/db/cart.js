@@ -62,16 +62,27 @@ const getInactiveCartsByUserId = async (id) => {
     WHERE "userId" = $1 AND "isActive" = false;
     `, [id]);
     
-    let [carts] = attachProductsToCart(rows);
+    let carts = attachProductsToCart(rows);
     console.log(carts);
-    //cart = Object.values(cart);
+    carts = Object.values(carts);
     
-    //return cart;
+    return carts;
+}
+
+const checkoutCart = async(id) => {
+    const { rows: [cart]} = await client.query(`
+    UPDATE carts 
+    SET "isActive" = false
+    WHERE id = $1
+    RETURNING *
+    `, [id]);
+
+    return cart;
 }
 
 module.exports = {
     createCart,
-    //getAllCarts,
     getActiveCartByUserId,
-    getInactiveCartsByUserId
+    getInactiveCartsByUserId,
+    checkoutCart
 }
