@@ -38,35 +38,40 @@ const attachProductsToCart = (carts) => {
     return cartsById;
 }
 
-const getAllCarts = async() => {
-    const SQL = `
-    SELECT carts."userId", carts."isActive", carts_products.*, products.name, products.description, 
-    products.price, products."imageUrl" FROM carts_products
-    JOIN carts ON "cartId" = carts.id
-    JOIN products ON "productId" = products.id`;
+const allCartsJoinQuery = `SELECT carts."userId", carts."isActive", carts_products.*, products.name, 
+products.description, products.price, products."imageUrl" FROM carts_products
+JOIN carts ON "cartId" = carts.id
+JOIN products ON "productId" = products.id`;
 
-    const { rows } = await client.query(SQL);
-
-    let carts = attachProductsToCart(rows);
-    carts = Object.values(carts);
-    return carts;
-}
 
 const getActiveCartByUserId = async (id) => {
-    const carts = await getAllCarts();
-    const [cart] = carts.filter(cart => {
-        return cart.userId === id && cart.isActive === true;
-    })
+    const { rows } = await client.query(`
+    ${allCartsJoinQuery}
+    WHERE "userId" = $1 AND "isActive" = true;
+    `, [id]);
+    
+    let cart = attachProductsToCart(rows);
+    cart = Object.values(cart);
+
     return cart;
 }
 
 const getInactiveCartsByUserId = async (id) => {
-
+    const { rows } = await client.query(`
+    ${allCartsJoinQuery}
+    WHERE "userId" = $1 AND "isActive" = false;
+    `, [id]);
+    
+    let [carts] = attachProductsToCart(rows);
+    console.log(carts);
+    //cart = Object.values(cart);
+    
+    //return cart;
 }
 
 module.exports = {
     createCart,
-    getAllCarts,
+    //getAllCarts,
     getActiveCartByUserId,
     getInactiveCartsByUserId
 }

@@ -14,7 +14,7 @@ afterAll(async () => {
   await tearDown();
 });
 
-describe("Testing all functions related to the cart_products table", () => {
+//describe("Testing all functions related to the cart_products table", () => {
   describe("Testing Add Product to Cart Function", () => {
     it("creates and returns a cart_product row", async () => {
       const larryCollection = await createCollection({ name: 'larry' })
@@ -48,7 +48,7 @@ describe("Testing all functions related to the cart_products table", () => {
     });
   });
 
-  describe('Testing getCarProductsByCartId', () => {
+  describe('Testing getCartProductsByCartId', () => {
     it('returns all products that are associated with a particular cart', async () => {
       const laurenCollection = await createCollection({ name: 'lauren' })
       const lauren = await createUser({ username: "Lauren", password: "larenisthecoolest" });
@@ -97,4 +97,4 @@ describe("Testing all functions related to the cart_products table", () => {
       );
     });
   })
-})
+//})

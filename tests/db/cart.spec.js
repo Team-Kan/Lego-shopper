@@ -1,4 +1,4 @@
-const { createCart, getAllCarts, getActiveCartByUserId } = require("../../server/db/cart");
+const { createCart, getActiveCartByUserId, getInactiveCartsByUserId } = require("../../server/db/cart");
 const { createCollection } = require("../../server/db/collection");
 const { createUser } = require("../../server/db/User");
 const { createProduct } = require("../../server/db/product");
@@ -77,30 +77,27 @@ describe("Testing of all functions for Cart table", () => {
     });
   });
 
-
-  describe("Testing getAllCarts and attachProductsToCart", () => {
-    it('gets all carts', async () => {
-      const allCarts = await getAllCarts();
-      expect(allCarts).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            id: expect.any(Number),
-            userId: user.id,
-            isActive: true,
-            products: expect.any(Array)
-          })])
-      );
-    })
-  });
-
   describe('Testing getActiveCartByUserId', () => {
     it('grabs the active cart by the user id', async () => {
       let userCart = await getActiveCartByUserId(user.id);
-      expect(userCart).toEqual(
+      expect(userCart[0]).toEqual(
         expect.objectContaining({
           id: expect.any(Number),
           userId: user.id,
           isActive: true,
+          products: expect.any(Array)
+        }))
+    })
+  })
+
+  xdescribe('Testing getInactiveCartsByUserId', () => {
+    it('grabs the checked out carts by the user id', async () => {
+      let userCarts = await getInactiveCartsByUserId(user.id);
+      expect(userCarts).toEqual(
+        expect.objectContaining({
+          id: expect.any(Number),
+          userId: user.id,
+          isActive: false,
           products: expect.any(Array)
         }))
     })
