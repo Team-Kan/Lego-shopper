@@ -40,7 +40,7 @@ describe("Testing deleteCollection()", () => {
 
     const { rows: [collection]} = await client.query(`
     SELECT *
-    FROM collection
+    FROM collections
     WHERE id = $1;
     `, [fakeCollection.id])
     expect(collection).toBeFalsy();

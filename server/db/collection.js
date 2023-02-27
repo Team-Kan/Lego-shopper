@@ -26,7 +26,7 @@ const deleteCollection = async (id) => {
   try {
     const {rows: [deletedCollection]} = await client.query(`
     DELETE
-    FROM collection
+    FROM collections
     WHERE "id"=$1
     RETURNING *;`, [id] )
     return deletedCollection;
