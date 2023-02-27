@@ -1,7 +1,7 @@
 const { createCart } = require("../../server/db/cart");
 const { createUser } = require("../../server/db");
 const { createProduct } = require("../../server/db/product");
-const { AttachProductToCart, getCartProductsByCartId } = require("../../server/db/cart_product");
+const {addProductToCart, getCartProductsByCartId } = require("../../server/db/cart_product");
 const setup = require("../setup");
 const tearDown = require("../tearDown");
 const { createCollection } = require("../../server/db/collection");
@@ -15,7 +15,7 @@ afterAll(async () => {
 });
 
 describe("Testing all functions related to the cart_products table", () => {
-  describe("Testing Attach Product to Cart Function", () => {
+  describe("Testing Add Product to Cart Function", () => {
     it("creates and returns a cart_product row", async () => {
       const larryCollection = await createCollection({ name: 'larry' })
       const larry = await createUser({ username: "Lary", password: "lary_password" });
@@ -32,7 +32,7 @@ describe("Testing all functions related to the cart_products table", () => {
       const cartId = larryCart.id;
       const productId = larryProduct.id;
       const quantity = 5;
-      const cart_product = await AttachProductToCart({
+      const cart_product = await addProductToCart({
         cartId,
         productId,
         quantity,
@@ -78,12 +78,12 @@ describe("Testing all functions related to the cart_products table", () => {
       const quantity1 = 1;
       const quantity2 = 1;
 
-      const cart_product1 = await AttachProductToCart({
+      const cart_product1 = await addProductToCart({
         cartId,
         productId: productId1,
         quantity: quantity1,
       });
-      const cart_product2 = await AttachProductToCart({
+      const cart_product2 = await addProductToCart({
         cartId,
         productId: productId2,
         quantity: quantity2,

@@ -1,6 +1,6 @@
 const client = require('./client');
 
-const AttachProductToCart = async({ cartId, productId, quantity }) => {
+const addProductToCart = async({ cartId, productId, quantity }) => {
     const SQL = `
     INSERT into carts_products("cartId", "productId", quantity)
     VALUES ($1, $2, $3)
@@ -20,6 +20,6 @@ const getCartProductsByCartId = async({ id }) => {
 }
 
 module.exports = {
-    AttachProductToCart,
+    addProductToCart,
     getCartProductsByCartId
 }
