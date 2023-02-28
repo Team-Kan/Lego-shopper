@@ -36,7 +36,7 @@ describe("delete /collections/remove/:id", () => {
     const token = await authenticate({username: admin.username, password: "password"});
 
     const response = await request(app).delete(
-      `/api/collections/remove/${newCollection.id}`
+      `/api/collections/${newCollection.id}`
     )
     .set("Authorization", `Bearer ${token}`);
 
@@ -48,7 +48,7 @@ describe("delete /collections/remove/:id", () => {
     const token = await authenticate({username, password: "password23"});
 
     const response = await request(app).delete(
-      `/api/collections/remove/${newCollection.id}`
+      `/api/collections/${newCollection.id}`
     )
     .set("Authorization", `Bearer ${token}`);
     
