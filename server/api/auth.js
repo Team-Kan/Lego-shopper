@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { authenticate, getUserByToken } = require("../db");
+const { authenticate, getUserByToken, createUser } = require("../db");
 
 module.exports = router;
 
@@ -22,7 +22,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.use("/register", async (req, res, next) => {
+router.post("/register", async (req, res, next) => {
   try {
     const {username, password} = req.body
     if(password.length <= 7){
@@ -33,8 +33,8 @@ router.use("/register", async (req, res, next) => {
       })
     }
     const newUser = await createUser({username, password});
-
-    res.send(newUser);
+    const token = await authenticate(req.body);
+    res.send({ token });
   } catch (error) {
     next(error);
   }

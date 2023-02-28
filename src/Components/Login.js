@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const Login = ({ attemptLogin })=> {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const login = async({ username, password})=> {
     fetch(
@@ -20,6 +22,7 @@ const Login = ({ attemptLogin })=> {
       if(data.token){
         window.localStorage.setItem('token', data.token);
         attemptLogin();
+        navigate('/');
       }
       else {
         console.log(data);

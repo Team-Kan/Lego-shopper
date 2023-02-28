@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
 
 const Register = ({ attemptLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const register = async({ username, password})=> {
     fetch(
-      '/api/auth/',
+      '/api/auth/register',
       {
         method: 'POST',
         body: JSON.stringify({ username, password}),
@@ -20,6 +22,7 @@ const Register = ({ attemptLogin }) => {
       if(data.token){
         window.localStorage.setItem('token', data.token);
         attemptLogin();
+        navigate('/');
       }
       else {
         console.log(data);
