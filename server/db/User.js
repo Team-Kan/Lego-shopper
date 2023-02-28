@@ -17,7 +17,7 @@ const createUser = async ({ username, password }) => {
 
   const {rows: [user]} = await client.query(SQL, [username, hash]);
 
-  return jwt.sign(user, process.env.JWT);
+  return user
 };
 
 const getUserByToken = async (token) => {

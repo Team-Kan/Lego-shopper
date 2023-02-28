@@ -32,8 +32,8 @@ describe("delete /collections/remove/:id", () => {
   it("should delete a collection from the database", async () => {
     const newCollection = await createCollection({ name: "newSample" });
     const newUser = await createUser({username: "bob", password: "password"});
-    const {username} = await editIsAdmin(newUser);
-    const token = await authenticate({username, password: "password"});
+    const admin = await editIsAdmin(newUser);
+    const token = await authenticate({username: admin.username, password: "password"});
 
     const response = await request(app).delete(
       `/api/collections/remove/${newCollection.id}`

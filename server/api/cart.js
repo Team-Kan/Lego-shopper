@@ -1,5 +1,5 @@
 const express = require("express");
-const { getActiveCartByUserId } = require("../db/cart");
+const { getActiveCartByUserId, getInactiveCartsByUserId } = require("../db/cart");
 const { tokenAuth, sliceToken } = require("./utils");
 const router = express.Router();
 
@@ -13,5 +13,17 @@ router.get("/", tokenAuth, async (req, res, next) => {
     next(error);
   }
 });
+
+router.get("/inactive/:id", tokenAuth, async (res, req, next) => {
+  try {
+    const {id, username, isAdmin} = sliceToken(req);
+
+    const orderHistory = await getInactiveCartsByUserId(id);
+
+    return orderHistory
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = router;
