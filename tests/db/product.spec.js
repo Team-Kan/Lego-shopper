@@ -1,6 +1,6 @@
 const { createCollection } = require("../../server/db/collection");
 const { client } = require("../../server/db/index");
-const { createProduct, getAllProducts } = require("../../server/db/product");
+const { createProduct, getAllProducts, getProductsByCollectionId, getProductById } = require("../../server/db/product");
 const setup = require("../setup");
 const tearDown = require("../tearDown");
 
@@ -80,3 +80,77 @@ describe("Testing getAllProducts()", () => {
     }))
   });
 });
+
+describe("getProductsByCollectionId(id)", () => {
+  it("return a list of all products in that collection", async () => {
+    const collection2 = await createCollection({name: "this"})
+    const collection3 = await createCollection({name: "now"})
+    const [product3, product4, product5, product6] = await Promise.all([
+      createProduct({name: "legoson",
+        description: "here is a legoson",
+        collectionId: collection2.id,
+        price: 100,
+        imageUrl: "www.image.com",
+        pieceCount: 10000,
+        quantity: 3,
+      }),
+      createProduct({name: "legodaughter",
+        description: "here is a legodaughter",
+        collectionId: collection2.id,
+        price: 100,
+        imageUrl: "www.image.com",
+        pieceCount: 10000,
+        quantity: 3,
+      }),
+      createProduct({name: "lego",
+        description: "here is a lego",
+        collectionId: collection3.id,
+        price: 100,
+        imageUrl: "www.image.com",
+        pieceCount: 10000,
+        quantity: 3,
+      }),
+      createProduct({name: "legoneighbor",
+        description: "here is a neighbor",
+        collectionId: collection3.id,
+        price: 100,
+        imageUrl: "www.image.com",
+        pieceCount: 10000,
+        quantity: 3,
+      }),
+    ])
+    const productsFromCollection2 = await getProductsByCollectionId(collection2.id);
+    const productsFromCollection3 = await getProductsByCollectionId(collection3.id);
+    expect(productsFromCollection2.length).toBe(2);
+    expect(productsFromCollection3.length).toBe(2);
+    expect(productsFromCollection3[0].name).toBe(product5.name);
+  })
+})
+
+describe("getProductById(id)", () => {
+  it("should return the product with that id", async () => {
+    const product3 = await getProductById(3);
+    const product5 = await getProductById(5);
+
+    expect(product3)
+    .toEqual(
+      expect.objectContaining({
+        name: "legoson",
+        description: "here is a legoson",
+        collectionId: 2,
+        price: 100,
+        imageUrl: "www.image.com",
+        pieceCount: 10000,
+        quantity: 3,
+    }))
+    expect(product5).toEqual(expect.objectContaining({
+      name: "lego",
+      description: "here is a lego",
+      collectionId: 3,
+      price: 100,
+      imageUrl: "www.image.com",
+      pieceCount: 10000,
+      quantity: 3,
+  }))
+  })
+})
