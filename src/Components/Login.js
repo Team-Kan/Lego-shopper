@@ -1,13 +1,40 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-const Login = ({ login })=> {
+const Login = ({ attemptLogin })=> {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const login = async({ username, password})=> {
+    fetch(
+      '/api/auth/',
+      {
+        method: 'POST',
+        body: JSON.stringify({ username, password}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    .then( response => response.json())
+    .then( (data) => {
+      if(data.token){
+        window.localStorage.setItem('token', data.token);
+        attemptLogin();
+        navigate('/');
+      }
+      else {
+        console.log(data);
+      }
+    });
+  };
 
   const _login = (ev)=> {
     ev.preventDefault();
     login({ username, password });
   };
+
   return (
     <div>
       <h2>Login</h2>

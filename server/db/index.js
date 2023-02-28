@@ -57,23 +57,23 @@ const createInitialUsers = async () => {
   const [nabeel, kristy, anthony] = await Promise.all([
     createUser({
       username: "nabeel",
-      password: "nabeel_password",
+      password: process.env.NABEEL_PASSWORD,
     }),
     createUser({
       username: "kristy",
-      password: "kristy_password",
+      password: process.env.KRISTY_PASSWORD,
     }),
     createUser({
       username: "actninswitch@gmail.com",
-      password: "SomethingSecret",
+      password: process.env.ANTHONY_PASSWORD,
     }),
   ]);
 
   console.log("--- seeded users ---");
   console.log(anthony);
   console.log(nabeel);
-  // await editIsAdmin(nabeel);
-  // await editIsAdmin(kristy);
+  await editIsAdmin(nabeel);
+  await editIsAdmin(kristy);
   await editIsAdmin(anthony);
 
   return { nabeel, kristy, anthony };

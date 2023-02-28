@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development",
-    "start:dev": "JWT=felix nodemon server/index.js --ignore dist/ --ignore src/ & npm run build:dev", 
+    "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run build:dev",
     "test": "jest --detectOpenHandles",
     "test:db": "jest db --detectOpenHandles",
     "test:api": "jest api --detectOpenHandles"
@@ -16,8 +16,11 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
     "pg": "^8.8.0",
     "sequelize": "^6.25.3"
   },
@@ -31,6 +34,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
+    "supertest": "^6.3.3",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   }
