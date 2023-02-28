@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
+import Register from './Register';
 import { Link, Routes, Route } from 'react-router-dom';
 
 
@@ -32,59 +33,52 @@ const App = ()=> {
     setAuth({});
   }
 
-  const login = async({ username, password})=> {
-    fetch(
-      '/api/auth/',
-      {
-        method: 'POST',
-        body: JSON.stringify({ username, password}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-    .then( response => response.json())
-    .then( (data) => {
-      if(data.token){
-        window.localStorage.setItem('token', data.token);
-        attemptLogin();
-      }
-      else {
-        console.log(data);
-      }
-    });
-  };
+  // having trouble with this function
+  // const login = async({ username, password})=> {
+  //   fetch(
+  //     '/api/auth/',
+  //     {
+  //       method: 'POST',
+  //       body: JSON.stringify({ username, password}),
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       }
+  //     }
+  //   )
+  //   .then( response => response.json())
+  //   .then( (data) => {
+  //     if(data.token){
+  //       window.localStorage.setItem('token', data.token);
+  //       attemptLogin();
+  //     }
+  //     else {
+  //       console.log(data);
+  //     }
+  //   });
+  // };
 
   return (
     <div>
-      <h1>FS UNI App Template</h1>
+      <h1>Welcome to reKANstructed!</h1>
       <nav>
+        <Link to='/'>Home</Link>
         {
           auth.id ? (
             <>
-              <Link to='/'>Home</Link>
               <button onClick={ logout }>Logout { auth.username }</button>
             </>
           ) : (
             <>
               <Link to='/login'>Login</Link>
+              <Link to='/register'>Register</Link>
             </>
           )
         }
       </nav>
       <Routes>
-        {
-          auth.id ? (
-            <>
-            <Route path='/' element= { <Home auth={ auth }/> } />
-            </>
-
-          ): (
-            <>
-            <Route path='/login' element= { <Login login={ login }/> } />
-            </>
-          )
-        }
+            <Route path='/' element= { <Home /> } />
+            <Route path='/login' element= { <Login attemptLogin={ attemptLogin }/> } />
+            <Route path='/register' element= { <Register attemptLogin={ attemptLogin }/> } />
       </Routes>
     </div>
   );
