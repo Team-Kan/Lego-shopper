@@ -29,4 +29,18 @@ app.use((err, req, res, next)=> {
   res.status(err.status || 500).send({ error: err.message });
 });
 
+app.use((req, res) => {
+  res.status(404).send(
+    {success: false , message: "Request failed with status 404"} 
+  );
+});
+
+app.use((req, res) => {
+  res
+    .status(500)
+    .send(
+      {success: false, message: "Request failed with status 500" }
+    );
+});
+
 module.exports = app;

@@ -1,16 +1,17 @@
-const express = require('express');
-const { getActiveCartByUserId } = require('../db/cart');
+const express = require("express");
+const { getActiveCartByUserId } = require("../db/cart");
+const { tokenAuth, sliceToken } = require("./utils");
 const router = express.Router();
 
+router.get("/", tokenAuth, async (req, res, next) => {
+  try {
+    const { id, username, isAdmin } = sliceToken(req);
+    const cart = await getActiveCartByUserId(id);
 
-// router.get('/', async(req, res, next) => {
-//     try{
-//         const cart = await getActiveCartByUserId();
-//         res.send(cart);
-//     } catch(error){
-//         next(error);
-//     }
-// })
-
+    res.send(cart);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
