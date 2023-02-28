@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, Navigate } from 'react-router-dom';
 
 
 const App = ()=> {
@@ -77,8 +77,8 @@ const App = ()=> {
       </nav>
       <Routes>
             <Route path='/' element= { <Home /> } />
-            <Route path='/login' element= { <Login attemptLogin={ attemptLogin }/> } />
-            <Route path='/register' element= { <Register attemptLogin={ attemptLogin }/> } />
+            <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
+            <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
       </Routes>
     </div>
   );
