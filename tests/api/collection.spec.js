@@ -4,7 +4,7 @@ const request = require("supertest");
 const { createCollection } = require("../../server/db/collection");
 const app = require("../../server/app");
 const { createUser } = require("../../server/db");
-const { editIsAdmin } = require("../../server/db/User");
+const { editIsAdmin, authenticate } = require("../../server/db/User");
 
 beforeAll(async () => {
   await setup();
@@ -31,14 +31,33 @@ describe("get /collections/", () => {
 describe("delete /collections/remove/:id", () => {
   it("should delete a collection from the database", async () => {
     const newCollection = await createCollection({ name: "newSample" });
-    const newUser = await createUser({name: "bob", password: "password"});
-    const admin = await editIsAdmin(newUser.id);
+    const newUser = await createUser({username: "bob", password: "password"});
+    const {username} = await editIsAdmin(newUser);
+    const token = await authenticate({username, password: "password"});
 
     const response = await request(app).delete(
       `/api/collections/remove/${newCollection.id}`
-    );
-    // .set("Authorization", `Bearer ${token}`);
+    )
+    .set("Authorization", `Bearer ${token}`);
 
     expect(response.body.name).toBe(newCollection.name);
   });
+  it("should not let a regular user delete a collection", async () => {
+    const newCollection = await createCollection({ name: "newSample" });
+    const {username} = await createUser({username: "bob23", password: "password23"});
+    const token = await authenticate({username, password: "password23"});
+
+    const response = await request(app).delete(
+      `/api/collections/remove/${newCollection.id}`
+    )
+    .set("Authorization", `Bearer ${token}`);
+    
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        message: `${username} is not an admin.`,
+        error: "Unathorized user",
+        name: "NotAllowedUserError",
+      })
+    )
+  })
 });
