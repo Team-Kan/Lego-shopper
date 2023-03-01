@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const { tokenAuth }= require("./utils")
 const { authenticate, getUserByToken, createUser } = require("../db");
 
 module.exports = router;
@@ -14,7 +14,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/", async (req, res, next) => {
+router.get("/", tokenAuth, async (req, res, next) => {
   try {
     res.send(await getUserByToken(req.headers.authorization));
   } catch (ex) {
