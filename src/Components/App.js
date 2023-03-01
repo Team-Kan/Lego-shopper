@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
+import Products from './Products';
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
 
 
@@ -79,6 +80,7 @@ const App = ()=> {
             <Route path='/' element= { <Home /> } />
             <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
             <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
+            <Route path='/products' element={<Products/>}/>
       </Routes>
     </div>
   );
