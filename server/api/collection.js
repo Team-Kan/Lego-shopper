@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllCollections, deleteCollection } = require("../db/collection");
+const { getAllCollections, deleteCollection, editCollection } = require("../db/collection");
 const { adminCheck, tokenAuth } = require("./utils");
 const router = express.Router();
 
@@ -20,7 +20,25 @@ router.delete("/:id", tokenAuth, adminCheck, async (req, res, next) => {
     
     res.send(collection);
   } catch (error) {
-    next(error)
+    next(error);
+  }
+});
+
+router.patch("/:id", tokenAuth, adminCheck, async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const {name} = req.body;
+
+    const colllection = await editCollection({id, name});
+    if(!colllection.name){
+      next({ 
+        status: 401,
+        message: `Collection with the id ${id} does not exist.`
+      });
+    }
+    res.send(colllection);
+  } catch (error) {
+    next(error);
   }
 })
 

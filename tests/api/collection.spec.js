@@ -4,7 +4,7 @@ const request = require("supertest");
 const app = require("../../server/app");
 const { createCollection } = require("../../server/db/collection");
 const { createUser } = require("../../server/db");
-const { editIsAdmin, authenticate } = require("../../server/db/User");
+const { editIsAdmin, authenticate, getUserByToken } = require("../../server/db/User");
 
 beforeAll(async () => {
   await setup();
@@ -61,3 +61,20 @@ describe("delete /collections/remove/:id", () => {
     )
   })
 });
+
+describe("PATCH api/collection/:id", () => {
+  it("should edit a collections name if an admin makes the request", async () => {
+    const newCollection = await createCollection({ name: "newAgeSample" });
+    const token = await authenticate({username: "bob", password: "password"});
+    // const {username, isA} = await getUserByToken(token);
+    const newName = {name: "NotANewAgeSample"}
+    const response =  await request(app).patch(
+      `/api/collections/${newCollection.id}`
+    )
+    .set("Authorization", `Bearer ${token}`)
+    .send(newName);
+
+    expect(response.body.name).toBe(newName.name);
+    expect(response.body.id).toBe(newCollection.id)
+  })
+})
