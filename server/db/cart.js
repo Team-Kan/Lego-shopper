@@ -22,26 +22,29 @@ const attachProductsToCart = (carts) => {
                 products: []
             }
         }
-        const product = {
+        if(cart.cartProductId){
+          const product = {
             cartId: cart.cartId,
-            cartProductId: cart.id,
+            cartProductId: cart.cartProductId,
             id:   cart.productId,
             quantity: cart.quantity,
             name: cart.name, 
             description: cart.description,
             price: cart.price,
             imageUrl: cart.imageUrl
+          }
+          cartsById[cart.cartId].products.push(product);
         }
-        cartsById[cart.cartId].products.push(product);
     })
 
     return cartsById;
 }
 
-const allCartsJoinQuery = `SELECT carts."userId", carts."isActive", carts_products.*, products.name, 
-products.description, products.price, products."imageUrl" FROM carts_products
-JOIN carts ON "cartId" = carts.id
-JOIN products ON "productId" = products.id`;
+const allCartsJoinQuery = `SELECT carts."userId", carts."isActive", carts.id AS "cartId",
+carts_products.id AS "cartProductId", carts_products."productId", carts_products.quantity,
+products.name, products.description, products.price, products."imageUrl" FROM carts
+LEFT JOIN carts_products ON "cartId" = carts.id
+LEFT JOIN products ON "productId" = products.id`;
 
 
 const getActiveCartByUserId = async (id) => {
