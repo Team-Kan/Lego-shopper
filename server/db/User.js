@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const saltRounds = process.env.SALT_ROUNDS;
 const salt = bcrypt.genSaltSync(+saltRounds);
-const JWT = process.env.JWT
 
 const createUser = async ({ username, password }) => {
   // we are now not returning the password
@@ -21,7 +20,7 @@ const createUser = async ({ username, password }) => {
 };
 
 const getUserByToken = async (token) => {
-  const payload = await jwt.verify(token, JWT);
+  const payload = await jwt.verify(token, process.env.JWT);
   const SQL = `
     SELECT id, username, "isAdmin"
     FROM users
@@ -47,11 +46,12 @@ const authenticate = async ({ username, password }) => {
   const hash = bcrypt.hashSync(password, salt)
   const {rows: [user]} = await client.query(SQL, [username, hash]);
   
-  if (!user) {
+  if (!user.id) {
     const error = Error("not authorized");
     error.status = 401;
     throw error;
   }
+  console.log(process.env.JWT)
   return jwt.sign(user, process.env.JWT);
 };
 

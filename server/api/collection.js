@@ -13,11 +13,11 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.delete("/remove/:id", tokenAuth, adminCheck, async (req, res, next) => {
+router.delete("/:id", tokenAuth, adminCheck, async (req, res, next) => {
   try {
     const { id } = req.params;
     const collection = await deleteCollection(id);
-
+    
     res.send(collection);
   } catch (error) {
     next(error)

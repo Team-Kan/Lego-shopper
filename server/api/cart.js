@@ -1,20 +1,25 @@
 const express = require("express");
-const { getActiveCartByUserId, getInactiveCartsByUserId } = require("../db/cart");
+const { getActiveCartByUserId, getInactiveCartsByUserId, createCart } = require("../db/cart");
 const { tokenAuth, sliceToken } = require("./utils");
 const router = express.Router();
 
 router.get("/", tokenAuth, async (req, res, next) => {
   try {
-    const { id, username, isAdmin } = sliceToken(req);
-    const cart = await getActiveCartByUserId(id);
-
-    res.send(cart);
+    const userInfo = sliceToken(req);
+    console.log("useer info",userInfo.id)
+    const cart = await getActiveCartByUserId(userInfo.id);
+    console.log(cart)
+    if(!cart.length){
+      const newCart = await createCart({id:userInfo.id})
+      res.send(newCart)
+    }
+    res.send(cart[0]);
   } catch (error) {
     next(error);
   }
 });
 
-router.get("/inactive/:id", tokenAuth, async (res, req, next) => {
+router.get("/inactive", tokenAuth, async (res, req, next) => {
   try {
     const {id, username, isAdmin} = sliceToken(req);
 
