@@ -1,8 +1,8 @@
 const setup = require("../setup");
 const tearDown = require("../tearDown");
 const request = require("supertest");
-const { createCollection } = require("../../server/db/collection");
 const app = require("../../server/app");
+const { createCollection } = require("../../server/db/collection");
 const { createUser } = require("../../server/db");
 const { editIsAdmin, authenticate } = require("../../server/db/User");
 
