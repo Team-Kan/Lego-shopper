@@ -15,6 +15,7 @@ const Products = () => {
 
   return (
     <div>
+      <h2>All Products</h2>
       {products.length
         ? products.map((product) => {
             const {
@@ -28,7 +29,6 @@ const Products = () => {
             } = product;
             return (
               <div key={product.id}>
-                <h2>All Products</h2>
                 <ul>
                 <li>Name:{name}</li>
                 <li>Description: {description}</li>
