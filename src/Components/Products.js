@@ -7,7 +7,6 @@ const Products = () => {
   const showAllProducts = async () => {
     const product = await fetchAllProducts();
     setProducts(product);
-    console.log(products);
   };
 
   useEffect(() => {
@@ -28,7 +27,7 @@ const Products = () => {
               quantity,
             } = product;
             return (
-              <div>
+              <div key={product.id}>
                 <h2>All Products</h2>
                 <ul>
                 <li>Name:{name}</li>
