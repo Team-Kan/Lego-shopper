@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { fetchAllProducts } from "../api";
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
 
-  const showAllProducts = async () => {
-    const product = await fetchAllProducts();
-    setProducts(product);
-  };
-
-  useEffect(() => {
-    showAllProducts();
-  }, []);
+const Products = (props) => {
+  const{products} = props;
 
   return (
     <div>
