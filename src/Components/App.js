@@ -3,13 +3,14 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Products from './Products';
-import { fetchAllProducts } from "../api";
+import { fetchAllProducts, fetchAllCollections } from "../api";
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
 
 
 const App = ()=> {
   const [auth, setAuth] = useState({});
   const [products, setProducts] = useState([]);
+  const [collections, setCollections] = useState([]);
 
   const attemptLogin = ()=> {
     const token = window.localStorage.getItem('token');
@@ -35,11 +36,15 @@ const App = ()=> {
     setProducts(product);
   };
 
-
+  const showAllCollections = async() => {
+    const collections = await fetchAllCollections();
+    setCollections(collections);
+  }
 
   useEffect(()=> {
     attemptLogin();
     showAllProducts();
+    showAllCollections();
   }, []);
 
   const logout = ()=> {
@@ -68,7 +73,7 @@ const App = ()=> {
         }
       </nav>
       <Routes>
-            <Route path='/' element= { <Home products ={products} /> } />
+            <Route path='/' element= { <Home products ={products} collections={collections}/> } />
             <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
             <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
       </Routes>
