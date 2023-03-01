@@ -15,3 +15,47 @@ nav {
   display: flex;
   justify-content: space-around;
 }
+
+.collections_brick {
+  background-color: #006600;
+  margin: 0;
+  padding: 0;
+  height: 8rem;
+}
+
+.collections_brick ul {
+  list-style-type: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  height: 8rem;
+}
+
+.collections_brick li {
+  height: 5rem;
+  width: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.collections_brick a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+  background-color: #029602;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.collections_brick a:hover {
+  background-color: rgba(128, 255, 0, 0.644);
+}

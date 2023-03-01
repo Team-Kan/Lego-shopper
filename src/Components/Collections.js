@@ -4,18 +4,19 @@ import { Link } from 'react-router-dom';
 const Collections = (props) => {
     const { collections } = props;
     return (
-        <>
-        <h1>Collections</h1>
-        {
-            collections.map(collection => {
-                return (
-                    <>
-                        <Link to={`/collections/${collection.id}`}>{collection.name}</Link>
-                    </>
-                )
-            })
-        }
-        </>
+        <div className = "collections_brick">
+            <ul>
+                {
+                    collections.map(collection => {
+                        return (
+                            <Link to={`/collections/${collection.id}`} key = {collection.id}><li>
+                                {collection.name}
+                            </li></Link>
+                        )
+                    })
+                }
+            </ul>
+        </div>
     )
 }
 
