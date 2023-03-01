@@ -5,8 +5,9 @@ const Products = () => {
   const [products, setProducts] = useState([]);
 
   const showAllProducts = async () => {
-    const product = fetchAllProducts();
+    const product = await fetchAllProducts();
     setProducts(product);
+    console.log(products);
   };
 
   useEffect(() => {

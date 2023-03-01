@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
+import Products from './Products';
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
 
 
