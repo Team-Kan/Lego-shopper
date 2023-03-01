@@ -79,6 +79,7 @@ const App = ()=> {
             <Route path='/' element= { <Home /> } />
             <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
             <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
+            <Route path='/products' element={<Products/>}/>
       </Routes>
     </div>
   );
