@@ -5,3 +5,7 @@ export {
 export {
     fetchAllCollections,
 } from "./collectionFetchCalls";
+
+export {
+    fetchAllUsers,
+} from "./adminFetchCalls";

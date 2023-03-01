@@ -3,8 +3,10 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Products from './Products';
+import Admin from './Admin';
 import { fetchAllProducts, fetchAllCollections } from "../api";
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
+
 
 
 const App = ()=> {
@@ -70,12 +72,16 @@ const App = ()=> {
               <Link to='/register'>Register</Link>
             </>
           )
+        } 
+        {
+          auth.isAdmin ? (<Link to='/admin'>Admin</Link>): null
         }
       </nav>
       <Routes>
             <Route path='/' element= { <Home products ={products} collections={collections}/> } />
             <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
             <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
+            <Route path='/admin' element={<Admin auth={auth}/>}/>
       </Routes>
     </div>
   );

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { tokenAuth }= require("./utils")
+const { tokenAuth, adminCheck }= require("./utils")
 const { authenticate, getUserByToken, createUser } = require("../db");
+const { getAllUsers } = require("../db/User");
 
-module.exports = router;
 
 router.post("/", async (req, res, next) => {
   try {
@@ -39,5 +39,14 @@ router.post("/register", async (req, res, next) => {
     next(error);
   }
 });
+
+router.get("/admin",tokenAuth, adminCheck, async(req, res, next) => {
+  try {
+    const users = await getAllUsers();
+    res.send(users);
+  } catch (error) {
+    next(error);
+  }
+})
 
 module.exports = router
