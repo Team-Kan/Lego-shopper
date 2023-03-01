@@ -33,6 +33,7 @@ describe("CreateCart(userId)", () => {
     )
     .set("Authorization", `Bearer ${token}`);
 
-    expect(response.body.id).toBe(1)
+    expect(response.body.id).toBe(1);
+    expect(response.body.products.length).toBe(0);
   })
 })
