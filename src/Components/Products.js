@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { fetchAllProducts } from "../api";
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
 
-  const showAllProducts = async () => {
-    const product = await fetchAllProducts();
-    setProducts(product);
-  };
-
-  useEffect(() => {
-    showAllProducts();
-  }, []);
+const Products = (props) => {
+  const{products} = props;
 
   return (
     <div>
+      <h2>All Products</h2>
       {products.length
         ? products.map((product) => {
             const {
@@ -28,7 +20,6 @@ const Products = () => {
             } = product;
             return (
               <div key={product.id}>
-                <h2>All Products</h2>
                 <ul>
                 <li>Name:{name}</li>
                 <li>Description: {description}</li>

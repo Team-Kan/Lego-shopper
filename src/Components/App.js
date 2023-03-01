@@ -3,11 +3,14 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Products from './Products';
+import { fetchAllProducts } from "../api";
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
 
 
 const App = ()=> {
   const [auth, setAuth] = useState({});
+  const [products, setProducts] = useState([]);
+
   const attemptLogin = ()=> {
     const token = window.localStorage.getItem('token');
     if(token){
@@ -25,8 +28,18 @@ const App = ()=> {
     }
   };
 
+  
+
+  const showAllProducts = async () => {
+    const product = await fetchAllProducts();
+    setProducts(product);
+  };
+
+
+
   useEffect(()=> {
     attemptLogin();
+    showAllProducts();
   }, []);
 
   const logout = ()=> {
@@ -34,29 +47,7 @@ const App = ()=> {
     setAuth({});
   }
 
-  // having trouble with this function
-  // const login = async({ username, password})=> {
-  //   fetch(
-  //     '/api/auth/',
-  //     {
-  //       method: 'POST',
-  //       body: JSON.stringify({ username, password}),
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       }
-  //     }
-  //   )
-  //   .then( response => response.json())
-  //   .then( (data) => {
-  //     if(data.token){
-  //       window.localStorage.setItem('token', data.token);
-  //       attemptLogin();
-  //     }
-  //     else {
-  //       console.log(data);
-  //     }
-  //   });
-  // };
+
 
   return (
     <div>
@@ -77,10 +68,9 @@ const App = ()=> {
         }
       </nav>
       <Routes>
-            <Route path='/' element= { <Home /> } />
+            <Route path='/' element= { <Home products ={products} /> } />
             <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
             <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
-            <Route path='/products' element={<Products/>}/>
       </Routes>
     </div>
   );
