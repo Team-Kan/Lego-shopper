@@ -5,6 +5,8 @@ const {
   getProductById,
   getProductByName,
   getProductsByCollectionId,
+  deleteProduct,
+  editProduct,
 } = require("../db/product");
 const { tokenAuth, adminCheck } = require("./utils");
 const router = express.Router();
@@ -34,7 +36,9 @@ router.get("/collection/:collectionId", async (req, res, next) => {
   try {
     const { collectionId } = req.params;
     const products = await getProductsByCollectionId(collectionId);
-
+    if(!products.length) {
+      res.send({status: 401, message: "no products found"});
+    }
     res.send(products);
   } catch (error) {
     next(error);
@@ -69,5 +73,34 @@ router.post("/create", tokenAuth, adminCheck, async (req, res, next) => {
     next(error);
   }
 });
+
+router.delete("/:id", tokenAuth, adminCheck, async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const product = await deleteProduct(id);
+    res.send(product);
+
+  } catch (error) {
+    next(error);
+  }
+})
+
+router.patch("/:id", tokenAuth, adminCheck, async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const fields = req.body;
+
+    const product = await editProduct({id, fields});
+    if(!product.name){
+      next({
+        status: 401,
+        message: `Product with the id ${id} does not exist`
+      })
+    }
+    res.send(product);
+  } catch (error) {
+    next(error);
+  }
+})
 
 module.exports = router;
