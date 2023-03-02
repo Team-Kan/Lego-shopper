@@ -10,6 +10,17 @@ const fetchAllCollections = async () => {
     return result;
 };
 
+const fetchCollectionProducts = async(id) => {
+    const response = await fetch(`${MAIN_URL}api/products/collection/${id}`, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const result = await response.json();
+    return result;
+}
+
 module.exports = {
     fetchAllCollections,
+    fetchCollectionProducts
 };

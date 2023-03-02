@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
-import Products from './Products';
 import Admin from './Admin';
+import Collection from './Collection';
 import { fetchAllProducts, fetchAllCollections } from "../api";
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -82,6 +82,7 @@ const App = ()=> {
             <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
             <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
             <Route path='/admin' element={<Admin auth={auth}/>}/>
+            <Route path='/collections/:id' element={<Collection collections={collections}/>}/>
       </Routes>
     </div>
   );
