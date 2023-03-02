@@ -12,6 +12,11 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+// TODO
+router.post("/", async (req, res, next) => {
+  
+})
+
 
 router.delete("/:id", tokenAuth, adminCheck, async (req, res, next) => {
   try {
