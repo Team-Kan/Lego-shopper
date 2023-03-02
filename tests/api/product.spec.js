@@ -59,12 +59,11 @@ describe("GET /products/:id", () => {
       pieceCount: 101,
       quantity: 1,
     });
-    const response = await request(app)
-      .get(`/api/products/${product2.id}`);
+    const response = await request(app).get(`/api/products/${product2.id}`);
 
-      expect(response.body.name).toBe(product2.name)
-  })
-})
+    expect(response.body.name).toBe(product2.name);
+  });
+});
 describe("GET /products/name/:name", () => {
   it("should return the product with the id", async () => {
     const product3 = await createProduct({
@@ -76,19 +75,19 @@ describe("GET /products/name/:name", () => {
       pieceCount: 101,
       quantity: 1,
     });
-    const response = await request(app)
-      .get(`/api/products/name/${product3.name}`);
+    const response = await request(app).get(
+      `/api/products/name/${product3.name}`
+    );
 
-      expect(response.body.price).toBe(product3.price)
-  })
-})
+    expect(response.body.price).toBe(product3.price);
+  });
+});
 
 describe("GET api/products/collection/:collectionId", () => {
   it("should return the products with the collectionId", async () => {
-    const response = await request(app)
-      .get(`/api/products/collection/2`)
-      console.log(response.body)
-      expect(response.body.length).toBe(2)
-      expect(response.body[0].name).toBe("sample5")
+    const response = await request(app).get(`/api/products/collection/2`);
+    console.log(response.body);
+    expect(response.body.length).toBe(2);
+    expect(response.body[0].name).toBe("sample5");
   });
 });
