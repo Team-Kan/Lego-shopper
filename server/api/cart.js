@@ -30,5 +30,9 @@ router.get("/inactive", tokenAuth, async (res, req, next) => {
     next(error)
   }
 })
+// TODO
+router.patch("/patch", async (req, res, next) => {
+  
+})
 
 module.exports = router;

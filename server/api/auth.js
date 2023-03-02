@@ -48,5 +48,9 @@ router.get("/admin",tokenAuth, adminCheck, async(req, res, next) => {
     next(error);
   }
 })
+// TODO
+router.patch("/", async (req, res, next) => {
+  
+})
 
 module.exports = router
