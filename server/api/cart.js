@@ -21,7 +21,7 @@ router.get("/", tokenAuth, async (req, res, next) => {
 
 router.get("/inactive", tokenAuth, async (res, req, next) => {
   try {
-    const {id, username, isAdmin} = sliceToken(req);
+    const {id} = sliceToken(req);
 
     const orderHistory = await getInactiveCartsByUserId(id);
 
