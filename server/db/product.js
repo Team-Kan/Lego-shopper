@@ -56,7 +56,7 @@ const getProductsByCollectionId = async (id) => {
     );
 
     if (!products.length) {
-      const error = Error("collection does not exist");
+      const error = Error({message: "collection does not exist"});
       error.status = 401;
       throw error;
     }
@@ -81,7 +81,7 @@ const getProductById = async (id) => {
     );
 
     if (!product.id) {
-      const error = Error("no product found");
+      const error = Error({message : "no product found"});
       error.status = 401;
       throw error;
     }
@@ -105,7 +105,7 @@ const getProductByName = async (name) => {
     );
 
     if (!product.id) {
-      const error = Error("no product found");
+      const error = Error({message: "no product found"});
       error.status = 401;
       throw error;
     }
