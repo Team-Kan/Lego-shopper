@@ -37,9 +37,10 @@ router.get("/collection/:collectionId", async (req, res, next) => {
     const { collectionId } = req.params;
     const products = await getProductsByCollectionId(collectionId);
     if(!products.length) {
-      res.send({status: 401, message: "no products found"});
+      next({status: 404, message: "no products found"});
+    } else {
+      res.send(products);
     }
-    res.send(products);
   } catch (error) {
     next(error);
   }

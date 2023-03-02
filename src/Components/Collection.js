@@ -6,20 +6,18 @@ import Collections from "./Collections";
 const Collection = (props) => {
     const { collections } = props;
     const [products, setProducts] = useState([]);
-    const [error, setError] = useState({});
+    const [error, setError] = useState('');
     const id = Number(useParams().id);
 
-    const showCollectionProducts = async(id) => {
-        try{
-            const products = await fetchCollectionProducts(id);
-            if (products.length) {
-                setError({});
-                setProducts(products);
-            } 
-        } catch(error) {
-            setError(error);
+    const showCollectionProducts = async (id) => {
+        const products = await fetchCollectionProducts(id);
+        if (!products.error) {
+            setError('');
+            setProducts(products);
+        } else {
+            setError(products.error);
             setProducts([]);
-        }  
+        }
     }
     
     useEffect(() => {
@@ -32,7 +30,7 @@ const Collection = (props) => {
     return (
         <div>
             <Collections collections={collections}/>
-            <h2>{error.message}</h2>
+            <h2>{error}</h2>
             <ul>
                 {
                     products.map(product => {
