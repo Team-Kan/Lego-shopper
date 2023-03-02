@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import CreateProductForm from './CreateProductForm';
 const { fetchAllUsers } = require("../api")
 
 const Admin = (props) => {
@@ -19,9 +20,7 @@ useEffect(() => {
   return (
     <div>
       <h2>Welcome Admin {auth.username}</h2>
-      <form>
-        
-      </form>
+      <CreateProductForm />
 
     </div>
   )

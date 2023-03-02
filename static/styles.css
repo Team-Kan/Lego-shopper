@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   font-family: verdana;
 }
@@ -25,13 +29,15 @@ nav {
 
 .collections_brick ul {
   list-style-type: none;
-  overflow: hidden;
+  overflow-x: scroll;
+  overflow-y: hidden;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin: 0;
   padding: 0;
   height: 8rem;
+  gap: 1rem;
 }
 
 .collections_brick li {
@@ -46,8 +52,8 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 7rem;
-  width: 7rem;
+  min-height: 7rem;
+  min-width: 7rem;
   border-radius: 50%;
   background-color: #029602;
   text-decoration: none;
