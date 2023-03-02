@@ -1,5 +1,5 @@
 const express = require('express');
-const {getAllProducts, createProduct, getProductById, getProductByName} = require("../db/product");
+const {getAllProducts, createProduct, getProductById, getProductByName, getProductsByCollectionId} = require("../db/product");
 const { tokenAuth, adminCheck } = require('./utils');
 const router = express.Router();
 
@@ -13,11 +13,23 @@ router.get("/", async (req, res, next) => {
     }
 });
 
+router.get("/collection/:collectionId", async (req, res, next) => {
+    try {
+      const {collectionId} = req.params
+        const products = await getProductsByCollectionId(collectionId)
+
+        res.send(products);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 router.get("/:id", async (req, res, next) => {
     try {
       const {id} = req.params
         const product = await getProductById(id);
-        
+
         res.send(product);
     } catch (error) {
         next(error);

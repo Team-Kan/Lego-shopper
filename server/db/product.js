@@ -49,7 +49,7 @@ const getProductsByCollectionId = async (id) => {
     const { rows: products } = await client.query(
       `
     ${getAllProductsQuery}
-    WHERE "collectionId" = $1
+    WHERE products."collectionId" = $1
     ORDER BY Id
     `,
       [id]
@@ -98,7 +98,7 @@ const getProductByName = async (name) => {
     } = await client.query(
       `
   ${getAllProductsQuery}
-  WHERE name = $1
+  WHERE products.name = $1
   ORDER BY Id
   `,
       [name]
