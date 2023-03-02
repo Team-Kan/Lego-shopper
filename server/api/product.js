@@ -5,6 +5,7 @@ const {
   getProductById,
   getProductByName,
   getProductsByCollectionId,
+  deleteProduct,
 } = require("../db/product");
 const { tokenAuth, adminCheck } = require("./utils");
 const router = express.Router();
@@ -69,5 +70,18 @@ router.post("/create", tokenAuth, adminCheck, async (req, res, next) => {
     next(error);
   }
 });
+
+router.delete("/:id", tokenAuth, adminCheck, async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const product = await deleteProduct(id);
+    res.send(product);
+
+  } catch (error) {
+    next(error);
+  }
+})
+
+
 
 module.exports = router;

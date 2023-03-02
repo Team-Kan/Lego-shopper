@@ -1,6 +1,6 @@
 const { createCollection } = require("../../server/db/collection");
 const { client } = require("../../server/db/index");
-const { createProduct, getAllProducts, getProductsByCollectionId, getProductById } = require("../../server/db/product");
+const { createProduct, getAllProducts, getProductsByCollectionId, getProductById, deleteProduct } = require("../../server/db/product");
 const setup = require("../setup");
 const tearDown = require("../tearDown");
 
@@ -154,3 +154,24 @@ describe("getProductById(id)", () => {
   }))
   })
 })
+
+describe("Testing deleteProduct(id)", () => {
+  it("removed product from database", async () => {
+    const  fakeProduct  = await createProduct({name: "Samurai",
+    description: "here is a Samurai",
+    collectionId: 1,
+    price: 100,
+    imageUrl: "www.image.com",
+    pieceCount: 10000,
+    quantity: 3,
+  });
+    await deleteProduct(fakeProduct.id);
+
+    const { rows: [product]} = await client.query(`
+    SELECT *
+    FROM products
+    WHERE id = $1;
+    `, [fakeProduct.id])
+    expect(product).toBeFalsy();
+  })
+});

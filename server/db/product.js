@@ -115,10 +115,24 @@ const getProductByName = async (name) => {
   }
 }
 
+const deleteProduct = async (id) => {
+  try {
+    const { rows: [deletedProduct] } = await client.query(`
+    DELETE
+    FROM products
+    WHERE "id"=$1
+    RETURNING *;`, [id])
+    return deletedProduct;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
   getProductsByCollectionId,
   getProductById,
   getProductByName,
+  deleteProduct,
 };

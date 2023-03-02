@@ -34,14 +34,14 @@ router.patch("/:id", tokenAuth, adminCheck, async (req, res, next) => {
     const {id} = req.params;
     const {name} = req.body;
 
-    const colllection = await editCollection({id, name});
-    if(!colllection.name){
+    const collection = await editCollection({id, name});
+    if(!collection.name){
       next({ 
         status: 401,
         message: `Collection with the id ${id} does not exist.`
       });
     }
-    res.send(colllection);
+    res.send(collection);
   } catch (error) {
     next(error);
   }
