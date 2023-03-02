@@ -55,12 +55,6 @@ const getProductsByCollectionId = async (id) => {
       [id]
     );
 
-    if (!products.length) {
-      const error = Error({message: "collection does not exist"});
-      error.status = 401;
-      throw error;
-    }
-
     return products;
   } catch (error) {
     console.error(error);
@@ -128,6 +122,27 @@ const deleteProduct = async (id) => {
   }
 }
 
+const editProduct = async ({id,...fields}) => {
+  const setFields = Object.keys(fields).map(
+    (key, index) => `"${ key }"=$${ index + 1 }`
+    ).join(', ');
+    try {
+      if(setFields.length > 0){
+        const {rows: [product] } = await client.query(`
+        UPDATE products
+        SET ${setFields}
+        WHERE id=${id}
+        RETURNING *;
+        `, Object.values(fields))
+
+        return product;
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
@@ -135,4 +150,5 @@ module.exports = {
   getProductById,
   getProductByName,
   deleteProduct,
+  editProduct,
 };

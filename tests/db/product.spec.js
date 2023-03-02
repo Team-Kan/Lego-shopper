@@ -1,6 +1,6 @@
 const { createCollection } = require("../../server/db/collection");
 const { client } = require("../../server/db/index");
-const { createProduct, getAllProducts, getProductsByCollectionId, getProductById, deleteProduct } = require("../../server/db/product");
+const { createProduct, getAllProducts, getProductsByCollectionId, getProductById, deleteProduct, editProduct } = require("../../server/db/product");
 const setup = require("../setup");
 const tearDown = require("../tearDown");
 
@@ -175,3 +175,10 @@ describe("Testing deleteProduct(id)", () => {
     expect(product).toBeFalsy();
   })
 });
+
+describe("Testing editProduct({id, ...fields})", () => {
+  it("edits products in database", async () => {
+    const fakeEditProduct = await editProduct({id:1, name: "React!"});
+    expect(fakeEditProduct.name).toBe("React!")
+  })
+})
