@@ -9,8 +9,9 @@ const tokenAuth = (req, res, next) => {
       error: "No token found",
       name: "Need to login",
     });
+  } else {
+    next();
   }
-  next();
 };
 
 const sliceToken = (req) => {
@@ -30,8 +31,9 @@ const adminCheck = async (req, res, next) => {
       error: "Unathorized user",
       name: "NotAllowedUserError",
     });
+  } else {
+    next();
   }
-  next();
 };
 
 module.exports = {
