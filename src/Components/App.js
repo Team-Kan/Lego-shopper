@@ -7,6 +7,8 @@ import Collection from './Collection';
 import Nav from './Nav';
 import { fetchAllProducts, fetchAllCollections } from "../api";
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
+import Cart from './Cart';
+import SingleProduct from './SingleProduct';
 
 
 const App = ()=> {
@@ -61,11 +63,13 @@ const App = ()=> {
       <h1>Welcome to reKANstructed!</h1>
       <Nav auth={auth} logout={logout}/>
       <Routes>
-            <Route path='/' element= { <Home products ={products} collections={collections}/> } />
-            <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
-            <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
-            <Route path='/admin' element={<Admin auth={auth}/>}/>
-            <Route path='/collections/:id' element={<Collection collections={collections}/>}/>
+        <Route path='/' element= { <Home products ={products} collections={collections}/> } />
+        <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
+        <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
+        <Route path='/admin' element={<Admin auth={auth}/>}/>
+        <Route path='/collections/:id' element={<Collection collections={collections}/>}/>
+        <Route path='/cart' element={<Cart />}/>
+        <Route path='/product/:id' element={<SingleProduct />}/>
       </Routes>
     </div>
   );
