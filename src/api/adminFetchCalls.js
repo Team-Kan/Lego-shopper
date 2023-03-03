@@ -25,7 +25,22 @@ const createProductFetch = async (token, newProduct) => {
   return result
 }
 
+const createCollectionFetch = async (token, name) => {
+  const response = await fetch(`${MAIN_URL}api/collections`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({name}),
+  });
+  const result = await response.json();
+
+  return result;
+} 
+
 module.exports = {
     fetchAllUsers,
     createProductFetch,
+    createCollectionFetch,
 };
