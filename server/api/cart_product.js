@@ -3,7 +3,6 @@ const { addProductToCart, editCartProduct, deleteCartProduct } = require("../db/
 const { tokenAuth } = require("./utils");
 const router = express.Router();
 
-// TODO
 router.post("/", tokenAuth, async (req, res, next) => {
   try {
     const { cartId, productId, quantity } = req.body;
