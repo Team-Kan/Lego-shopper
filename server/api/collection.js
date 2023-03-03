@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllCollections, deleteCollection, editCollection } = require("../db/collection");
+const { getAllCollections, deleteCollection, editCollection, createCollection } = require("../db/collection");
 const { adminCheck, tokenAuth } = require("./utils");
 const router = express.Router();
 
@@ -12,9 +12,18 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-// TODO
-router.post("/", async (req, res, next) => {
-  
+
+router.post("/", tokenAuth, adminCheck, async (req, res, next) => {
+  try {
+    const {name} = req.body;
+
+    const collection = await createCollection({name});
+
+    res.send(collection)    
+  } catch (error) {
+    next(error)
+  }
+
 })
 
 
