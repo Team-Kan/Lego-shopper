@@ -4,9 +4,9 @@ import Login from './Login';
 import Register from './Register';
 import Admin from './Admin';
 import Collection from './Collection';
+import Nav from './Nav';
 import { fetchAllProducts, fetchAllCollections } from "../api";
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
-
 
 
 const App = ()=> {
@@ -59,24 +59,7 @@ const App = ()=> {
   return (
     <div>
       <h1>Welcome to reKANstructed!</h1>
-      <nav>
-        <Link to='/'>Home</Link>
-        {
-          auth.id ? (
-            <>
-              <button onClick={ logout }>Logout { auth.username }</button>
-            </>
-          ) : (
-            <>
-              <Link to='/login'>Login</Link>
-              <Link to='/register'>Register</Link>
-            </>
-          )
-        } 
-        {
-          auth.isAdmin ? (<Link to='/admin'>Admin</Link>): null
-        }
-      </nav>
+      <Nav auth={auth} logout={logout}/>
       <Routes>
             <Route path='/' element= { <Home products ={products} collections={collections}/> } />
             <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />

@@ -9,4 +9,6 @@ export {
 
 export {
     fetchAllUsers,
+    createProductFetch,
+    createCollectionFetch,
 } from "./adminFetchCalls";

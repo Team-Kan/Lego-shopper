@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import ChangeAdminForm from './ChangeAdminForm';
+import CreateCollectionForm from './CreateCollectionForm';
 import CreateProductForm from './CreateProductForm';
 const { fetchAllUsers } = require("../api")
 
@@ -20,7 +22,11 @@ useEffect(() => {
   return (
     <div>
       <h2>Welcome Admin {auth.username}</h2>
-      <CreateProductForm />
+      <div className='grid grid-cols-1 gap-3 lg:grid-cols-2'>
+        <CreateProductForm />
+        <ChangeAdminForm />
+        <CreateCollectionForm />
+      </div>
 
     </div>
   )
