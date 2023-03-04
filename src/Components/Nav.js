@@ -5,7 +5,7 @@ const Nav = (props) => {
   const {auth, logout} = props
   return (
     <nav>
-        <Link to='/'>Home</Link>
+        <Link to='/'>Shop All Products</Link>
         {
           auth.id ? (
             <>
@@ -18,6 +18,7 @@ const Nav = (props) => {
             </>
           )
         } 
+        <Link to='/Cart'>Cart</Link>
         {
           auth.isAdmin ? (<Link to='/admin'>Admin</Link>): null
         }
