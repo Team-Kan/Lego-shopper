@@ -10,54 +10,47 @@ const Cart = () => {
   
 
   const retrieveCartAndProducts = async(token) => {
-    const cart = {id: 1}
-    const fakeProducts = [{
-      id: 1, 
-      name: "Lunar Research Base",
-      description: "Inspired by NASA's Artemis Base Camp Concept",
-      collectionId: 1,
-      price: 59.99,
-      imageUrl:
-        "https://m.media-amazon.com/images/I/81ctAoJcr9L._AC_SX679_.jpg",
-      pieceCount: 768,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: "Recycling Truck",
-      description:
-        "Caring for the environment is fun with this recycling truck set, featuring a recycling center, 3 minifigures and a cat figure.",
-      collectionId: 1,
-      price: 19.99,
-      imageUrl:
-        "https://m.media-amazon.com/images/I/81TR1DUg4ML._AC_SX679_.jpg",
-      pieceCount: 261,
-      quantity: 1,
-    }
-    ];
-    setCartProducts(fakeProducts);
-    // const cart = await fetchCart(token);
-    // console.log(cart);
-    // if(cart.products) {
-    //   console.log(cart.products);
-    //   setCartProducts(cart.products);
-    // } 
+    const cart = await fetchCart(token);
+    console.log(cart);
+    if(cart.products) {
+      console.log(cart.products);
+      //setCartProducts(cart.products);
+    } 
     setCart(cart);
   }
 
-  const decreaseQuantity = async(id, quantity) => {
-    // if(quantity-1 === 0) {
-    //   return;
-    // } else {
-    quantity--;
-    // }
-    const product = cartProducts.find(product => product.id === id);//cart.products.find(product => product.productId === id)
-    const update = await updateQuantityFetch(token, cart.id, id, quantity);
-    console.log(update);
+  const decreaseQuantity = async (productId, quantity) => {
+    if (quantity - 1 === 0) {
+      return;
+    } else {
+      quantity--;
+      const response = await updateQuantityFetch(token, cart.id, productId, quantity);
+      console.log(response);
+      if (!response.error) {
+        const result = await retrieveCartAndProducts(token);
+        console.log("here is the result ")
+        
+      } else {
+        console.log("finished updating quantity");
+      }
+    }
   }
 
   const increaseQuantity = async(productId, quantity) => {
-
+    if (quantity - 1 === 0) {
+      return;
+    } else {
+      quantity++;
+      const response = await updateQuantityFetch(token, cart.id, productId, quantity);
+      console.log(response);
+      if (!response.error) {
+        const result = await retrieveCartAndProducts(token);
+        console.log("here is the result ")
+        
+      } else {
+        console.log("finished updating quantity");
+      }
+    }
   }
 
   useEffect(()=> {
@@ -69,10 +62,11 @@ const Cart = () => {
   return (
     <div>
       <Link to="/">Continue Shopping</Link>
-      <div>
+      <div> 
+        { cart.products ? (
         <ul>
           {
-            cartProducts.map(product => {
+            cart.products.map(product => {
               return(
                 <div key={product.id}>
                   <Link to={`/product/${product.id}`}><img src={product.imageUrl} /></Link>
@@ -85,7 +79,8 @@ const Cart = () => {
               )
             })
           }
-        </ul>
+        </ul> 
+        ) : (<h2>Add items to cart</h2>)}
         <button>Checkout</button>
       </div>
     </div>
