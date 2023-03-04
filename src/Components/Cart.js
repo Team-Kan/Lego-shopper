@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchCart } from '../api/cartFetchCalls';
+import { fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
 
 const Cart = () => {
   const [ cart, setCart ] = useState({});
@@ -10,6 +10,7 @@ const Cart = () => {
   
 
   const retrieveCartAndProducts = async(token) => {
+    const cart = {id: 1}
     const fakeProducts = [{
       id: 1, 
       name: "Lunar Research Base",
@@ -41,7 +42,22 @@ const Cart = () => {
     //   console.log(cart.products);
     //   setCartProducts(cart.products);
     // } 
-    // setCart(cart);
+    setCart(cart);
+  }
+
+  const decreaseQuantity = async(id, quantity) => {
+    // if(quantity-1 === 0) {
+    //   return;
+    // } else {
+    quantity--;
+    // }
+    const product = cartProducts.find(product => product.id === id);//cart.products.find(product => product.productId === id)
+    const update = await updateQuantityFetch(token, cart.id, id, quantity);
+    console.log(update);
+  }
+
+  const increaseQuantity = async(productId, quantity) => {
+
   }
 
   useEffect(()=> {
@@ -61,9 +77,9 @@ const Cart = () => {
                 <div key={product.id}>
                   <Link to={`/product/${product.id}`}><img src={product.imageUrl} /></Link>
                   <li>{product.name}</li>
-                  <button>-</button>
+                  <button onClick={() => {decreaseQuantity(product.id, product.quantity)}}>-</button>
                   <li>{product.quantity}</li>
-                  <button>+</button>
+                  <button onClick = {() => {increaseQuantity(product.id, product.quantity)}}>+</button>
                   <li>Price: ${product.price}</li>
                 </div>
               )

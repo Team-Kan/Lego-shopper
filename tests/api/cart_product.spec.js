@@ -57,6 +57,26 @@ describe('post /cart-products/', () => {
   })
 })
 
+describe('get /cart-products/', () => {
+  it('should get all rows from the cart_product table', async() => {
+    const response = await request(app)
+    .get('/api/cart-products')
+    .set("Authorization", `Bearer ${token}`)
+    .send({ cartId: cart.id });
+
+    expect(response.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: 1,
+          cartId: cart.id,
+          productId: product.id,
+          quantity: quantity
+        })
+      ])
+    )
+  })
+})
+
 describe('patch /cart-products/', () => {
   it('should change the quantity in the cart_product table', async() => {
     const newQuantity = 5;
