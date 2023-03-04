@@ -44,8 +44,25 @@ const updateQuantityFetch = async (token, cartId, productId, quantity) => {
   return result;
 }
 
+const deleteCartProduct = async(token, cartId, productId) => {
+  const response = await fetch(`${MAIN_URL}api/cart-products`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      cartId: cartId,
+      productId: productId
+    })
+  })
+  const result = await response.json();
+  return result;
+}
+
 module.exports = {
   fetchCart, 
   fetchCartProducts,
-  updateQuantityFetch
+  updateQuantityFetch,
+  deleteCartProduct
 };

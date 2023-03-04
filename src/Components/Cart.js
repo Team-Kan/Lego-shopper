@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
+import { deleteCartProduct, fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
 
 const Cart = () => {
   const [ cart, setCart ] = useState({});
@@ -8,19 +8,13 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const token = window.localStorage.getItem('token');
 
-  
-
   const retrieveCartAndProducts = async(token) => {
     const cart = await fetchCart(token);
-    console.log(cart);
     if(cart.products) {
-      console.log(cart.products);
       const items = cart.products.reduce((acc, curr) => acc + curr.quantity, 0);
-      console.log(items);
       setItemCount(items);
 
-      const cost = Math.round(100*cart.products.reduce((acc, curr) => acc + curr.price*curr.quantity, 0))/100;
-      console.log(cost);
+      let cost = (Math.round(100*cart.products.reduce((acc, curr) => acc + curr.price*curr.quantity, 0))/100).toFixed(2);
       setTotal(cost);
     } 
     setCart(cart);
@@ -35,28 +29,30 @@ const Cart = () => {
       console.log(response);
       if (!response.error) {
         const result = await retrieveCartAndProducts(token);
-        console.log("here is the result ")
-        
       } else {
-        console.log("finished updating quantity");
+        console.log("error decreasing quantity");
       }
     }
   }
 
   const increaseQuantity = async(productId, quantity) => {
-    if (quantity - 1 === 0) {
-      return;
-    } else {
       quantity++;
       const response = await updateQuantityFetch(token, cart.id, productId, quantity);
-      console.log(response);
       if (!response.error) {
         const result = await retrieveCartAndProducts(token);
-        console.log("here is the result ")
-        
       } else {
-        console.log("finished updating quantity");
+        console.log("error increasing quantity");
       }
+  }
+
+  const removeItem = async(productId) => {
+    const response = await deleteCartProduct(token, cart.id, productId);
+    console.log(response);
+    if (!response.error) {
+      const result = await retrieveCartAndProducts(token);
+      console.log("here is the result ")
+    } else {
+      console.log("issue");
     }
   }
 
@@ -70,28 +66,34 @@ const Cart = () => {
     <div>
       <Link to="/">Back to Shopping</Link>
       <div> 
-        { cart.products ? (
-        <ul>
-          {
-            cart.products.map(product => {
-              return(
-                <div key={product.id}>
-                  <Link to={`/product/${product.id}`}><img src={product.imageUrl} /></Link>
-                  <li>{product.name}</li>
-                  <button onClick={() => {decreaseQuantity(product.id, product.quantity)}}>-</button>
-                  <li>{product.quantity}</li>
-                  <button onClick = {() => {increaseQuantity(product.id, product.quantity)}}>+</button>
-                  <li>Price: ${product.price}</li>
-                </div>
-              )
-            })
-          }
-        </ul> 
-        ) : (<h2>Add items to cart</h2>)}
-        <p>Order Summary</p>
-        <p>Items ({itemCount})</p>
-        <p>Total: ${total}</p>
-        <button>Checkout</button>
+        <div>
+          {cart.products ? (
+            <ul>
+              {
+                cart.products.map(product => {
+                  return (
+                    <div key={product.id}>
+                      <Link to={`/product/${product.id}`}><img src={product.imageUrl} /></Link>
+                      <li>{product.name}</li>
+                      <li>Price: ${product.price}</li>
+                      <button onClick={() => { decreaseQuantity(product.id, product.quantity) }}>-</button>
+                      <li>{product.quantity}</li>
+                      <button onClick={() => { increaseQuantity(product.id, product.quantity) }}>+</button>
+                      <p></p>
+                      <button onClick={() => { removeItem(product.id)}}>Remove From Cart</button>
+                    </div>
+                  )
+                })
+              }
+            </ul>
+          ) : (<h2>Add items to cart</h2>)}
+        </div>
+        <div>
+          <p>Order Summary</p>
+          <p>Items ({itemCount})</p>
+          <p>Total: ${total}</p>
+          <button>Checkout</button>
+        </div>
       </div>
     </div>
   )
