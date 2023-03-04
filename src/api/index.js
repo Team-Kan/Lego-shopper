@@ -1,5 +1,6 @@
 export {
     fetchAllProducts,
+    fetchProductById,
 } from "./productFetchCalls";
 
 export {

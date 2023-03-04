@@ -1,7 +1,7 @@
-const MAIN_URL = "http://localhost:3000/"
+const MAIN_URL = "http://localhost:3000/api/products"
 
 const fetchAllProducts = async () => {
-    const response = await fetch(`${MAIN_URL}api/products`, {
+    const response = await fetch(`${MAIN_URL}`, {
         headers: {
             "Content-Type": "application/json",
         },
@@ -10,6 +10,19 @@ const fetchAllProducts = async () => {
     return result;
 };
 
+const fetchProductById = async (id) => {
+ const response = await fetch(`${MAIN_URL}/${id}`,{
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+ });
+
+ const results = await response.json();
+ return results
+}
+
 module.exports = {
     fetchAllProducts,
+    fetchProductById,
 };
