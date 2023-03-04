@@ -10,11 +10,8 @@ const Products = (props) => {
         ? products.map((product) => {
             const {
               name,
-              description,
-              collectionName,
               price,
               imageUrl,
-              pieceCount,
               quantity,
             } = product;
             return (
