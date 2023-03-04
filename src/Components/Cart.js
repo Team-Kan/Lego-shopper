@@ -4,7 +4,8 @@ import { fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
 
 const Cart = () => {
   const [ cart, setCart ] = useState({});
-  const [cartProducts, setCartProducts] = useState([]);
+  const [itemCount, setItemCount] = useState(0);
+  const [total, setTotal] = useState(0);
   const token = window.localStorage.getItem('token');
 
   
@@ -14,7 +15,13 @@ const Cart = () => {
     console.log(cart);
     if(cart.products) {
       console.log(cart.products);
-      //setCartProducts(cart.products);
+      const items = cart.products.reduce((acc, curr) => acc + curr.quantity, 0);
+      console.log(items);
+      setItemCount(items);
+
+      const cost = Math.round(100*cart.products.reduce((acc, curr) => acc + curr.price*curr.quantity, 0))/100;
+      console.log(cost);
+      setTotal(cost);
     } 
     setCart(cart);
   }
@@ -61,7 +68,7 @@ const Cart = () => {
 
   return (
     <div>
-      <Link to="/">Continue Shopping</Link>
+      <Link to="/">Back to Shopping</Link>
       <div> 
         { cart.products ? (
         <ul>
@@ -81,6 +88,9 @@ const Cart = () => {
           }
         </ul> 
         ) : (<h2>Add items to cart</h2>)}
+        <p>Order Summary</p>
+        <p>Items ({itemCount})</p>
+        <p>Total: ${total}</p>
         <button>Checkout</button>
       </div>
     </div>
