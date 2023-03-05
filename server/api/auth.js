@@ -31,10 +31,11 @@ router.post("/register", async (req, res, next) => {
         error: "shortPassword",
         message: "Your password must be atleast 8 charcters."
       })
-    }
+    } else{
     const newUser = await createUser({username, password});
-    const token = await authenticate(newUser);
+    const token = await authenticate({username: newUser.username, password});
     res.send({ token });
+    }
   } catch (error) {
     next(error);
   }

@@ -130,6 +130,17 @@ const createInitialProducts = async () => {
         quantity: 4,
       }),
       createProduct({
+        name: "LEGO® City Police Training Academy",
+        description:
+          "LEGO® City Police Training Academy features a 2-level modular police station playset, outdoor training facilities, quad bike toy and a horse figure",
+        collectionId: 1,
+        price: 64.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/91RTR2+T0IL._AC_SL1500_.jpg",
+        pieceCount: 823,
+        quantity: 4,
+      }),
+      createProduct({
         name: "Ninjago® Ninja Dojo",
         description:
           "Ninja dojo playset - Kids can help train their heroes with this 3-tiered LEGO® NINJAGO® Ninja Dojo Temple (71767) featuring a training area and 5 rooms",
@@ -159,7 +170,7 @@ const createInitialProducts = async () => {
         price: 79.99,
         imageUrl:
           "https://m.media-amazon.com/images/I/91jh4Kc1KSL._AC_SL1500_.jpg",
-        pieceCount: 1476,
+        pieceCount: 5932,
         quantity: 4,
       }),
       createProduct({

@@ -9,6 +9,10 @@ export {
 } from "./collectionFetchCalls";
 
 export {
+ createUser
+} from "./userFetchCalls";
+
+export {
     fetchAllUsers,
     createProductFetch,
     createCollectionFetch,
