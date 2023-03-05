@@ -30,11 +30,11 @@ const AddProductToCartForm = (props) => {
     }
 
   return (
-    <form className="flex">
+    <form className="flex bg-slate-700 rounded-r-md h-56 mb-4 text-yellow-400">
       <label className="mt-0">Current Stock: {product.quantity}</label>
       <div className="w-40 flex justify-center">
         <button 
-          className="pl-3 pr-3 bg-red-400 text-red-800 active:bg-red-700 active:text-red-400 rounded-md active:translate-y-1"
+          className="pl-3 pr-3 bg-red-400 text-red-200 active:bg-red-700 active:text-red-400 rounded-md active:translate-y-1"
           onClick={(ev) => {
             ev.preventDefault();
             quantity - 1 > 0 ?
@@ -63,7 +63,7 @@ const AddProductToCartForm = (props) => {
         </button>
       </div>
       <button 
-        className="p-3 bg-gradient-to-t from-green-500 border-2 border-slate-700 rounded-lg active:bg-gradient-to-b active:from-green-500 active:translate-y-1"
+        className="p-3 text-black bg-gradient-to-t from-green-500 to-white border-2 border-slate-700 rounded-lg active:bg-gradient-to-b active:from-green-700 active:to-white active:translate-y-1"
         onClick={ev => handleSubmit(ev)}
       >
         Add to cart
