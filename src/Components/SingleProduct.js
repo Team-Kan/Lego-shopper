@@ -31,7 +31,7 @@ const SingleProduct = () => {
       {product.id ?
       <div className='flex flex-col m-10'>
         <h1 className='text-2xl p-10 pl-20 text-center'>{product.name}</h1>
-        <img className='md:h-[36rem] md:w-[36rem] w-96 h-96' src={product.imageUrl} alt={product.name}/>
+        <img className='md:h-[36rem] md:w-[36rem] w-96 h-96 m-6 self-center' src={product.imageUrl} alt={product.name}/>
         <div className='flex'>
           <div>
             <h5>Description:</h5>
@@ -45,7 +45,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
-      :<div>{product.error}</div>}
+      :<div className='text-4xl'>{product.error}</div>}
     </>
   )
 }

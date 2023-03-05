@@ -13,3 +13,10 @@ export {
     createProductFetch,
     createCollectionFetch,
 } from "./adminFetchCalls";
+
+export {
+  fetchCart, 
+  fetchCartProducts,
+  updateQuantityFetch,
+  deleteCartProduct
+} from "./cartFetchCalls"
