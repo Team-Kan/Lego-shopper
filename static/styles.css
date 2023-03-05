@@ -119,3 +119,35 @@ nav {
 li{
   padding-top: 1rem;
 }
+
+.cart-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cart-product-container {
+  border: solid 1px red;
+  width: 700px;
+  
+}
+
+.cart-product {
+  border: solid 1px black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cart-product-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 1%;
+  box-shadow: 10px 10px 10px grey;
+}
+
+.checkout-container {
+  border: solid 1px black;
+  height: 500px;
+  width: 500px;
+}

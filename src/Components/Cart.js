@@ -26,7 +26,6 @@ const Cart = () => {
     } else {
       quantity--;
       const response = await updateQuantityFetch(token, cart.id, productId, quantity);
-      console.log(response);
       if (!response.error) {
         const result = await retrieveCartAndProducts(token);
       } else {
@@ -50,7 +49,6 @@ const Cart = () => {
     console.log(response);
     if (!response.error) {
       const result = await retrieveCartAndProducts(token);
-      console.log("here is the result ")
     } else {
       console.log("issue");
     }
@@ -65,22 +63,22 @@ const Cart = () => {
   return (
     <div>
       <Link to="/">Back to Shopping</Link>
-      <div> 
-        <div>
+      <div className='cart-container'> 
+        <div className = 'cart-product-container'>
           {cart.products ? (
             <ul>
               {
                 cart.products.map(product => {
                   return (
-                    <div key={product.id}>
-                      <Link to={`/product/${product.id}`}><img src={product.imageUrl} /></Link>
+                    <div key={product.id} className = 'cart-product'>
+                      <Link to={`/product/${product.id}`}><img className = 'cart-product-image' src={product.imageUrl} /></Link>
                       <li>{product.name}</li>
                       <li>Price: ${product.price}</li>
                       <button onClick={() => { decreaseQuantity(product.id, product.quantity) }}>-</button>
-                      <li>{product.quantity}</li>
+                      <p>{product.quantity}</p>
                       <button onClick={() => { increaseQuantity(product.id, product.quantity) }}>+</button>
                       <p></p>
-                      <button onClick={() => { removeItem(product.id)}}>Remove From Cart</button>
+                      <button onClick={() => { removeItem(product.id)}}>Remove</button>
                     </div>
                   )
                 })
@@ -88,7 +86,7 @@ const Cart = () => {
             </ul>
           ) : (<h2>Add items to cart</h2>)}
         </div>
-        <div>
+        <div className = 'checkout-container'>
           <p>Order Summary</p>
           <p>Items ({itemCount})</p>
           <p>Total: ${total}</p>
