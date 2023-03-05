@@ -72,11 +72,15 @@ const Cart = () => {
                   return (
                     <div key={product.id} className = 'cart-product'>
                       <Link to={`/product/${product.id}`}><img className = 'cart-product-image' src={product.imageUrl} /></Link>
-                      <li>{product.name}</li>
-                      <li>Price: ${product.price}</li>
-                      <button onClick={() => { decreaseQuantity(product.id, product.quantity) }}>-</button>
+                      <li className = 'cart-product-info'>
+                        <p>{product.name}</p>
+                        <p>Price: ${product.price}</p>
+                      </li>
+                      <button className = 'quantity-button' 
+                      onClick={() => { decreaseQuantity(product.id, product.quantity) }}>-</button>
                       <p>{product.quantity}</p>
-                      <button onClick={() => { increaseQuantity(product.id, product.quantity) }}>+</button>
+                      <button className = 'quantity-button'
+                      onClick={() => { increaseQuantity(product.id, product.quantity) }}>+</button>
                       <p></p>
                       <button onClick={() => { removeItem(product.id)}}>Remove</button>
                     </div>
@@ -88,9 +92,10 @@ const Cart = () => {
         </div>
         <div className = 'checkout-container'>
           <p>Order Summary</p>
+          <hr></hr>
           <p>Items ({itemCount})</p>
-          <p>Total: ${total}</p>
-          <button>Checkout</button>
+          <p>Subtotal: ${total}</p>
+          <button className='checkout-button'>Checkout</button>
         </div>
       </div>
     </div>
