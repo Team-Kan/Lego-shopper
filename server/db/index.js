@@ -130,6 +130,17 @@ const createInitialProducts = async () => {
         quantity: 4,
       }),
       createProduct({
+        name: "LEGO® City Police Training Academy",
+        description:
+          "LEGO® City Police Training Academy features a 2-level modular police station playset, outdoor training facilities, quad bike toy and a horse figure",
+        collectionId: 1,
+        price: 64.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/91RTR2+T0IL._AC_SL1500_.jpg",
+        pieceCount: 823,
+        quantity: 4,
+      }),
+      createProduct({
         name: "Ninjago® Ninja Dojo",
         description:
           "Ninja dojo playset - Kids can help train their heroes with this 3-tiered LEGO® NINJAGO® Ninja Dojo Temple (71767) featuring a training area and 5 rooms",
@@ -152,6 +163,28 @@ const createInitialProducts = async () => {
         quantity: 2,
       }),
       createProduct({
+        name: "LEGO® Architecture Great Pyramid of Giza Set",
+        description:
+          "Travel back in time to the 26th century BC. and discover the Great Pyramid of Giza and its surroundings with this LEGO set for adults",
+        collectionId: 3,
+        price: 79.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/91jh4Kc1KSL._AC_SL1500_.jpg",
+        pieceCount: 5932,
+        quantity: 4,
+      }),
+      createProduct({
+        name: "LEGO® Creator Expert Taj Mahal",
+        description:
+          "Take your architectural admiration of the Taj Mahal to the next level! Build the LEGO® replica of one of the seven wonders of the world with this building kit for kids and adults.",
+        collectionId: 3,
+        price: 399.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/71s3B71uO8L._AC_SL1500_.jpg",
+        pieceCount: 5932,
+        quantity: 4,
+      }),
+      createProduct({
         name: "Millenium Falcon Microfighter",
         description: "Series 8",
         collectionId: 4,
@@ -159,8 +192,64 @@ const createInitialProducts = async () => {
         imageUrl:
           "https://m.media-amazon.com/images/I/810mIHggsfL._AC_SX679_.jpg",
         pieceCount: 101,
-        quantity: 1,
+        quantity: 26,
       }),
+      createProduct({
+        name: "Hogwarts™ Icons - Collectors' Edition",
+        description: 
+          "Includes iconic artifacts: Harry's wand and glasses, a tray of potions, Tom Riddle's diary, the Golden Snitch, a Hogwarts scarf, Hedwig carrying an invitation to Hogwarts and more",
+        collectionId: 5,
+        price: 249.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/71+ZaMQXGZL._AC_SL1500_.jpg",
+        pieceCount: 3010,
+        quantity: 4,
+      }),
+      createProduct({
+        name: "LEGO® Harry Potter™ Hufflepuff House Banner ",
+        description: 
+          "Hufflepuff fans can display their love for the Hogwarts house with this LEGO® Harry Potter™ toy, featuring a Hogwarts crest that opens for play",
+        collectionId: 5,
+        price: 24.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81HD5f34yXL._AC_SL1500_.jpg",
+        pieceCount: 313,
+        quantity: 17,
+      }),
+      createProduct({
+        name: "LEGO® Marvel™ Super Heroes The Guardians' Ship",
+        description: 
+          "Indulge a kid's passion for the Guardians of the Galaxy™ and the Marvel Avengers™ movies with the stunning LEGO® Marvel The Guardians' Ship",
+        collectionId: 6,
+        price: 99.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81OzV37HNSL._AC_SL1500_.jpg",
+        pieceCount: 1901,
+        quantity: 5,
+      }),
+      createProduct({
+        name: "LEGO® Marvel Super Heroes Infinity Gauntlet™",
+        description: 
+          "captures forever the captivating style of Marvel Studios' Avengers™: Infinity War and Avengers: Endgame movies™",
+        collectionId: 6,
+        price: 45.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81uwk+ags9L._AC_SL1500_.jpg",
+        pieceCount: 590,
+        quantity: 10,
+      }),
+      createProduct({
+        name: "LEGO® Marvel™ I am Groot",
+        description: 
+          "Movable Baby Groot",
+        collectionId: 6,
+        price: 45.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81LGtW3NU8L._AC_SL1500_.jpg",
+        pieceCount: 476,
+        quantity: 5,
+      }),
+      
     ]);
 
   console.log("---- seeded Product -----");

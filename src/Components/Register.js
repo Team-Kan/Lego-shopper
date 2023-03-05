@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
+import { createUser } from '../api';
 
 const Register = ({ attemptLogin }) => {
   const [username, setUsername] = useState('');
@@ -7,27 +8,16 @@ const Register = ({ attemptLogin }) => {
   const navigate = useNavigate();
 
   const register = async({ username, password})=> {
-    fetch(
-      '/api/auth/register',
-      {
-        method: 'POST',
-        body: JSON.stringify({ username, password}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-    .then( response => response.json())
-    .then( (data) => {
-      if(data.token){
-        window.localStorage.setItem('token', data.token);
+    const user = await createUser({username, password})
+
+      if(user.token){
+        window.localStorage.setItem('token', user.token);
         attemptLogin();
         navigate('/');
       }
       else {
-        console.log(data);
+        console.log(user);
       }
-    });
   };
 
   const _register = (ev)=> {
