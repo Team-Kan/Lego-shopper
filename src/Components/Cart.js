@@ -11,6 +11,7 @@ const Cart = () => {
   const retrieveCartAndProducts = async(token) => {
     const cart = await fetchCart(token);
     if(cart.products) {
+      cart.products.sort((a, b) => a.cartProductId - b.cartProductId);
       const items = cart.products.reduce((acc, curr) => acc + curr.quantity, 0);
       setItemCount(items);
 
