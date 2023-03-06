@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import ChangeAdminForm from './ChangeAdminForm';
-import CreateCollectionForm from './CreateCollectionForm';
-import CreateProductForm from './CreateProductForm';
+import {
+  EditOrDeleteProduct,
+  CreateProductForm, 
+  CreateCollectionForm,
+} from '.';
 const { fetchAllUsers } = require("../api")
 
 const Admin = (props) => {
@@ -25,6 +28,7 @@ useEffect(() => {
       <div className='grid grid-cols-1 grid-rows-1 lg:grid-cols-2 justify-items-center'>
         <CreateProductForm collections={collections}/>
         <ChangeAdminForm users={users}/>
+        <EditOrDeleteProduct />
         <CreateCollectionForm showAllCollections={showAllCollections}/>
       </div>
 

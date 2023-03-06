@@ -8,10 +8,18 @@ const createUser = async ({ username, password }) => {
   // we are now not returning the password
   // We are now hashing the passwords before they are sent to the database
   try {
-    if(password.length < 7){
+    // const regex = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    // // This is used to make sure the username is an email
+    // if(!regex.test(username)){
+    //   const error = new Error("Plese enter a Valid email")
+    //   error.status = 400
+    //   throw error
+    // }
+
+    if(password.length < 8){
       const error = new Error("password must be atleast 8 characters long.")
-      error.status(401);
-      throw error
+      error.status = 400;
+      throw error;
     }
     const hash = bcrypt.hashSync(password, salt)
     const SQL = `
@@ -22,9 +30,9 @@ const createUser = async ({ username, password }) => {
 
     const {rows: [user]} = await client.query(SQL, [username, hash]);
 
-    return user
+    return user;
   } catch (error) {
-    console.error(error)
+    throw error;
   }
 };
 
@@ -47,7 +55,7 @@ const getUserByToken = async (token) => {
 
     return user;  
   } catch (error) {
-    console.error(error)
+    throw error;
   }
 };
 
@@ -68,7 +76,7 @@ const authenticate = async ({ username, password }) => {
     }
     return jwt.sign(user, process.env.JWT);
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 
@@ -81,7 +89,7 @@ const getAllUsers = async () => {
 
     return users
   } catch (error) {
-    console.error(error)
+    throw error;
   }
 
 }
@@ -103,7 +111,7 @@ const editIsAdmin = async ({ id, isAdmin }) => {
   
     return user;
   } catch (error) {
-    console.error(error)
+    throw error
   }
   
 };

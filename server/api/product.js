@@ -83,13 +83,8 @@ router.patch("/:id", tokenAuth, adminCheck, async (req, res, next) => {
     const {id} = req.params;
     const fields = req.body;
 
-    const product = await editProduct({id, fields});
-    if(!product.name){
-      next({
-        status: 401,
-        message: `Product with the id ${id} does not exist`
-      })
-    }
+    const product = await editProduct({id, ...fields});
+    
     res.send(product);
   } catch (error) {
     next(error);

@@ -10,7 +10,7 @@ const createCart = async ({ id }) => {
       const { rows: [cart] } = await client.query(SQL, [id]);
       return cart;   
     } catch (error) {
-      console.error(error);
+      throw error;
     }
 }
 
@@ -63,7 +63,7 @@ const getActiveCartByUserId = async (id) => {
 
       return cart;
     } catch (error) {
-      console.error(error)
+      throw error;
     }
 }
 
@@ -80,7 +80,7 @@ const getInactiveCartsByUserId = async (id) => {
     
     return carts;  
   } catch (error) {
-  console.error(error);
+  throw error;
   }   
 }
 
@@ -95,7 +95,7 @@ const checkoutCart = async(id) => {
     
       return cart;    
     } catch (error) {
-      console.error(error);
+      throw error;
     }
     
 }

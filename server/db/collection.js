@@ -2,16 +2,20 @@ const client = require("./client");
 
 const createCollection = async ({name}) => {
   try {
+    if(!name){
+      const error = new Error("Please include a name")
+      error.status(400)
+      throw error
+    }
     const {rows: [collection]} = await client.query(`
       INSERT INTO collections(name)
       VALUES ($1)
       RETURNING *
     `, [name]);
-    console.log(collection);
 
     return collection;  
   } catch (error) {
-    console.error(error);
+    throw error;
   }
   
 }
@@ -23,7 +27,7 @@ const getAllCollections = async () => {
     `)
     return rows;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
@@ -36,7 +40,7 @@ const deleteCollection = async (id) => {
     RETURNING *;`, [id] )
     return deletedCollection;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
@@ -51,7 +55,7 @@ const editCollection = async ({id, name}) => {
     return collection;
 
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 } 
 
