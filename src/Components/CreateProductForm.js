@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { createProductFetch } from "../api";
 
-const CreateProductForm = () => {
+const CreateProductForm = (props) => {
+  const { collections } = props;
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -57,15 +58,18 @@ const CreateProductForm = () => {
           value={description}
           onChange={(ev) => setDescription(ev.target.value)}
         />
-        <label className="self-start">
-          Id of collection product belongs to:
-        </label>
-        <input
+        <label className="self-start">collection:</label>
+        <select
           className="border-2 border-green-700 rounded-md w-8/12 p-2"
-          placeholder="collectionId..."
-          value={collectionId}
           onChange={(ev) => setCollectionId(ev.target.value)}
-        />
+        >
+          <option value={null}>Select a collection</option>
+          {collections.map(({ id, name }) => (
+            <option key={id} value={id}>
+              {name}
+            </option>
+          ))}
+        </select>
         <label className="self-start">Price:</label>
         <input
           className="border-2 border-green-700 rounded-md w-8/12 p-2"
