@@ -15,7 +15,7 @@ const Cart = () => {
       const items = cart.products.reduce((acc, curr) => acc + curr.quantity, 0);
       setItemCount(items);
 
-      let cost = (Math.round(100*cart.products.reduce((acc, curr) => acc + curr.price*curr.quantity, 0))/100).toFixed(2);
+      const cost = (Math.round(100*cart.products.reduce((acc, curr) => acc + curr.price*curr.quantity, 0))/100).toFixed(2);
       setTotal(cost);
     } 
     setCart(cart);
@@ -76,7 +76,7 @@ const Cart = () => {
       <Link to="/">Back to Shopping</Link>
       <div className='cart-container'> 
         <div className = 'cart-product-container'>
-          {cart.products ? (
+          {cart.products && cart.products.length > 0 ? (
             <ul>
               {
                 cart.products.map(product => {
@@ -106,7 +106,7 @@ const Cart = () => {
           <hr></hr>
           <p>Items ({itemCount})</p>
           <p>Subtotal: ${total}</p>
-          <button className='checkout-button' onClick = {() => { processCheckout(cart.id) }}>Checkout</button>
+          <button className='checkout-button' onClick = {() => { processCheckout(cart.id) }}>Proceed to Checkout</button>
         </div>
       </div>
     </div>
