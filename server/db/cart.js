@@ -53,7 +53,7 @@ LEFT JOIN products ON "productId" = products.id`;
 
 const getActiveCartByUserId = async (id) => {
     try {
-      const { rows } = await clieznt.query(`
+      const { rows } = await client.query(`
         ${allCartsJoinQuery}
         WHERE "userId" = $1 AND "isActive" = true;
       `, [id]);

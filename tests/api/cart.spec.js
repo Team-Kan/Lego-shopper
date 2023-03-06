@@ -37,7 +37,7 @@ describe("CreateCart(userId)", () => {
     });
     const response = await request(app)
       .get(`/api/cart/`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${token}`)
 
     cart = response.body;
     expect(response.body.id).toBe(1);
@@ -58,4 +58,4 @@ describe('testing checkout', () => {
     console.log(response.body);
     expect(response.body.isActive).toBe(false);
   })
-})
+});

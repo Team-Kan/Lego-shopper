@@ -36,7 +36,7 @@ router.patch("/:id", tokenAuth, async (req, res, next) => {
     const { id } = req.params;
     const checkout = await checkoutCart(id);
     console.log(checkout);
-    return checkout;
+    res.send(checkout);
   } catch (error) {
     next(error);
   }
