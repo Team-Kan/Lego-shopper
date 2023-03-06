@@ -21,6 +21,16 @@ const CheckoutPage = () => {
         setCart(cart);
     }
 
+    const processCheckout = async (cartId) => {
+        const response = await checkoutCart(token, cartId);
+        console.log(response);
+        if (!response.error) {
+          const result = await retrieveCartAndProducts(token);
+        } else {
+          console.log("issue");
+        }
+      }
+
     useEffect(() => {
         if (token) {
             retrieveCartAndProducts(token)
