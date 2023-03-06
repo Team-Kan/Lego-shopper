@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { deleteCartProduct, fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
+import { checkoutCart, deleteCartProduct, fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
 
 const Cart = () => {
   const [ cart, setCart ] = useState({});
@@ -15,7 +15,7 @@ const Cart = () => {
       const items = cart.products.reduce((acc, curr) => acc + curr.quantity, 0);
       setItemCount(items);
 
-      let cost = (Math.round(100*cart.products.reduce((acc, curr) => acc + curr.price*curr.quantity, 0))/100).toFixed(2);
+      const cost = (Math.round(100*cart.products.reduce((acc, curr) => acc + curr.price*curr.quantity, 0))/100).toFixed(2);
       setTotal(cost);
     } 
     setCart(cart);
@@ -55,6 +55,16 @@ const Cart = () => {
     }
   }
 
+  const processCheckout = async (cartId) => {
+    const response = await checkoutCart(token, cartId);
+    console.log(response);
+    if (!response.error) {
+      const result = await retrieveCartAndProducts(token);
+    } else {
+      console.log("issue");
+    }
+  }
+
   useEffect(()=> {
     if(token) {
       retrieveCartAndProducts(token)
@@ -66,7 +76,7 @@ const Cart = () => {
       <Link to="/">Back to Shopping</Link>
       <div className='cart-container'> 
         <div className = 'cart-product-container'>
-          {cart.products ? (
+          {cart.products && cart.products.length > 0 ? (
             <ul>
               {
                 cart.products.map(product => {
@@ -96,7 +106,7 @@ const Cart = () => {
           <hr></hr>
           <p>Items ({itemCount})</p>
           <p>Subtotal: ${total}</p>
-          <button className='checkout-button'>Checkout</button>
+          <button className='checkout-button' onClick = {() => { processCheckout(cart.id) }}>Proceed to Checkout</button>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import Nav from './Nav';
 import { fetchAllProducts, fetchAllCollections } from "../api";
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
 import Cart from './Cart';
+import CheckoutPage from './CheckoutPage';
 import SingleProduct from './SingleProduct';
 
 
@@ -69,6 +70,7 @@ const App = ()=> {
         <Route path='/admin' element={<Admin auth={auth} collections={collections} showAllCollections={showAllCollections}/>}/>
         <Route path='/collections/:id' element={<Collection collections={collections}/>}/>
         <Route path='/cart' element={<Cart />}/>
+        <Route path='/checkout' element={<CheckoutPage />} />
         <Route path='/product/:id' element={<SingleProduct />}/>
       </Routes>
     </div>
