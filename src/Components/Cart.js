@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { deleteCartProduct, fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
+import { checkoutCart, deleteCartProduct, fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
 
 const Cart = () => {
   const [ cart, setCart ] = useState({});
@@ -55,6 +55,16 @@ const Cart = () => {
     }
   }
 
+  const processCheckout = async (cartId) => {
+    const response = await checkoutCart(token, cartId);
+    console.log(response);
+    if (!response.error) {
+      const result = await retrieveCartAndProducts(token);
+    } else {
+      console.log("issue");
+    }
+  }
+
   useEffect(()=> {
     if(token) {
       retrieveCartAndProducts(token)
@@ -96,7 +106,7 @@ const Cart = () => {
           <hr></hr>
           <p>Items ({itemCount})</p>
           <p>Subtotal: ${total}</p>
-          <button className='checkout-button'>Checkout</button>
+          <button className='checkout-button' onClick = {() => { processCheckout(cart.id) }}>Checkout</button>
         </div>
       </div>
     </div>
