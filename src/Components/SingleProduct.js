@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import { useLocation } from 'react-router-dom';
-import { fetchProductById } from '../api';
-import {AddProductToCartForm} from '.';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { fetchProductById } from "../api";
+import { AddProductToCartForm } from ".";
 
 const SingleProduct = () => {
-  
   const [product, setProduct] = useState("");
   const [error, setError] = useState("");
 
@@ -15,39 +14,49 @@ const SingleProduct = () => {
 
   const getProduct = async () => {
     const product = await fetchProductById(id);
-    if(product.error){
-      setError(product.error)
-      return 
+    if (product.error) {
+      setError(product.error);
+      return;
     }
     setProduct(product);
-  }
+  };
 
   useEffect(() => {
-    getProduct()
+    getProduct();
   }, [id]);
 
-  return ( 
-    <div className='flex md:justify-center items-center'>
-      {product.id ?
-      <div className='flex flex-col md:m-10 md:items-center rounded-xl bg bg-gradient-to-t from-green-500 via-green-300 to-[#73A580] w-11/12 min-w-[573px]'>
-        <h1 className='text-2xl p-10 pl-20 text-center'>{product.name}</h1>
-        <img className='w-fill h-96 m-auto self-start md:self-center md:min-w-full md:h-auto md:m-0' src={product.imageUrl} alt={product.name}/>
-        <div className='flex m-10 shadow-lg shadow-black rounded-md'>
-          <div className='pl-2 border-r-2 border-white bg-[#3E363F] text-green-200 rounded-l-md'>
-            <h5>Description:</h5>
-            <h6 className='w-48 h-48 md:w-96 overflow-y-scroll'>{product.description}</h6>
-          </div>
-          <h4 className='w-1/3 pl-2 pr-2 bg-[#3E363F] border-r-2 border-white text-green-200'>Total number of <br /> pieces: {product.pieceCount}</h4>
-          <div>
-            {product.quantity?
-              <AddProductToCartForm product={product}/>
-            : <div>Out of Stock, check in later!</div>}
+  return (
+    <div className="flex md:justify-center items-center">
+      {product.id ? (
+        <div className="flex flex-col md:m-10 md:items-center rounded-xl bg bg-gradient-to-t from-green-500 via-green-300 to-[#73A580] w-11/12 min-w-[573px]">
+          <h1 className="text-2xl p-10 pl-20 text-center">{product.name}</h1>
+          <img
+            className="w-fill h-96 m-auto self-start md:self-center md:min-w-full md:h-auto md:m-0"
+            src={product.imageUrl}
+            alt={product.name}
+          />
+          <div className="flex m-10 shadow-lg shadow-black rounded-md">
+            <div className="pl-2 border-r-2 border-white bg-[#3E363F] text-green-200 rounded-l-md">
+              <h5>Description:</h5>
+              <h6 className="w-48 h-48 md:w-96">{product.description}</h6>
+            </div>
+            <h4 className="w-1/3 pl-2 pr-2 bg-[#3E363F] border-r-2 border-white text-green-200">
+              Total number of <br /> pieces: {product.pieceCount}
+            </h4>
+            <div>
+              {product.quantity ? (
+                <AddProductToCartForm product={product} />
+              ) : (
+                <div>Out of Stock, check in later!</div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      :<div className='text-4xl'>{product.error}</div>}
+      ) : (
+        <div className="text-4xl">{product.error}</div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default SingleProduct;
