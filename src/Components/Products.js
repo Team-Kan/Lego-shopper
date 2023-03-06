@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 const Products = (props) => {
@@ -15,14 +16,16 @@ const Products = (props) => {
               quantity,
             } = product;
             return (
-              <div key={product.id} className='single_product'>
+              <Link to={`/product/${product.id}`} key={product.id}>
+                <div  className='single_product'>
                 <ul>
                 <img src={imageUrl} className='product_image' />
                 <li>Name:{name}</li>
                 <li>Price: {price}</li>
-                <li>Quantity: {quantity}</li>
+                <li>Currently: {quantity ? `${quantity} In Stock`: "Out of Stock"}</li>
                 </ul>
               </div>
+              </Link>
             );
           })
         : null}
