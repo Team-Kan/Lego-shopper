@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 const Products = (props) => {
@@ -15,7 +16,8 @@ const Products = (props) => {
               quantity,
             } = product;
             return (
-              <div key={product.id} className='single_product'>
+              <Link to={`/product/${product.id}`} key={product.id}>
+                <div  className='single_product'>
                 <ul>
                 <img src={imageUrl} className='product_image' />
                 <li>Name:{name}</li>
@@ -23,6 +25,7 @@ const Products = (props) => {
                 <li>Quantity: {quantity}</li>
                 </ul>
               </div>
+              </Link>
             );
           })
         : null}

@@ -11,7 +11,7 @@
 }
 
 body {
-  font-family: verdana;
+  font-family: 'Genos', sans-serif;
 }
 
 form {
@@ -98,13 +98,31 @@ nav {
 .single_product{
   display: flex;
   flex-wrap: wrap;
-  border: 2px solid black;
+  flex-direction: column;
+  border: 2px solid silver;
   border-radius: 5px;
+  border-radius: silver;
   padding: 1.5rem;
   margin: 1.5rem;
+  font-family: 'Genos', sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 .single_product:hover{
+  box-shadow: 1px 1px 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.single_product_image{
+  width: 400px;
+  height: 400px;
+  transition: .2s;
+  margin: 0 0;
+}
+
+.single_product_image:hover{
+  transform: scale(1.10);
   box-shadow: 1px 1px 2px 1px rgba(0, 140, 186, 0.5);
 }
 

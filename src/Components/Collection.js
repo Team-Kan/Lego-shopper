@@ -35,11 +35,13 @@ const Collection = (props) => {
                 {
                     products.map(product => {
                         return (
-                            <div key={product.id}>
-                            <Link to={`/product/${product.id}`}><img src={product.imageUrl} /></Link>
+                            <Link to={`/product/${product.id}`} key={product.id}>
+                            <div  className='single_product'>
+                            <img src={product.imageUrl} className='single_product_image' />
                             <li>{product.name}</li>
                             <li>Price: ${product.price}</li>
                             </div>
+                            </Link>
                         )
                     })
                 }
