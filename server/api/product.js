@@ -61,14 +61,6 @@ router.post("/create", tokenAuth, adminCheck, async (req, res, next) => {
   try {
     const product = await createProduct(req.body);
 
-    if (!product) {
-      next({
-        status: 400,
-        message:
-          "Product could not be created, double check everything and try again.",
-      });
-    }
-
     res.send(product);
   } catch (error) {
     next(error);
@@ -91,13 +83,8 @@ router.patch("/:id", tokenAuth, adminCheck, async (req, res, next) => {
     const {id} = req.params;
     const fields = req.body;
 
-    const product = await editProduct({id, fields});
-    if(!product.name){
-      next({
-        status: 401,
-        message: `Product with the id ${id} does not exist`
-      })
-    }
+    const product = await editProduct({id, ...fields});
+    
     res.send(product);
   } catch (error) {
     next(error);

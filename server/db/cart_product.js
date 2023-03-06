@@ -11,7 +11,7 @@ const addProductToCart = async({ cartId, productId, quantity }) => {
       const { rows: [cart_product]} = await client.query(SQL, [ cartId, productId, quantity ]);
       return cart_product;    
     } catch (error) {
-      console.error(error);
+      throw error;
     }
     
 }
@@ -25,7 +25,7 @@ const getCartProductsByCartId = async({ id }) => {
       const { rows } = await client.query(SQL, [id]);
       return rows;    
     } catch (error) {
-      console.error(error);
+      throw error;
     }
 }
 
@@ -41,7 +41,7 @@ const editCartProduct = async(cartId, productId, quantity) => {
       const { rows: [cart_product]} = await client.query(SQL, [cartId, productId, quantity]);
       return cart_product;    
     } catch (error) {
-      console.error(error);
+      throw error;
     }
     
 }
@@ -57,7 +57,7 @@ const deleteCartProduct = async(cartId, productId) => {
       const { rows: [cart_product]} = await client.query(SQL, [cartId, productId]);
       return cart_product;  
     } catch (error) {
-      console.error(error);
+      throw error;
     }
 }
 

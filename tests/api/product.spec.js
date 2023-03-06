@@ -7,12 +7,6 @@ const request = require("supertest");
 const app = require("../../server/app");
 const { createCollection } = require("../../server/db/collection");
 
-let product1;
-let product2;
-let product3;
-let product4;
-let notAdmin;
-
 beforeAll(async () => {
   await setup();
 });
@@ -91,3 +85,51 @@ describe("GET api/products/collection/:collectionId", () => {
     expect(response.body[0].name).toBe("sample5");
   });
 });
+
+describe("PATCH api/products/:id", () => {
+  it("should edit the product", async () => {
+    const product4 = await createProduct({
+      name: "sample4",
+      collectionId: 2,
+      description: "this is a ;glhakdsgh",
+      price: 19.99,
+      imageUrl: "double",
+      pieceCount: 101,
+      quantity: 1,
+    });
+    const newDescription = "how you like this changing?"
+    
+    const token = await authenticate({ username: "bob", password: "password" });
+    
+    const response = await request(app)
+    .patch(`/api/products/${product4.id}`)
+    .set("Authorization", `Bearer ${token}`)
+    .send({description: newDescription});
+
+    console.log(response.body);
+    expect(response.body.description).toBe(newDescription)
+  })
+})
+
+describe("DELETE api/products/:id", () => {
+  it("should DELETE the product", async () => {
+    const product5 = await createProduct({
+      name: "sample5fgsadhf",
+      collectionId: 2,
+      description: "thiasdfsadfasd",
+      price: 19.99,
+      imageUrl: "double",
+      pieceCount: 101,
+      quantity: 1,
+    });
+    
+    const token = await authenticate({ username: "bob", password: "password" });
+    
+    const response = await request(app)
+    .delete(`/api/products/${product5.id}`)
+    .set("Authorization", `Bearer ${token}`)
+
+    expect(response.body.id).toBe(product5.id)
+  })
+})
+

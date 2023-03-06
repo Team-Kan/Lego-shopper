@@ -16,20 +16,34 @@ const createProduct = async ({
   pieceCount,
   quantity,
 }) => {
-  const {
-    rows: [product],
-  } = await client.query(
-    `
-  INSERT INTO products(name, description, "collectionId", price, "imageUrl", "pieceCount", quantity)
-  VALUES ($1, $2, $3, $4, $5, $6, $7)
-  RETURNING *
-  `,
-    [name, description, collectionId, price, imageUrl, pieceCount, quantity]
-  );
-
-  console.log(product);
-
-  return product;
+  try {
+    if(!name, !description || !collectionId || !price || !imageUrl || !pieceCount || !quantity){
+      const error = new Error("Make sure to add everything before creating a product")
+      error.status = 401;
+      throw error;
+    }
+    const {
+      rows: [product],
+    } = await client.query(
+      `
+      INSERT INTO products(name, description, "collectionId", price, "imageUrl", "pieceCount", quantity)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *
+      `, [name, description, collectionId, price, imageUrl, pieceCount, quantity]
+    );
+  
+    if(!product){
+      const error = new Error("Product could not be created, double check everything and try again.")
+      error.status = 400
+      throw error
+    }
+    console.log(product);
+  
+    return product;
+  } catch (error) {
+    throw error;
+  }
+  
 };
 
 const getAllProducts = async () => {
@@ -40,7 +54,7 @@ const getAllProducts = async () => {
     `);
     return product;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -57,7 +71,7 @@ const getProductsByCollectionId = async (id) => {
 
     return products;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 
@@ -81,7 +95,7 @@ const getProductById = async (id) => {
     }
     return product;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 
@@ -105,7 +119,7 @@ const getProductByName = async (name) => {
     }
     return product
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }
 
@@ -116,9 +130,16 @@ const deleteProduct = async (id) => {
     FROM products
     WHERE "id"=$1
     RETURNING *;`, [id])
+    
+    if(!deleteProduct.id){
+      const error = new Error(`Product with the id ${id} does not exist`)
+      error.status = 401;
+      throw error;
+    }
+
     return deletedProduct;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
@@ -129,7 +150,9 @@ const editProduct = async ({id,...fields}) => {
     .join(', ');
       
     if(!setFields.length){
-      throw new Error("You must atleast have one field to edit");
+      const error = new Error("You must atleast have one field to edit");
+      error.status = 400;
+      throw error
     }
       const {rows: [product] } = await client.query(`
         UPDATE products
@@ -138,9 +161,14 @@ const editProduct = async ({id,...fields}) => {
         RETURNING *;
       `, Object.values(fields))
 
+      if(!product.id){
+        const error = new Error(`Product with the id ${id} does not exist`)
+        error.status = 401;
+        throw error;
+      }
       return product;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
 }
 
