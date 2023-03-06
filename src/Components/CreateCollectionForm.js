@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { createCollectionFetch } from "../api";
 
-const CreateCollectionForm = () => {
+const CreateCollectionForm = (props) => {
+  const {showAllCollections} = props
   const [name, setName] = useState("");
   const [error, setError] = useState("")
 
@@ -17,6 +18,7 @@ const CreateCollectionForm = () => {
 
     setError("");
     setName("");
+    showAllCollections()
     return newCollection;
   };
   return (

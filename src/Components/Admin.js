@@ -5,7 +5,7 @@ import CreateProductForm from './CreateProductForm';
 const { fetchAllUsers } = require("../api")
 
 const Admin = (props) => {
-const { auth } = props;    
+const { auth, collections, showAllCollections } = props;    
 const [users, setUsers] = useState([]);
 
 const displayAllUsers = async () => {
@@ -23,9 +23,9 @@ useEffect(() => {
     <div>
       <h2>Welcome Admin {auth.username}</h2>
       <div className='grid grid-cols-1 grid-rows-1 lg:grid-cols-2 justify-items-center'>
-        <CreateProductForm />
-        <ChangeAdminForm />
-        <CreateCollectionForm />
+        <CreateProductForm collections={collections}/>
+        <ChangeAdminForm users={users}/>
+        <CreateCollectionForm showAllCollections={showAllCollections}/>
       </div>
 
     </div>

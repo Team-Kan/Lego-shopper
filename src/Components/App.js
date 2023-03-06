@@ -66,7 +66,7 @@ const App = ()=> {
         <Route path='/' element= { <Home products ={products} collections={collections}/> } />
         <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
         <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
-        <Route path='/admin' element={<Admin auth={auth}/>}/>
+        <Route path='/admin' element={<Admin auth={auth} collections={collections} showAllCollections={showAllCollections}/>}/>
         <Route path='/collections/:id' element={<Collection collections={collections}/>}/>
         <Route path='/cart' element={<Cart />}/>
         <Route path='/product/:id' element={<SingleProduct />}/>
