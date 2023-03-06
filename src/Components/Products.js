@@ -22,7 +22,7 @@ const Products = (props) => {
                 <img src={imageUrl} className='product_image' />
                 <li>Name:{name}</li>
                 <li>Price: {price}</li>
-                <li>Quantity: {quantity}</li>
+                <li>Currently: {quantity ? `${quantity} In Stock`: "Out of Stock"}</li>
                 </ul>
               </div>
               </Link>
