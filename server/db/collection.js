@@ -1,14 +1,19 @@
 const client = require("./client");
 
 const createCollection = async ({name}) => {
+  try {
+    const {rows: [collection]} = await client.query(`
+      INSERT INTO collections(name)
+      VALUES ($1)
+      RETURNING *
+    `, [name]);
+    console.log(collection);
 
-  const {rows: [collection]} = await client.query(`
-  INSERT INTO collections(name)
-  VALUES ($1)
-  RETURNING *
-  `, [name]);
-  console.log(collection);
-  return collection;
+    return collection;  
+  } catch (error) {
+    console.error(error);
+  }
+  
 }
 
 const getAllCollections = async () => {

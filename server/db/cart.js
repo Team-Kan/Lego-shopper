@@ -1,13 +1,17 @@
 const client = require('./client');
 
 const createCart = async ({ id }) => {
-    const SQL = `
-    INSERT into carts("userId")
-    VALUES ($1)
-    RETURNING *`;
-
-    const { rows: [cart] } = await client.query(SQL, [id]);
-    return cart;
+    try {
+      const SQL = `
+        INSERT into carts("userId")
+        VALUES ($1)
+        RETURNING *`;
+    
+      const { rows: [cart] } = await client.query(SQL, [id]);
+      return cart;   
+    } catch (error) {
+      console.error(error);
+    }
 }
 
 const attachProductsToCart = (carts) => {
@@ -48,39 +52,52 @@ LEFT JOIN products ON "productId" = products.id`;
 
 
 const getActiveCartByUserId = async (id) => {
-    const { rows } = await client.query(`
-    ${allCartsJoinQuery}
-    WHERE "userId" = $1 AND "isActive" = true;
-    `, [id]);
+    try {
+      const { rows } = await clieznt.query(`
+        ${allCartsJoinQuery}
+        WHERE "userId" = $1 AND "isActive" = true;
+      `, [id]);
     
-    let cart = attachProductsToCart(rows);
-    cart = Object.values(cart);
+      let cart = attachProductsToCart(rows);
+      cart = Object.values(cart);
 
-    return cart;
+      return cart;
+    } catch (error) {
+      console.error(error)
+    }
 }
 
 const getInactiveCartsByUserId = async (id) => {
+  try {
     const { rows } = await client.query(`
-    ${allCartsJoinQuery}
-    WHERE "userId" = $1 AND "isActive" = false;
+      ${allCartsJoinQuery}
+      WHERE "userId" = $1 AND "isActive" = false;
     `, [id]);
     
     let carts = attachProductsToCart(rows);
     console.log(carts);
     carts = Object.values(carts);
     
-    return carts;
+    return carts;  
+  } catch (error) {
+  console.error(error);
+  }   
 }
 
 const checkoutCart = async(id) => {
-    const { rows: [cart]} = await client.query(`
-    UPDATE carts 
-    SET "isActive" = false
-    WHERE id = $1
-    RETURNING *
-    `, [id]);
-
-    return cart;
+    try {
+      const { rows: [cart]} = await client.query(`
+        UPDATE carts 
+        SET "isActive" = false
+        WHERE id = $1
+        RETURNING *
+      `, [id]);
+    
+      return cart;    
+    } catch (error) {
+      console.error(error);
+    }
+    
 }
 
 module.exports = {

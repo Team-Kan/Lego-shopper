@@ -7,8 +7,6 @@ router.use("/collections", require("./collection"));
 
 router.use("/products", require("./product"));
 
-router.use("/users", require("./user"));
-
 router.use("/cart", require("./cart"));
 
 router.use("/cart-products", require("./cart_product"));
