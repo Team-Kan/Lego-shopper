@@ -5,19 +5,24 @@ import { createUser } from '../api';
 const Register = ({ attemptLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState("")
   const navigate = useNavigate();
 
   const register = async({ username, password})=> {
-    const user = await createUser({username, password})
+    const user = await createUser({username, password});
 
-      if(user.token){
-        window.localStorage.setItem('token', user.token);
-        attemptLogin();
-        navigate('/');
-      }
-      else {
-        console.log(user);
-      }
+    if(user.error){
+      return setError(user.error);
+    }
+    
+    if(user.token){
+      window.localStorage.setItem('token', user.token);
+      attemptLogin();
+      navigate('/');
+    }
+    else {
+      console.log(user);
+    }
   };
 
   const _register = (ev)=> {
@@ -42,6 +47,7 @@ const Register = ({ attemptLogin }) => {
           value={ password }
           onChange = { ev => setPassword(ev.target.value) }
         />
+        <div>{error}</div>
         <button className="bg-green-300 rounded-md active:bg-green-600 active:translate-y-1 shadow-md shadow-green-600">Register</button>
       </form>
     </div>

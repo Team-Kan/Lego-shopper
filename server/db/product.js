@@ -16,20 +16,29 @@ const createProduct = async ({
   pieceCount,
   quantity,
 }) => {
-  const {
-    rows: [product],
-  } = await client.query(
-    `
-  INSERT INTO products(name, description, "collectionId", price, "imageUrl", "pieceCount", quantity)
-  VALUES ($1, $2, $3, $4, $5, $6, $7)
-  RETURNING *
-  `,
-    [name, description, collectionId, price, imageUrl, pieceCount, quantity]
-  );
-
-  console.log(product);
-
-  return product;
+  try {
+    const {
+      rows: [product],
+    } = await client.query(
+      `
+      INSERT INTO products(name, description, "collectionId", price, "imageUrl", "pieceCount", quantity)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *
+      `, [name, description, collectionId, price, imageUrl, pieceCount, quantity]
+    );
+  
+    if(!product){
+      const error = new Error("Product could not be created, double check everything and try again.")
+      error.status = 400
+      throw error
+    }
+    console.log(product);
+  
+    return product;
+  } catch (error) {
+    console.error(error)
+  }
+  
 };
 
 const getAllProducts = async () => {

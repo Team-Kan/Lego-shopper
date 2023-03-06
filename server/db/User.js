@@ -8,6 +8,11 @@ const createUser = async ({ username, password }) => {
   // we are now not returning the password
   // We are now hashing the passwords before they are sent to the database
   try {
+    if(password.length < 7){
+      const error = new Error("password must be atleast 8 characters long.")
+      error.status(401);
+      throw error
+    }
     const hash = bcrypt.hashSync(password, salt)
     const SQL = `
       INSERT INTO users(username, password)
