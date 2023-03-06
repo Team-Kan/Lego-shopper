@@ -1,5 +1,5 @@
 const express = require("express");
-const { getActiveCartByUserId, getInactiveCartsByUserId, createCart } = require("../db/cart");
+const { checkoutCart, getActiveCartByUserId, getInactiveCartsByUserId, createCart } = require("../db/cart");
 const { tokenAuth, sliceToken } = require("./utils");
 const router = express.Router();
 
@@ -30,9 +30,16 @@ router.get("/inactive", tokenAuth, async (res, req, next) => {
     next(error)
   }
 })
-// TODO
-router.patch("/patch", async (req, res, next) => {
-  
+
+router.patch("/:id", tokenAuth, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const checkout = await checkoutCart(id);
+    console.log(checkout);
+    res.send(checkout);
+  } catch (error) {
+    next(error);
+  }
 })
 
 module.exports = router;
