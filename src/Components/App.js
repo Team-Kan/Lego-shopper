@@ -62,13 +62,6 @@ const App = ()=> {
   return (
     <div>
       <Nav auth={auth} logout={logout}/>
-      <div className='container'>
-        <div className='banner'>
-          <div className='banner-text'>
-            <h1>Welcome to reKANstructed!</h1>
-          </div>
-        </div>
-      </div>
       <Routes>
         <Route path='/' element= { <Home products ={products} collections={collections}/> } />
         <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />

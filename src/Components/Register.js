@@ -32,7 +32,7 @@ const Register = ({ attemptLogin }) => {
 
   return (
     <div className='flex flex-col justify-center items-center h-full'>
-    <div className='border-2 rounded-md p-20 shadow-lg shadow-green-600'>
+    <div className='border-2 rounded-md p-20 shadow-lg shadow-green-600 bg-white'>
       <h2 className='text-5xl p-10 text-green-700'>Register</h2>
       <form onSubmit={ _register }>
         <input
