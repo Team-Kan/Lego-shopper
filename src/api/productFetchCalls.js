@@ -22,6 +22,9 @@ const fetchProductById = async (id) => {
  return results
 }
 
+const editProductFetch = async () => {
+  const response = await fetch(`$`)
+}
 module.exports = {
     fetchAllProducts,
     fetchProductById,
