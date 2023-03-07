@@ -16,15 +16,6 @@ const EditProductForm = (props) => {
     ev.preventDefault()
     const token = window.localStorage.getItem("token");
     console.log(token)
-    const body = {
-      name,
-      description,
-      collectionId,
-      price,
-      imageUrl,
-      pieceCount,
-      quantity,
-    }
     const editProduct = await editProductFetch({
       id: product.id, 
       token, 
@@ -34,7 +25,8 @@ const EditProductForm = (props) => {
       price,
       imageUrl,
       pieceCount,
-      quantity,})
+      quantity,
+    })
     if(editProduct.error){
       return setError(editProduct.message)
     }

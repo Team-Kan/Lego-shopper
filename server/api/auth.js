@@ -25,17 +25,11 @@ router.get("/", tokenAuth, async (req, res, next) => {
 router.post("/register", async (req, res, next) => {
   try {
     const {username, password} = req.body
-    // if(password.length <= 7){
-    //   // next({
-    //   //   status: 400,
-    //   //   error: "shortPassword",
-    //   //   message: "Your password must be atleast 8 charcters."
-    //   // })
-    // } else{
+
     const newUser = await createUser({username, password});
     const token = await authenticate({username: newUser.username, password});
+    
     res.send({ token });
-    // }
   } catch (error) {
     next(error);
   }

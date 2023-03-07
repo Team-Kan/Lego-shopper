@@ -69,9 +69,7 @@ const EditOrDeleteProduct = (props) => {
             <option value={{}}>There are no products.</option>
           )}
         </select>
-      <div
-        className="w-11/12"
-      >{editProduct ? <EditProductForm product={product} setEditProduct={setEditProduct}/> : null}</div>
+      <div>{editProduct ? <EditProductForm product={product} setEditProduct={setEditProduct}/> : null}</div>
       <div>{deleteProduct ? <DeleteProductForm product={product} setDeleteProduct={setDeleteProduct}/> : null}</div>
     </div>
   );
