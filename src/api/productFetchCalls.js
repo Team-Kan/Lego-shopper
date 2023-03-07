@@ -22,14 +22,30 @@ const fetchProductById = async (id) => {
  return results;
 }
 
-const editProductFetch = async (id, token, body) => {
+const editProductFetch = async ({
+    id, 
+    token, 
+    name,
+    description,
+    collectionId,
+    price,
+    imageUrl,
+    pieceCount,
+    quantity,}) => {
   const response = await fetch(`${MAIN_URL}/${id}`, {
     method: "PATCH",
     headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify({
+        name,
+        description,
+        collectionId,
+        price,
+        imageUrl,
+        pieceCount,
+        quantity,}),
   })
   
   const results = await response.json();
@@ -48,6 +64,7 @@ const deleteProductFetch = async (id, token) => {
   const results = await response.json();
   return results;
 }
+
 module.exports = {
     fetchAllProducts,
     fetchProductById,

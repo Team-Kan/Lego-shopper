@@ -8,7 +8,7 @@ import {
 const { fetchAllUsers } = require("../api")
 
 const Admin = (props) => {
-const { auth, collections, showAllCollections } = props;    
+const { auth, collections, showAllCollections, products } = props;    
 const [users, setUsers] = useState([]);
 
 const displayAllUsers = async () => {
@@ -28,7 +28,7 @@ useEffect(() => {
       <div className='grid grid-cols-1 grid-rows-1 sm:gap-10 lg:grid-cols-2 justify-items-center'>
         <CreateProductForm collections={collections}/>
         <ChangeAdminForm users={users}/>
-        <EditOrDeleteProduct />
+        <EditOrDeleteProduct products={products}/>
         <CreateCollectionForm showAllCollections={showAllCollections}/>
       </div>
 

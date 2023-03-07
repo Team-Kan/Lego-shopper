@@ -15,7 +15,8 @@ const EditProductForm = (props) => {
   const handleEdit = async (ev, id) => {
     ev.preventDefault()
     const token = window.localStorage.getItem("token");
-    const editProduct = await editProductFetch(id, token, {
+    console.log(token)
+    const body = {
       name,
       description,
       collectionId,
@@ -23,7 +24,17 @@ const EditProductForm = (props) => {
       imageUrl,
       pieceCount,
       quantity,
-    })
+    }
+    const editProduct = await editProductFetch({
+      id: product.id, 
+      token, 
+      name,
+      description,
+      collectionId,
+      price,
+      imageUrl,
+      pieceCount,
+      quantity,})
     if(editProduct.error){
       return setError(editProduct.message)
     }
@@ -44,9 +55,9 @@ const EditProductForm = (props) => {
   }, [product])
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       {product.id ? 
-       <form>
+       <form className="w-11/12 flex flex-col items-center">
          <input
            className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={name}
@@ -82,6 +93,9 @@ const EditProductForm = (props) => {
            value={quantity}
            onChange={ev => setQuantity(ev.target.value)}
          />
+         <button
+           onClick={ev => handleEdit(ev)}
+         >Submit edits</button>
        </form> 
       : <div>Please select A product</div>}
       <button 
