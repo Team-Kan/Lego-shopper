@@ -130,8 +130,8 @@ const deleteProduct = async (id) => {
     FROM products
     WHERE "id"=$1
     RETURNING *;`, [id])
-    
-    if(!deleteProduct.id){
+
+    if(!deletedProduct.id){
       const error = new Error(`Product with the id ${id} does not exist`)
       error.status = 401;
       throw error;

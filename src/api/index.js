@@ -1,11 +1,13 @@
 export {
     fetchAllProducts,
     fetchProductById,
+    editProductFetch,
+    deleteProductFetch,
 } from "./productFetchCalls";
 
 export {
     fetchAllCollections,
-    fetchCollectionProducts
+    fetchCollectionProducts,
 } from "./collectionFetchCalls";
 
 export {

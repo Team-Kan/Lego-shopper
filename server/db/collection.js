@@ -4,8 +4,8 @@ const createCollection = async ({name}) => {
   try {
     if(!name){
       const error = new Error("Please include a name")
-      error.status(400)
-      throw error
+      error.status = 400
+      throw error 
     }
     const {rows: [collection]} = await client.query(`
       INSERT INTO collections(name)
