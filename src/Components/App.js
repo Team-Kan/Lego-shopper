@@ -61,13 +61,19 @@ const App = ()=> {
 
   return (
     <div>
-      <h1>Welcome to reKANstructed!</h1>
       <Nav auth={auth} logout={logout}/>
+      <div className='container'>
+        <div className='banner'>
+          <div className='banner-text'>
+            <h1>Welcome to reKANstructed!</h1>
+          </div>
+        </div>
+      </div>
       <Routes>
         <Route path='/' element= { <Home products ={products} collections={collections}/> } />
         <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
         <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
-        <Route path='/admin' element={<Admin auth={auth} collections={collections} showAllCollections={showAllCollections}/>}/>
+        <Route path='/admin' element={<Admin auth={auth} collections={collections} showAllCollections={showAllCollections} products={products}/>}/>
         <Route path='/collections/:id' element={<Collection collections={collections}/>}/>
         <Route path='/cart' element={<Cart />}/>
         <Route path='/checkout' element={<CheckoutPage />} />
