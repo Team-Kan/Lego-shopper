@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { editProductFetch } from "../api";
 
 const EditProductForm = (props) => {
-  const {product} = props;
+  const {product, setEditProduct} = props;
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -27,6 +27,7 @@ const EditProductForm = (props) => {
     if(editProduct.error){
       return setError(editProduct.message)
     }
+    setEditProduct(false)
     return editProduct
   }
 
@@ -43,46 +44,52 @@ const EditProductForm = (props) => {
   }, [product])
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       {product.id ? 
        <form>
          <input
-           className=""
+           className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={name}
            onChange={ev => setName(ev.target.value)}
          />
          <input
-           className=""
+           className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={description}
            onChange={ev => setDescription(ev.target.value)}
          />
          <input
-           className=""
+           className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={collectionId}
            onChange={ev => setCollectionId(ev.target.value)}
          />
          <input
-           className=""
+           className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={price}
            onChange={ev => setPrice(ev.target.value)}
          />
          <input
-           className=""
+           className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={imageUrl}
            onChange={ev => setImageUrl(ev.target.value)}
          />
          <input
-           className=""
+           className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={pieceCount}
            onChange={ev => setPieceCount(ev.target.value)}
          />
          <input
-           className=""
+           className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={quantity}
            onChange={ev => setQuantity(ev.target.value)}
          />
        </form> 
       : <div>Please select A product</div>}
+      <button 
+        className="pl-4 pr-4 bg-green-600 rounded-lg shadow-md shadow-green-700 hover:animate-pulse active:bg-green-800 active:animate-none active:translate-y-1"
+        onClick={ev => setEditProduct(false)}
+      >
+        cancel
+      </button>
     </div>
   );
 };
