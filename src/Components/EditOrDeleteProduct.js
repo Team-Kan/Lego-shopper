@@ -23,14 +23,14 @@ const EditOrDeleteProduct = (props) => {
   };
 
   return (
-    <div className=" min-h-[20rem] border-2 flex flex-col justify-center items-center border-green-600 rounded-md w-11/12 shadow-md shadow-green-700">
+    <div className="bg-white min-h-[20rem] border-2 flex flex-col justify-center items-center border-green-600 rounded-md w-11/12 shadow-md shadow-green-700">
       <h1>Edit or Remove Product</h1>
-      <div className="flex justify-center items-center w-1/2">
+      <div className="flex justify-center items-center w-full">
         <button
           onClick={(ev) => handleClick(ev.target.value)}
           value={"edit"}
           disabled={editProduct}
-          className={`m-1 pl-2 pr-2 bg-green-600 w-1/2 rounded-lg shadow-md shadow-green-700 hover:animate-pulse ${
+          className={`m-1 pl-2 pr-2 bg-green-600 w-1/4 rounded-lg shadow-md shadow-green-700 hover:animate-pulse ${
             !editProduct
               ? "active:translate-y-1 active:bg-green-800 active:animate-none"
               : ""
@@ -42,7 +42,7 @@ const EditOrDeleteProduct = (props) => {
           onClick={(ev) => handleClick(ev.target.value)}
           value={"delete"}
           disabled={deleteProduct}
-          className={`m-1 pl-2 pr-2 bg-green-600 w-1/2 rounded-lg shadow-md shadow-green-700 hover:animate-pulse ${
+          className={`m-1 pl-2 pr-2 bg-green-600 w-1/4 rounded-lg shadow-md shadow-green-700 hover:animate-pulse ${
             !deleteProduct
               ? "active:translate-y-1 active:bg-green-800 active:animate-none"
               : ""
@@ -69,7 +69,7 @@ const EditOrDeleteProduct = (props) => {
             <option value={{}}>There are no products.</option>
           )}
         </select>
-      <div>{editProduct ? <EditProductForm product={product} setEditProduct={setEditProduct}/> : null}</div>
+      <div className="w-full">{editProduct ? <EditProductForm product={product} setEditProduct={setEditProduct}/> : null}</div>
       <div>{deleteProduct ? <DeleteProductForm product={product} setDeleteProduct={setDeleteProduct}/> : null}</div>
     </div>
   );

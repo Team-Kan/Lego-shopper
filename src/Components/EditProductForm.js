@@ -47,39 +47,46 @@ const EditProductForm = (props) => {
   }, [product])
 
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col items-center m-6 min-h-[10rem] max-h-[42rem] overflow-y-scroll ">
       {product.id ? 
        <form className="w-11/12 flex flex-col items-center">
+        <label>name:</label>
          <input
            className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={name}
            onChange={ev => setName(ev.target.value)}
          />
+         <label>Description:</label>
          <input
            className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={description}
            onChange={ev => setDescription(ev.target.value)}
          />
+         <label>Collection Id:</label>
          <input
            className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={collectionId}
            onChange={ev => setCollectionId(ev.target.value)}
          />
+         <label>Price</label>
          <input
            className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={price}
            onChange={ev => setPrice(ev.target.value)}
          />
+         <label>Image Url:</label>
          <input
            className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={imageUrl}
            onChange={ev => setImageUrl(ev.target.value)}
          />
+         <label>Piece Count:</label>
          <input
            className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={pieceCount}
            onChange={ev => setPieceCount(ev.target.value)}
          />
+         <label>Quantity</label>
          <input
            className="border-2 border-green-700 rounded-md w-8/12 p-2"
            value={quantity}
@@ -91,7 +98,7 @@ const EditProductForm = (props) => {
        </form> 
       : <div>Please select A product</div>}
       <button 
-        className="pl-4 pr-4 bg-green-600 rounded-lg shadow-md shadow-green-700 hover:animate-pulse active:bg-green-800 active:animate-none active:translate-y-1"
+        className="pl-4 pr-4 mb-4 bg-green-600 rounded-lg shadow-md shadow-green-700 hover:animate-pulse active:bg-green-800 active:animate-none active:translate-y-1"
         onClick={ev => setEditProduct(false)}
       >
         cancel
