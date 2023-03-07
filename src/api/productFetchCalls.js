@@ -19,13 +19,38 @@ const fetchProductById = async (id) => {
  });
 
  const results = await response.json();
- return results
+ return results;
 }
 
-const editProductFetch = async () => {
-  const response = await fetch(`$`)
+const editProductFetch = async (id, token, body) => {
+  const response = await fetch(`${MAIN_URL}/${id}`, {
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(body),
+  })
+  
+  const results = await response.json();
+  return results;
+}
+
+const deleteProductFetch = async (id, token) => {
+  const response = await fetch(`${MAIN_URL}/${id}`, {
+    method: "DELETE",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    },
+  })
+
+  const results = await response.json();
+  return results;
 }
 module.exports = {
     fetchAllProducts,
     fetchProductById,
+    editProductFetch,
+    deleteProductFetch,
 };

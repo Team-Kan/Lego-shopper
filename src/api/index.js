@@ -5,7 +5,9 @@ export {
 
 export {
     fetchAllCollections,
-    fetchCollectionProducts
+    fetchCollectionProducts,
+    editProductFetch,
+    deleteProductFetch,
 } from "./collectionFetchCalls";
 
 export {
