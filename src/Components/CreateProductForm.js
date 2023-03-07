@@ -41,7 +41,7 @@ const CreateProductForm = (props) => {
     return newProduct;
   };
   return (
-    <div className="border-2 border-green-600 rounded-md w-11/12 h-[42rem] overflow-y-scroll mt-12 mb-12 shadow-md shadow-green-700">
+    <div className="border-2 bg-white border-green-600 rounded-md w-11/12 h-[42rem] overflow-y-scroll mt-12 mb-12 shadow-md shadow-green-700">
       <form className="flex flex-col justify-center items-center">
         <h1>Create product.</h1>
         <label className="self-start">Product name:</label>
