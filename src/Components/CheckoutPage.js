@@ -6,6 +6,12 @@ const CheckoutPage = () => {
     const [cart, setCart] = useState({});
     const [itemCount, setItemCount] = useState(0);
     const [total, setTotal] = useState(0);
+    const [tax, setTax] = useState(0);
+    const [shipping, setShipping] = useState('$9.95');
+    const [finalTotal, setFinalTotal] = useState(0);
+    const [showDeliveryForm, setDeliveryForm] = useState(true);
+    const [showPaymentForm, setPaymentForm] = useState(false);
+    const [showReviewOrder, setReviewOrder] = useState(false);
     const token = window.localStorage.getItem('token');
 
     const retrieveCartAndProducts = async (token) => {
@@ -17,6 +23,19 @@ const CheckoutPage = () => {
 
             const cost = (Math.round(100 * cart.products.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)) / 100).toFixed(2);
             setTotal(cost);
+            
+            const tax = Math.round(100*(0.06*cost)/100).toFixed(2);
+            setTax(tax);
+
+            if(cost > 35) {
+                setShipping('Free');
+                setFinalTotal((Number(tax)+Number(cost)));
+            } else if(cost < 35 && cost > 0) {
+                setShipping('$9.95');
+                setFinalTotal((Number(tax)+Number(cost)+9.99));
+            } else {
+                setFinalTotal((Number(tax)+Number(cost)));
+            }
         }
         setCart(cart);
     }
@@ -41,8 +60,9 @@ const CheckoutPage = () => {
             <Link to="/cart">Back to Cart</Link>
             <div className='cart-container'>
                 <div className='cart-product-container'>
-                    <h1>Delivery Options</h1>
-                    <form>
+                    { showDeliveryForm ? (
+                    <form onSubmit={(ev) => {ev.preventDefault(); setDeliveryForm(false); setPaymentForm(true);}}>
+                        <h1>Delivery Options</h1>
                         <p>First Name</p>
                         <input></input>
                         <p>Last Name</p>
@@ -55,10 +75,12 @@ const CheckoutPage = () => {
                         <input></input>
                         <p>Zipcode</p>
                         <input></input>
-                        <button></button>
-                    </form>
-                    <h1>Payment</h1>
-                    <form>
+                        <button type='submit'>Next: Payment Details</button>
+                    </form>)
+                    : null }
+                    { showPaymentForm ? (
+                    <form onSubmit={(ev) => {ev.preventDefault(); setPaymentForm(false); setReviewOrder(true);}}>
+                        <h1>Payment</h1>
                         <p>Name (as shown on card)</p>
                         <input></input>
                         <p>Card Number</p>
@@ -67,30 +89,36 @@ const CheckoutPage = () => {
                         <input></input>
                         <p>Zipcode</p>
                         <input></input>
-                        <button></button>
+                        <button type='submit'>Next: Review Your Order</button>
                     </form>
-                    <h1>Order Review</h1>
-                    { cart.products ? (
-                    <ul>
-                        {
-                            cart.products.map(product => {
-                                return (
-                                    <li key={product.id}>{product.name} x {product.quantity}</li>
-                                )
-                            })
-                        }
-                    </ul>
-                    ): null }
-                    <p>Total $</p>
+                    ): null}
+                    {showReviewOrder ? (
+                        <div>
+                            <h1>Order Review</h1>
+                            {
+                                cart.products ? (
+                                    <ul>
+                                        {
+                                            cart.products.map(product => {
+                                                return (
+                                                    <li key={product.id}>{product.name} x {product.quantity}</li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                ) : null}
+                            < p > Total ${finalTotal}</p>
+                        </div>
+                    ) : null}
                 </div>
                 <div className='checkout-container'>
                     <p>In Your Cart</p>
                     <hr></hr>
                     <p>Items ({itemCount})</p>
                     <p>Subtotal: ${total}</p>
-                    <p>Estimated Shipping</p>
-                    <p>Estimated Tax</p>
-                    <p>Total $</p>
+                    <p>Estimated Shipping: {shipping}</p>
+                    <p>Estimated Tax: ${tax} </p>
+                    <p>Total ${finalTotal}</p>
                     <p></p>
                     <button className='checkout-button' onClick={() => { processCheckout(cart.id) }}>Proceed to Checkout</button>
                 </div>
