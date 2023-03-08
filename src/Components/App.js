@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Home, Login, Register, Admin, Collection, Nav, Cart, CheckoutPage, SingleProduct } from '.'
-import { fetchAllProducts, fetchAllCollections, fetchCart } from "../api";
+import { fetchAllProducts, fetchAllCollections, fetchCart, getUser } from "../api";
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
 
 const App = ()=> {
@@ -17,17 +17,8 @@ const App = ()=> {
   const attemptLogin = ()=> {
     const token = window.localStorage.getItem('token');
     if(token){
-      fetch(
-        '/api/auth/',
-        {
-          method: 'GET',
-          headers: {
-            'authorization': token 
-          }
-        }
-      )
-      .then( response => response.json())
-      .then( user => setAuth(user));
+      getUser(token)
+      .then(user => setAuth(user))
     }
   };
 

@@ -16,6 +16,22 @@ const createUser = async ({username, password}) => {
       return results;
 }
 
+const getUser = async (token) => {
+    const response = await fetch(
+        `${MAIN_URL}/api/auth/`,
+        {
+          method: 'GET',
+          headers: {
+            'authorization': token 
+          }
+        }
+      )
+      const results = await response.json()
+
+      return results;
+}
+
 module.exports={
     createUser,
+    getUser
 }

@@ -11,7 +11,8 @@ export {
 } from "./collectionFetchCalls";
 
 export {
- createUser
+ createUser,
+ getUser
 } from "./userFetchCalls";
 
 export {

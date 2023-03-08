@@ -1,26 +1,35 @@
-import React, {useState, useEffect} from 'react'
-import ChangeAdminForm from './ChangeAdminForm';
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   EditOrDeleteProduct,
   CreateProductForm, 
   CreateCollectionForm,
+  ChangeAdminForm
 } from '.';
-const { fetchAllUsers } = require("../api")
+const { fetchAllUsers, getUser } = require("../api");
 
 const Admin = (props) => {
 const { auth, collections, showAllCollections, products } = props;    
 const [users, setUsers] = useState([]);
+const nav = useNavigate();
 
-const displayAllUsers = async () => {
-    const token = window.localStorage.getItem("token");
+const displayAllUsers = async (token) => {
+    const {isAdmin} = await getUser(token)
+    if(!isAdmin){
+      return nav("/")
+    }
     const users = await fetchAllUsers(token);
     console.log(users,"This is all of our users")
     setUsers(users);
 }
 
 useEffect(() => {
-    displayAllUsers(); 
-},[])
+  const token = window.localStorage.getItem("token")
+  if(!token){
+    return nav("/");
+  }
+    displayAllUsers(token);
+}, [auth])
 
   return (
     <div>
