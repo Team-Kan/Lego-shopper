@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { fetchCart } from "../api";
 
 const AddProductToCartForm = (props) => {
-  const { product } = props;
+  const { product, retrieveCartAndProducts } = props;
   const [quantity, setQuantity] = useState(1);
   const [disabled, setDisabled] = useState(false);
 
@@ -38,6 +38,7 @@ const AddProductToCartForm = (props) => {
       });
       if (addedProduct.id) {
         setDisabled(true);
+        retrieveCartAndProducts();
       }
       console.log(addedProduct);
     }

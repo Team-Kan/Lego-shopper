@@ -5,8 +5,8 @@ import { useLocation } from "react-router-dom";
 const Nav = (props) => {
   const location = useLocation();
   const pathName = location.pathname;
-  console.log(pathName);
-  const {auth, logout} = props;
+  //console.log(pathName);
+  const {auth, logout, itemCount } = props;
   return (
     <nav>
         <Link to='/' className={pathName === "/" ? "underline" : ""}>Shop All Products</Link>
@@ -25,7 +25,7 @@ const Nav = (props) => {
             </>
           )
         } 
-        <Link to='/Cart' className={pathName.startsWith("/Cart") ? " underline" : ""}>Cart</Link>
+        <Link to='/Cart' className={pathName.startsWith("/Cart") ? " underline" : ""}>Cart ({itemCount})</Link>
     </nav>
   )
 }

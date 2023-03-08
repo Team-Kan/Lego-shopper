@@ -1,26 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { checkoutCart, deleteCartProduct, fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
+import { deleteCartProduct, updateQuantityFetch } from '../api/cartFetchCalls';
 
-const Cart = () => {
-  const [ cart, setCart ] = useState({});
-  const [itemCount, setItemCount] = useState(0);
-  const [total, setTotal] = useState(0);
+const Cart = (props) => {
+  const {cart, itemCount, total, retrieveCartAndProducts } = props;
   const token = window.localStorage.getItem('token');
   const navigate = useNavigate();
-
-  const retrieveCartAndProducts = async(token) => {
-    const cart = await fetchCart(token);
-    if(cart.products) {
-      cart.products.sort((a, b) => a.cartProductId - b.cartProductId);
-      const items = cart.products.reduce((acc, curr) => acc + curr.quantity, 0);
-      setItemCount(items);
-
-      const cost = (Math.round(100*cart.products.reduce((acc, curr) => acc + curr.price*curr.quantity, 0))/100).toFixed(2);
-      setTotal(cost);
-    } 
-    setCart(cart);
-  }
 
   const decreaseQuantity = async (productId, quantity) => {
     if (quantity - 1 === 0) {
@@ -29,7 +14,7 @@ const Cart = () => {
       quantity--;
       const response = await updateQuantityFetch(token, cart.id, productId, quantity);
       if (!response.error) {
-        const result = await retrieveCartAndProducts(token);
+        await retrieveCartAndProducts();
       } else {
         console.log("error decreasing quantity");
       }
@@ -40,7 +25,7 @@ const Cart = () => {
       quantity++;
       const response = await updateQuantityFetch(token, cart.id, productId, quantity);
       if (!response.error) {
-        const result = await retrieveCartAndProducts(token);
+        await retrieveCartAndProducts();
       } else {
         console.log("error increasing quantity");
       }
@@ -50,17 +35,11 @@ const Cart = () => {
     const response = await deleteCartProduct(token, cart.id, productId);
     console.log(response);
     if (!response.error) {
-      const result = await retrieveCartAndProducts(token);
+      await retrieveCartAndProducts();
     } else {
       console.log("issue");
     }
   }
-
-  useEffect(()=> {
-    if(token) {
-      retrieveCartAndProducts(token)
-    }
-  }, [])
 
   return (
     <div>
