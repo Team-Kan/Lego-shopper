@@ -25,7 +25,7 @@ const Nav = (props) => {
             </>
           )
         } 
-        <Link to='/Cart' className={pathName.startsWith("/Cart") ? " underline" : ""}>Cart ({itemCount})</Link>
+        <Link to='/Cart' className={pathName.startsWith("/Cart") || pathName.startsWith("/checkout") ? " underline" : ""}>Cart ({itemCount})</Link>
     </nav>
   )
 }

@@ -36,7 +36,7 @@ useEffect(() => {
       <h2>Welcome Admin {auth.username}</h2>
       <div className='grid grid-cols-1 grid-rows-1 sm:gap-10 lg:grid-cols-2 justify-items-center'>
         <CreateProductForm collections={collections}/>
-        <ChangeAdminForm users={users}/>
+        <ChangeAdminForm users={users} displayAllUsers={displayAllUsers}/>
         <EditOrDeleteProduct products={products} collections={collections}/>
         <CreateCollectionForm showAllCollections={showAllCollections}/>
       </div>

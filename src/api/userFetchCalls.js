@@ -31,7 +31,24 @@ const getUser = async (token) => {
       return results;
 }
 
+const editUsersAdminPriv = async ({id, isAdmin, token}) => {
+  const response = await fetch(
+    `${MAIN_URL}/api/auth/${id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ isAdmin }),
+    }
+  )
+  const results = await response.json();
+
+  return results
+}
+
 module.exports={
     createUser,
-    getUser
+    getUser,
+    editUsersAdminPriv,
 }

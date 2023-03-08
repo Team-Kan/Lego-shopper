@@ -12,7 +12,8 @@ export {
 
 export {
  createUser,
- getUser
+ getUser,
+ editUsersAdminPriv
 } from "./userFetchCalls";
 
 export {

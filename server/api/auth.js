@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { tokenAuth, adminCheck }= require("./utils")
 const { authenticate, getUserByToken, createUser } = require("../db");
-const { getAllUsers } = require("../db/User");
-
+const { getAllUsers, editIsAdmin } = require("../db/User");
 
 router.post("/", async (req, res, next) => {
   try {
@@ -44,9 +43,15 @@ router.get("/admin",tokenAuth, adminCheck, async(req, res, next) => {
   }
 })
 // TODO
-router.patch("/", async (req, res, next) => {
+router.patch("/:id", tokenAuth, adminCheck, async (req, res, next) => {
   try {
-    
+    const {id} = req.params;
+    console.log(id)
+    const  {isAdmin} = req.body;
+
+    const user = await editIsAdmin({id, isAdmin})
+
+     res.send(user)
   } catch (error) {
     next (error)
   }
