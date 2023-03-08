@@ -3,7 +3,8 @@ import { useLocation } from "react-router-dom";
 import { fetchProductById } from "../api";
 import { AddProductToCartForm } from ".";
 
-const SingleProduct = () => {
+const SingleProduct = (props) => {
+  const { retrieveCartAndProducts } = props;
   const [product, setProduct] = useState("");
   const [error, setError] = useState("");
 
@@ -49,7 +50,7 @@ const SingleProduct = () => {
             </h4>
             <div>
               {product.quantity ? (
-                <AddProductToCartForm product={product} />
+                <AddProductToCartForm product={product} retrieveCartAndProducts={retrieveCartAndProducts}/>
               ) : (
                 <div>Out of Stock, check in later!</div>
               )}
