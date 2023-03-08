@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { DeleteProductForm, EditProductForm } from ".";
 
 const EditOrDeleteProduct = (props) => {
-  const {products} = props;
+  const { products, collections } = props;
   // const products =[]
   const [editProduct, setEditProduct] = useState(false);
   const [deleteProduct, setDeleteProduct] = useState(false);
   const [product, setProduct] = useState({});
 
-  console.log(product)
+  console.log(product);
   const handleClick = (value) => {
     switch (value) {
       case "edit":
@@ -23,7 +23,7 @@ const EditOrDeleteProduct = (props) => {
   };
 
   return (
-    <div className="bg-white min-h-[20rem] border-2 flex flex-col justify-center items-center border-green-600 rounded-md w-11/12 shadow-md shadow-green-700">
+    <div className="bg-white mb-6 min-h-[20rem] border-2 flex flex-col justify-center items-center border-green-600 rounded-md w-11/12 shadow-md shadow-green-700">
       <h1>Edit or Remove Product</h1>
       <div className="flex justify-center items-center w-full">
         <button
@@ -52,25 +52,44 @@ const EditOrDeleteProduct = (props) => {
         </button>
       </div>
       <select
-          onChange={ev => {
-            const addedProduct = products.filter(({id}) => id === +ev.target.value)
-            setProduct(addedProduct[0])
-          }}
-          className="m-4 border-2 border-green-700 rounded-md w-8/12 p-2"
-        >
-          <option value={{}}>Select a product...</option>
-          {products.length ? (
-            products.map((product) => {
-              return <option key={product.id} value={product.id}>
+        onChange={(ev) => {
+          const addedProduct = products.filter(
+            ({ id }) => id === +ev.target.value
+          );
+          setProduct(addedProduct[0]);
+        }}
+        className="m-4 border-2 border-green-700 rounded-md w-8/12 p-2"
+      >
+        <option value={{}}>Select a product...</option>
+        {products.length ? (
+          products.map((product) => {
+            return (
+              <option key={product.id} value={product.id}>
                 {product.name}
               </option>
-})
-          ) : (
-            <option value={{}}>There are no products.</option>
-          )}
-        </select>
-      <div className="w-full">{editProduct ? <EditProductForm product={product} setEditProduct={setEditProduct}/> : null}</div>
-      <div>{deleteProduct ? <DeleteProductForm product={product} setDeleteProduct={setDeleteProduct}/> : null}</div>
+            );
+          })
+        ) : (
+          <option value={{}}>There are no products.</option>
+        )}
+      </select>
+      <div className="w-full">
+        {editProduct ? (
+          <EditProductForm
+            product={product}
+            setEditProduct={setEditProduct}
+            collections={collections}
+          />
+        ) : null}
+      </div>
+      <div>
+        {deleteProduct ? (
+          <DeleteProductForm
+            product={product}
+            setDeleteProduct={setDeleteProduct}
+          />
+        ) : null}
+      </div>
     </div>
   );
 };

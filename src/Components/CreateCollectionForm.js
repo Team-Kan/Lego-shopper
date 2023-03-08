@@ -22,9 +22,9 @@ const CreateCollectionForm = (props) => {
     return newCollection;
   };
   return (
-    <div className="border-2 border-green-600 rounded-md w-11/12 shadow-md shadow-green-700">
+    <div className="bg-white max-h-[300px] border-2 border-green-600 rounded-md w-11/12 mb-6 shadow-md shadow-green-700">
       <form
-        className="flex flex-col justify-center items-center m-6 h-full"
+        className="flex flex-col justify-center items-center m-6"
         onSubmit={(ev) => handleSubmit(ev)}
       >
         <h1>Create new collection.</h1>
