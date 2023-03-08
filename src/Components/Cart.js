@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { checkoutCart, deleteCartProduct, fetchCart, updateQuantityFetch } from '../api/cartFetchCalls';
 
 const Cart = () => {
@@ -7,6 +7,7 @@ const Cart = () => {
   const [itemCount, setItemCount] = useState(0);
   const [total, setTotal] = useState(0);
   const token = window.localStorage.getItem('token');
+  const navigate = useNavigate();
 
   const retrieveCartAndProducts = async(token) => {
     const cart = await fetchCart(token);
@@ -47,16 +48,6 @@ const Cart = () => {
 
   const removeItem = async(productId) => {
     const response = await deleteCartProduct(token, cart.id, productId);
-    console.log(response);
-    if (!response.error) {
-      const result = await retrieveCartAndProducts(token);
-    } else {
-      console.log("issue");
-    }
-  }
-
-  const processCheckout = async (cartId) => {
-    const response = await checkoutCart(token, cartId);
     console.log(response);
     if (!response.error) {
       const result = await retrieveCartAndProducts(token);
@@ -106,7 +97,7 @@ const Cart = () => {
           <hr></hr>
           <p>Items ({itemCount})</p>
           <p>Subtotal: ${total}</p>
-          <button className='checkout-button' onClick = {() => { processCheckout(cart.id) }}>Proceed to Checkout</button>
+          <button disabled={!itemCount} className='checkout-button' onClick = {() => { navigate('/checkout') }}>Proceed to Checkout</button>
         </div>
       </div>
     </div>
