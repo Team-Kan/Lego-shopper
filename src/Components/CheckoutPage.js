@@ -120,7 +120,7 @@ const CheckoutPage = () => {
                     <p>Estimated Tax: ${tax} </p>
                     <p>Total ${finalTotal}</p>
                     <p></p>
-                    <button className='checkout-button' onClick={() => { processCheckout(cart.id) }}>Proceed to Checkout</button>
+                    <button className='checkout-button' onClick={() => { processCheckout(cart.id) }}>Checkout</button>
                 </div>
             </div>
         </div>
