@@ -25,7 +25,6 @@ const CreateProductForm = (props) => {
       quantity,
     };
     const newProduct = await createProductFetch(token, submitProduct);
-    console.log(newProduct);
     if (newProduct.error) {
       return setError(newProduct.error);
     }

@@ -40,7 +40,6 @@ const AddProductToCartForm = (props) => {
         setDisabled(true);
         retrieveCartAndProducts();
       }
-      console.log(addedProduct);
     }
   };
 

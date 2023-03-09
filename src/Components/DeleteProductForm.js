@@ -16,7 +16,6 @@ const DeleteProductForm = (props) => {
     if(deleted.error){
       return setError(deleted.error);
     }
-    console.log(deleted)
     setDeleteProduct(false)
     return deleted
   }

@@ -11,7 +11,6 @@ const CreateCollectionForm = (props) => {
     ev.preventDefault();
 
     const newCollection = await createCollectionFetch(token, name);
-    console.log(newCollection);
     if (newCollection.error) {
       return setError(newCollection.error);
     }
