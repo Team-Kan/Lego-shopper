@@ -3,17 +3,24 @@ import { useParams } from "react-router-dom";
 import { AddProductToCartForm } from ".";
 
 const SingleProduct = (props) => {
-  const { retrieveCartAndProducts, products } = props;
-  const [product, setProduct] = useState("");
+  const { retrieveCartAndProducts, products, cart } = props;
+  const [product, setProduct] = useState({});
+  const [disabled, setDisabled] = useState(false)
   const id = useParams().id;
 
   const getProduct = async () => {
     const singleProduct = products.find(product => product.id === +id);
     if (singleProduct) {
       setProduct(singleProduct);
+      if(cart.id){
+        const productInCart = cart.products.find(product => product.id === singleProduct.id);
+        if(productInCart){
+          setDisabled(true)
+        }
+      }
     }
   };
-
+console.log(cart);
   useEffect(() => {
     getProduct();
   }, [id, products]);
@@ -42,7 +49,12 @@ const SingleProduct = (props) => {
             </h4>
             <div>
               {product.quantity ? (
-                <AddProductToCartForm product={product} retrieveCartAndProducts={retrieveCartAndProducts}/>
+                <AddProductToCartForm 
+                  product={product} 
+                  retrieveCartAndProducts={retrieveCartAndProducts} 
+                  disabled={disabled} 
+                  setDisabled={setDisabled}
+                />
               ) : (
                 <div>Out of Stock, check in later!</div>
               )}

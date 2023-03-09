@@ -75,11 +75,31 @@ const checkoutCart = async(token, cartId, products) => {
   return result;
 }
 
+const addProductToCartFetch = async ({
+  cartId,
+  productId,
+  quantity,
+  token,
+}) => {
+  const response = await fetch(`http://localhost:3000/api/cart-products`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ cartId, productId, quantity }),
+  });
+  const results = await response.json();
+
+  return results;
+};
+
 
 module.exports = {
   fetchCart, 
   fetchCartProducts,
   updateQuantityFetch,
   deleteCartProduct, 
-  checkoutCart, 
+  checkoutCart,
+  addProductToCartFetch
 };
