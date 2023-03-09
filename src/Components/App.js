@@ -93,8 +93,9 @@ const App = ()=> {
         <Route path='/admin' element={<Admin auth={auth} collections={collections} showAllCollections={showAllCollections} products={products}/>}/>
         <Route path='/collections/:id' element={<Collection collections={collections}/>}/>
         <Route path='/cart' element={<Cart cart={cart} itemCount={itemCount} total={total} retrieveCartAndProducts={retrieveCartAndProducts} />}/>
-        <Route path='/checkout' element={<CheckoutPage cart={cart} itemCount={itemCount} total={total} tax={tax} shipping={shipping} finalTotal={finalTotal} retrieveCartAndProducts={retrieveCartAndProducts}/>} />
-        <Route path='/product/:id' element={<SingleProduct retrieveCartAndProducts={retrieveCartAndProducts} />}/>
+        <Route path='/checkout' element={<CheckoutPage cart={cart} itemCount={itemCount} total={total} tax={tax} shipping={shipping} 
+        finalTotal={finalTotal} retrieveCartAndProducts={retrieveCartAndProducts} showAllProducts={showAllProducts}/>} />
+        <Route path='/product/:id' element={<SingleProduct retrieveCartAndProducts={retrieveCartAndProducts} products={products} />}/>
       </Routes>
     </div>
   );

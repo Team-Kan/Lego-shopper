@@ -1,30 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { fetchProductById } from "../api";
+import { useParams } from "react-router-dom";
 import { AddProductToCartForm } from ".";
 
 const SingleProduct = (props) => {
-  const { retrieveCartAndProducts } = props;
+  const { retrieveCartAndProducts, products } = props;
   const [product, setProduct] = useState("");
-  const [error, setError] = useState("");
-
-  const location = useLocation();
-  const pathName = location.pathname;
-  const pathArray = pathName.split("/");
-  const id = pathArray[pathArray.length - 1];
+  const id = useParams().id;
 
   const getProduct = async () => {
-    const product = await fetchProductById(id);
-    if (product.error) {
-      setError(product.error);
-      return;
+    const singleProduct = products.find(product => product.id === +id);
+    if (singleProduct) {
+      setProduct(singleProduct);
     }
-    setProduct(product);
   };
 
   useEffect(() => {
     getProduct();
-  }, [id]);
+  }, [id, products]);
 
   return (
     <div className="flex md:justify-center items-center">
@@ -57,9 +49,7 @@ const SingleProduct = (props) => {
             </div>
           </div>
         </div>
-      ) : (
-        <div className="text-4xl">{product.error}</div>
-      )}
+      ) : null }
     </div>
   );
 };
