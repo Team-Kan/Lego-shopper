@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 const Nav = (props) => {
   const location = useLocation();
   const pathName = location.pathname;
-  //console.log(pathName);
   const {auth, logout, itemCount } = props;
   return (
     <nav className='bg-brick p-2'>
@@ -25,7 +24,7 @@ const Nav = (props) => {
             </>
           )
         } 
-        <Link to='/Cart' className={pathName.startsWith("/Cart") || pathName.startsWith("/checkout") ? " underline rounded-md p-2 md:p-4  ml-1 bg-green-300 hover:bg-[#029602] text-black" : " rounded-md p-2 md:p-4  ml-1 bg-[#006600] hover:bg-[#029602] text-white"}>Cart ({itemCount})</Link>
+        <Link to='/cart' className={pathName.startsWith("/cart") || pathName.startsWith("/checkout") ? " underline rounded-md p-2 md:p-4  ml-1 bg-green-300 hover:bg-[#029602] text-black" : " rounded-md p-2 md:p-4  ml-1 bg-[#006600] hover:bg-[#029602] text-white"}>Cart ({itemCount})</Link>
     </nav>
   )
 }
