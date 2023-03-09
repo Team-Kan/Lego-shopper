@@ -60,25 +60,26 @@ const deleteCartProduct = async(token, cartId, productId) => {
   return result;
 }
 
-const checkoutCart = async(token, cartId) => {
-  try{const response = await fetch(`${MAIN_URL}api/cart/${cartId}`, {
+const checkoutCart = async(token, cartId, products) => {  
+  const response = await fetch(`${MAIN_URL}api/cart/${cartId}`, {
     method: "PATCH", 
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
-    }
+    }, 
+    body: JSON.stringify({
+      products: products
+    })
   })
   const result = await response.json();
   return result;
-} catch(error){
-    console.log(error);
-  }
 }
+
 
 module.exports = {
   fetchCart, 
   fetchCartProducts,
   updateQuantityFetch,
   deleteCartProduct, 
-  checkoutCart
+  checkoutCart, 
 };

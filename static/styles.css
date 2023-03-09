@@ -171,8 +171,8 @@ li{
 }
 
 .cart-product-container {
-  width: 700px;
-  height: 510px;
+  width: 1000px;
+  height: 860px;
   overflow-y: scroll;
   direction:ltr;
 }
@@ -224,6 +224,29 @@ li{
 
 .checkout-button:hover {
   background-color: rgba(128, 255, 0, 0.644);
+}
+
+.checkout-form > div {
+  display: flex;
+}
+
+.checkout-form input {
+  border: solid 1px #029602;
+  border-radius: 10px;
+}
+
+.checkout-form-button {
+  color: white;
+  background-color: blue;
+}
+
+.final-checkout-container {
+  border: solid 1px black;
+  border-radius: 10px;
+  background-color: white;
+  height: 250px;
+  width: 500px;
+  text-align: center;
 }
 
 .container{

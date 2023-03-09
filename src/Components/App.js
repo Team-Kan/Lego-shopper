@@ -27,6 +27,7 @@ const App = ()=> {
     if (token) {
       const cart = await fetchCart(token);
       if (cart.products) {
+        console.log(cart);
         cart.products.sort((a, b) => a.cartProductId - b.cartProductId);
         const items = cart.products.reduce((acc, curr) => acc + curr.quantity, 0);
         setItemCount(items);

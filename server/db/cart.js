@@ -32,6 +32,7 @@ const attachProductsToCart = (carts) => {
             cartProductId: cart.cartProductId,
             id:   cart.productId,
             quantity: cart.quantity,
+            stock: cart.stock,
             name: cart.name, 
             description: cart.description,
             price: cart.price,
@@ -46,7 +47,7 @@ const attachProductsToCart = (carts) => {
 
 const allCartsJoinQuery = `SELECT carts."userId", carts."isActive", carts.id AS "cartId",
 carts_products.id AS "cartProductId", carts_products."productId", carts_products.quantity,
-products.name, products.description, products.price, products."imageUrl" FROM carts
+products.name, products.description, products.price, products."imageUrl", products.quantity AS "stock" FROM carts
 LEFT JOIN carts_products ON "cartId" = carts.id
 LEFT JOIN products ON "productId" = products.id`;
 

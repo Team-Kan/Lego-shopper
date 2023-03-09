@@ -1,5 +1,6 @@
 const express = require("express");
 const { checkoutCart, getActiveCartByUserId, getInactiveCartsByUserId, createCart } = require("../db/cart");
+const { editProduct } = require("../db/product");
 const { tokenAuth, sliceToken } = require("./utils");
 const router = express.Router();
 
@@ -34,6 +35,10 @@ router.get("/inactive", tokenAuth, async (res, req, next) => {
 router.patch("/:id", tokenAuth, async (req, res, next) => {
   try {
     const { id } = req.params;
+    const { products } = req.body;
+    products.forEach(async(product) => {
+      await editProduct({id: product.id, quantity: product.quantity });
+    })
     const checkout = await checkoutCart(id);
     console.log(checkout);
     res.send(checkout);
