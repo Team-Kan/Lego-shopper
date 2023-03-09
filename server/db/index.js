@@ -119,6 +119,16 @@ const createInitialProducts = async () => {
         quantity: 3,
       }),
       createProduct({
+        name: "Lunar Roving Vehicle",
+        description: "Inspired by NASA's Artemis Base Camp Concept Rover",
+        collectionId: 1,
+        price: 29.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81zQvgUK4AL._AC_SX679_.jpg",
+        pieceCount: 275,
+        quantity: 5,
+      }),
+      createProduct({
         name: "Recycling Truck",
         description:
           "Caring for the environment is fun with this recycling truck set, featuring a recycling center, 3 minifigures and a cat figure.",
@@ -127,6 +137,17 @@ const createInitialProducts = async () => {
         imageUrl:
           "https://m.media-amazon.com/images/I/81TR1DUg4ML._AC_SX679_.jpg",
         pieceCount: 261,
+        quantity: 4,
+      }),
+      createProduct({
+        name: "Farmers Market Van",
+        description:
+          "The Farmers Market Van comes with a serving window, opening side doors, rear doors and a minifigure cab, while the veggie patch features a fun carrot-growing function",
+        collectionId: 1,
+        price: 29.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/91aYFvakirL._AC_SX679_.jpg",
+        pieceCount: 310,
         quantity: 4,
       }),
       createProduct({
@@ -139,6 +160,16 @@ const createInitialProducts = async () => {
           "https://m.media-amazon.com/images/I/91RTR2+T0IL._AC_SL1500_.jpg",
         pieceCount: 823,
         quantity: 4,
+      }),
+      createProduct({
+        name: "LEGO® City Fire Station",
+        description: "LEGO® City Fire Station features a 3-level LEGO fire station with a toy garage, reception, firefighter quarters and control room",
+        collectionId: 1,
+        price: 49.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81CHdZUyLJL._AC_SX679_.jpg",
+        pieceCount: 540,
+        quantity: 5,
       }),
       createProduct({
         name: "Ninjago® Ninja Dojo",
@@ -169,7 +200,7 @@ const createInitialProducts = async () => {
         collectionId: 3,
         price: 79.99,
         imageUrl:
-          "https://m.media-amazon.com/images/I/91jh4Kc1KSL._AC_SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/71s3B71uO8L._AC_SL1500_.jpg",
         pieceCount: 5932,
         quantity: 4,
       }),
@@ -180,19 +211,113 @@ const createInitialProducts = async () => {
         collectionId: 3,
         price: 399.99,
         imageUrl:
-          "https://m.media-amazon.com/images/I/71s3B71uO8L._AC_SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/91jh4Kc1KSL._AC_SL1500_.jpg",
         pieceCount: 5932,
         quantity: 4,
       }),
       createProduct({
+        name: "LEGO® Architecture San Francisco Skyline",
+        description:
+          "This San Francisco building set captures the essence of the San Francisco skyline with models of the city's most iconic architectural marvels, from the Golden Gate Bridge to the Transamerica Pyramid",
+        collectionId: 3,
+        price: 72.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/91aGPT5QLxL._AC_SX679_.jpg",
+        pieceCount: 565,
+        quantity: 8,
+      }),
+      createProduct({
+        name: "LEGO® Architecture London Skyline",
+        description:
+          "Build a detailed LEGO Architecture model interpretation of the London skyline featuring famous landmarks!",
+        collectionId: 3,
+        price: 40.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/91WU9-ozJzL._AC_SX466_.jpg",
+        pieceCount: 468,
+        quantity: 8,
+      }),
+      createProduct({
+        name: "LEGO® Architecture Dubai Skyline",
+        description:
+          "The Burj Khalifa, Jumeirah Emirates Towers Hotel, Burj Al Arab Jumeirah hotel, Dubai Frame and The Dubai Fountain are featured in this architecture model kit, a charming souvenir for anyone with an affinity for Dubai",
+        collectionId: 3,
+        price: 70.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81yHERnYgJL._AC_SX679_.jpg",
+        pieceCount: 740,
+        quantity: 5,
+      }),
+      createProduct({
+        name: "LEGO® Architecture Statue of Liberty",
+        description:
+          "This impressive LEGO interpretation faithfully reproduces the monument’s harmonious blend of sculpture and architecture",
+        collectionId: 3,
+        price: 99.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/817QaKEw4lL._AC_SX679_.jpg",
+        pieceCount: 1685,
+        quantity: 7,
+      }),
+      createProduct({
         name: "Millenium Falcon Microfighter",
-        description: "Series 8",
+        description: "The Millennium Falcon Microfighter features a seat for the Han Solo LEGO minifigure and 2 stud shooters, for fun, creative play. Han Solo also has a blaster pistol",
         collectionId: 4,
         price: 19.99,
         imageUrl:
           "https://m.media-amazon.com/images/I/810mIHggsfL._AC_SX679_.jpg",
         pieceCount: 101,
         quantity: 26,
+      }),
+      createProduct({
+        name: "Boba Fett's Starship Microfighter",
+        description: "The LEGO Star Wars Microfighter set features an opening cockpit for Boba Fett LEGO minifigure, adjustable wings and landing modes",
+        collectionId: 4,
+        price: 6.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/815zsURmdSL._AC_SX679_.jpg",
+        pieceCount: 85,
+        quantity: 10,
+      }),
+      createProduct({
+        name: "Obi-Wan Kenobi's Jedi StarFighter",
+        description: "The starfighter has an opening minifigure cockpit, 2 stud shooters, retractable landing gear, lightsaber storage clips and an attachment point on the wing for R4-P17’s head",
+        collectionId: 4,
+        price: 9.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81dsPG1JP0L._AC_SX679_.jpg",
+        pieceCount: 282,
+        quantity: 10,
+      }),
+      createProduct({
+        name: "The Clone Wars Armored Assault Tank (AAT)",
+        description: "This set includes 2 LEGO Star Wars minifigures, Ahsoka Tano and Ahsoka's Clone Trooper, AAT Driver Battle Droid and Battle Droid LEGO figures, and cool weapons including 2 Lightsabers to role-play action stories",
+        collectionId: 4,
+        price: 19.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81kVxznTd0L._AC_SX679_.jpg",
+        pieceCount: 286,
+        quantity: 15,
+      }),
+      createProduct({
+        name: "TIE Bomber",
+        description: "The TIE Bomber has an opening minifigure cockpit, a warhead bay with torpedo-dropping function for4 torpedoes (the set includes 6 buildable torpedoes)",
+        collectionId: 4,
+        price: 59.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/91-v0ignk5L._AC_SX679_.jpg",
+        pieceCount: 625,
+        quantity: 5,
+      }),
+      createProduct({
+        name: "Republic Fighter Tank",
+        description: "The Republic Fighter Tank features battle droids, clone troopers, and Mace Windu",
+        collectionId: 4,
+        price: 59.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/6109qhUHJZL._AC_SX679_.jpg",
+        pieceCount: 262,
+        quantity: 5,
       }),
       createProduct({
         name: "Hogwarts™ Icons - Collectors' Edition",
@@ -239,6 +364,17 @@ const createInitialProducts = async () => {
         quantity: 10,
       }),
       createProduct({
+        name: "LEGO® Marvel Super Heroes Nano Gauntlet™",
+        description: 
+          "This vibrantly colored LEGO brick recreation of the Nano Gauntlet includes the 6 Infinity Stones, a sturdy stand and a descriptive tablet",
+        collectionId: 6,
+        price: 49.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81SD23gywyL._AC_SX679_.jpg",
+        pieceCount: 675,
+        quantity: 8,
+      }),
+      createProduct({
         name: "LEGO® Marvel™ I am Groot",
         description: 
           "Movable Baby Groot",
@@ -249,7 +385,28 @@ const createInitialProducts = async () => {
         pieceCount: 476,
         quantity: 5,
       }),
-      
+      createProduct({
+        name: "LEGO® Marvel™ Black Panther",
+        description: 
+          "The model rests securely on a stand with an information plate attached. The hands include articulated fingers and detach from the main model to increase display possibilities",
+        collectionId: 6,
+        price: 250.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/71USiW4UYtL._AC_SX679_.jpg",
+        pieceCount: 2961,
+        quantity: 3,
+      }),
+      createProduct({
+        name: "LEGO® Marvel™ Hulkbuster",
+        description: 
+          "The model incorporates 3 light-up arc reactors (1 in the chest and 1 in each hand), a fully jointed upper body and a spacious, opening cockpit",
+        collectionId: 6,
+        price: 459.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81R9CxlQBFL._AC_SX679_.jpg",
+        pieceCount: 4049,
+        quantity: 5,
+      }),
     ]);
 
   console.log("---- seeded Product -----");
