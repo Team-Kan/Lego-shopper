@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Home, Login, Register, Admin, Collection, Nav, Cart, CheckoutPage, SingleProduct } from '.'
+import { Home, Login, Register, Admin, Collection, Nav, Cart, CheckoutPage, SingleProduct, Collections } from '.'
 import { fetchAllProducts, fetchAllCollections, fetchCart, getUser } from "../api";
-import { Link, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 const App = ()=> {
   const [auth, setAuth] = useState({});
@@ -13,6 +13,8 @@ const App = ()=> {
   const [tax, setTax] = useState(0);
   const [shipping, setShipping] = useState('$9.95');
   const [finalTotal, setFinalTotal] = useState(0);
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const attemptLogin = ()=> {
     const token = window.localStorage.getItem('token');
@@ -27,7 +29,6 @@ const App = ()=> {
     if (token) {
       const cart = await fetchCart(token);
       if (cart.products) {
-        console.log(cart);
         cart.products.sort((a, b) => a.cartProductId - b.cartProductId);
         const items = cart.products.reduce((acc, curr) => acc + curr.quantity, 0);
         setItemCount(items);
@@ -86,15 +87,17 @@ const App = ()=> {
   return (
     <div>
       <Nav auth={auth} logout={logout} itemCount={itemCount}/>
+      { pathname.startsWith('/collections/') || pathname.startsWith('/product/') ? <Collections collections={collections} />: null}
       <Routes>
         <Route path='/' element= { <Home products ={products} collections={collections}/> } />
         <Route path='/login' element={<Login attemptLogin={attemptLogin} />} />
         <Route path='/register' element={<Register attemptLogin={attemptLogin} />} />
         <Route path='/admin' element={<Admin auth={auth} collections={collections} showAllCollections={showAllCollections} products={products}/>}/>
-        <Route path='/collections/:id' element={<Collection collections={collections}/>}/>
+        <Route path='/collections/:id' element={<Collection />}/>
         <Route path='/cart' element={<Cart cart={cart} itemCount={itemCount} total={total} retrieveCartAndProducts={retrieveCartAndProducts} />}/>
-        <Route path='/checkout' element={<CheckoutPage cart={cart} itemCount={itemCount} total={total} tax={tax} shipping={shipping} finalTotal={finalTotal} retrieveCartAndProducts={retrieveCartAndProducts}/>} />
-        <Route path='/product/:id' element={<SingleProduct retrieveCartAndProducts={retrieveCartAndProducts} />}/>
+        <Route path='/checkout' element={<CheckoutPage cart={cart} itemCount={itemCount} total={total} tax={tax} shipping={shipping} 
+        finalTotal={finalTotal} retrieveCartAndProducts={retrieveCartAndProducts} showAllProducts={showAllProducts}/>} />
+        <Route path='/product/:id' element={<SingleProduct retrieveCartAndProducts={retrieveCartAndProducts} products={products} />}/>
       </Routes>
     </div>
   );

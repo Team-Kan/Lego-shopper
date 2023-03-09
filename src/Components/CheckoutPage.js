@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { checkoutCart } from '../api/cartFetchCalls';
 
 const CheckoutPage = (props) => {
-    const {cart, itemCount, total, tax, shipping, finalTotal, retrieveCartAndProducts } = props;
+    const {cart, itemCount, total, tax, shipping, finalTotal, retrieveCartAndProducts, showAllProducts } = props;
     const [showDeliveryForm, setDeliveryForm] = useState(true);
     const [showPaymentForm, setPaymentForm] = useState(false);
     const [showReviewOrder, setReviewOrder] = useState(false);
@@ -18,7 +18,8 @@ const CheckoutPage = (props) => {
             obj.quantity = product.stock - product.quantity;
             products.push(obj);
         }
-        const response = await checkoutCart(token, cartId, products);
+        await checkoutCart(token, cartId, products);
+        await showAllProducts();
         await retrieveCartAndProducts();
         console.log('checkout complete');
     }

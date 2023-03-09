@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchCollectionProducts } from "../api";
-import Collections from "./Collections";
 
-const Collection = (props) => {
-  const { collections } = props;
+const Collection = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
   const id = Number(useParams().id);
@@ -28,7 +26,6 @@ const Collection = (props) => {
 
   return (
     <div>
-      <Collections collections={collections} />
       <h2>{error}</h2>
 
       <div className="product_container">
