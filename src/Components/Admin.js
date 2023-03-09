@@ -19,7 +19,6 @@ const displayAllUsers = async (token) => {
       return nav("/")
     }
     const users = await fetchAllUsers(token);
-    console.log(users,"This is all of our users")
     setUsers(users);
 }
 

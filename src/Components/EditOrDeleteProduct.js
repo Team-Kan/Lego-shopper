@@ -8,7 +8,6 @@ const EditOrDeleteProduct = (props) => {
   const [deleteProduct, setDeleteProduct] = useState(false);
   const [product, setProduct] = useState({});
 
-  console.log(product);
   const handleClick = (value) => {
     switch (value) {
       case "edit":

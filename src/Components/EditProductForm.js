@@ -15,7 +15,6 @@ const EditProductForm = (props) => {
   const handleEdit = async (ev, id) => {
     ev.preventDefault();
     const token = window.localStorage.getItem("token");
-    console.log(token);
     const editProduct = await editProductFetch({
       id: product.id,
       token,
