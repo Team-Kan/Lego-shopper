@@ -171,8 +171,8 @@ li{
 }
 
 .cart-product-container {
-  width: 700px;
-  height: 510px;
+  width: 1000px;
+  height: 860px;
   overflow-y: scroll;
   direction:ltr;
 }
