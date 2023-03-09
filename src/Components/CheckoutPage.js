@@ -4,60 +4,27 @@ import { checkoutCart } from '../api/cartFetchCalls';
 
 const CheckoutPage = (props) => {
     const {cart, itemCount, total, tax, shipping, finalTotal, retrieveCartAndProducts } = props;
-    // const [cart, setCart] = useState({});
-    // const [itemCount, setItemCount] = useState(0);
-    // const [total, setTotal] = useState(0);
-    // const [tax, setTax] = useState(0);
-    // const [shipping, setShipping] = useState('$9.95');
-    // const [finalTotal, setFinalTotal] = useState(0);
     const [showDeliveryForm, setDeliveryForm] = useState(true);
     const [showPaymentForm, setPaymentForm] = useState(false);
     const [showReviewOrder, setReviewOrder] = useState(false);
     const token = window.localStorage.getItem('token');
 
-    // const retrieveCartAndProducts = async (token) => {
-    //     const cart = await fetchCart(token);
-    //     if (cart.products) {
-    //         cart.products.sort((a, b) => a.cartProductId - b.cartProductId);
-    //         const items = cart.products.reduce((acc, curr) => acc + curr.quantity, 0);
-    //         setItemCount(items);
-
-    //         const cost = (Math.round(100 * cart.products.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)) / 100).toFixed(2);
-    //         setTotal(cost);
-            
-    //         const tax = Math.round(100*(0.06*cost)/100).toFixed(2);
-    //         setTax(tax);
-
-    //         if(cost > 35) {
-    //             setShipping('Free');
-    //             setFinalTotal((Number(tax)+Number(cost)));
-    //         } else if(cost < 35 && cost > 0) {
-    //             setShipping('$9.95');
-    //             setFinalTotal((Number(tax)+Number(cost)+9.99));
-    //         } else {
-    //             setFinalTotal((Number(tax)+Number(cost)));
-    //         }
-    //     }
-    //     setCart(cart);
-    // }
 
     const processCheckout = async (cartId) => {
-        const response = await checkoutCart(token, cartId);
-        console.log(response);
-        // setCart({});
-        // if (!response.error) {
+        const products = [];
+        for(let i = 0; i< cart.products.length; i++) {
+            const obj = {};
+            const product = cart.products[i];
+            obj.id = product.id;
+            obj.quantity = product.stock - product.quantity;
+            products.push(obj);
+        }
+        const response = await checkoutCart(token, cartId, products);
         await retrieveCartAndProducts();
         console.log('checkout complete');
-        // } else {
-        //   console.log("issue");
-        // }
-      }
+    }
 
-    // useEffect(() => {
-    //     if (token) {
-    //         retrieveCartAndProducts(token)
-    //     }
-    // }, [])
+
     return (
         <div>
             <Link to="/cart">Back to Cart</Link>
