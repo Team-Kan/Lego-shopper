@@ -85,6 +85,7 @@ const getAllUsers = async () => {
     const { rows: users} = await client.query(`
       SELECT id, username, "isAdmin"
       FROM users
+      ORDER BY id
     `);
 
     return users
