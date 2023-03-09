@@ -21,7 +21,8 @@ const Cart = (props) => {
     }
   }
 
-  const increaseQuantity = async(productId, quantity) => {
+  const increaseQuantity = async (productId, stock, quantity) => {
+    if (quantity < stock) {
       quantity++;
       const response = await updateQuantityFetch(token, cart.id, productId, quantity);
       if (!response.error) {
@@ -29,6 +30,9 @@ const Cart = (props) => {
       } else {
         console.log("error increasing quantity");
       }
+    } else {
+      return;
+    }
   }
 
   const removeItem = async(productId) => {
@@ -56,12 +60,13 @@ const Cart = (props) => {
                       <li className = 'cart-product-info'>
                         <p>{product.name}</p>
                         <p>Price: ${product.price}</p>
+                        <p>{product.stock} IN STOCK</p>
                       </li>
                       <button className = 'quantity-button' 
                       onClick={() => { decreaseQuantity(product.id, product.quantity) }}>-</button>
                       <p>{product.quantity}</p>
                       <button className = 'quantity-button'
-                      onClick={() => { increaseQuantity(product.id, product.quantity) }}>+</button>
+                      onClick={() => { increaseQuantity(product.id, product.stock, product.quantity) }}>+</button>
                       <p></p>
                       <button onClick={() => { removeItem(product.id)}}>Remove</button>
                     </div>
