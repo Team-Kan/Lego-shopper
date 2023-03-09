@@ -26,5 +26,6 @@ export {
   fetchCart, 
   fetchCartProducts,
   updateQuantityFetch,
-  deleteCartProduct
+  deleteCartProduct,
+  addProductToCartFetch
 } from "./cartFetchCalls"

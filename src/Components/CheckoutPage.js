@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { checkoutCart } from '../api/cartFetchCalls';
+import {PaymentInfo, DeliveryInfo} from '.';
+
 
 const CheckoutPage = (props) => {
     const {cart, itemCount, total, tax, shipping, finalTotal, retrieveCartAndProducts, showAllProducts } = props;
@@ -9,6 +11,7 @@ const CheckoutPage = (props) => {
     const [showReviewOrder, setReviewOrder] = useState(false);
     const token = window.localStorage.getItem('token');
 
+    console.log(showReviewOrder)
     const processCheckout = async (cartId) => {
         const products = [];
         for(let i = 0; i< cart.products.length; i++) {
@@ -32,40 +35,11 @@ const CheckoutPage = (props) => {
             <Link to="/cart">Back to Cart</Link>
                 <div className='cart-product-container'>
                     { showDeliveryForm ? (
-                    <form onSubmit={(ev) => {ev.preventDefault(); setDeliveryForm(false); setPaymentForm(true);}}
-                        className="checkout-form">
-                        <h1>Delivery Options</h1>
-                        <div>
-                            <p>First Name</p>
-                            <input></input>
-                            <p>Last Name</p>
-                            <input></input>
-                        </div>
-                        <p>Street Address</p>
-                        <input></input>
-                        <p>City</p>
-                        <input></input>
-                        <p>State</p>
-                        <input></input>
-                        <p>Zipcode</p>
-                        <input></input>
-                        <button className="checkout-form-button" type='submit'>Next: Payment Details</button>
-                    </form>)
+                      <DeliveryInfo  setDeliveryForm={setDeliveryForm} setPaymentForm={setPaymentForm}/>
+                    )
                     : null }
                     { showPaymentForm ? (
-                    <form onSubmit={(ev) => {ev.preventDefault(); setPaymentForm(false); setReviewOrder(true);}}
-                    className="checkout-form">
-                        <h1>Payment</h1>
-                        <p>Name (as shown on card)</p>
-                        <input></input>
-                        <p>Card Number</p>
-                        <input></input>
-                        <p>Security Code:</p>
-                        <input></input>
-                        <p>Zipcode</p>
-                        <input></input>
-                        <button className="checkout-form-button" type='submit'>Next: Review Your Order</button>
-                    </form>
+                      <PaymentInfo setPaymentForm={setPaymentForm} setReviewOrder={setReviewOrder}/>
                     ): null}
                     {showReviewOrder ? (
                         <div>
@@ -98,7 +72,7 @@ const CheckoutPage = (props) => {
                     <p>Estimated Tax: ${tax} </p>
                     <p>Total ${finalTotal}</p>
                     <p></p>
-                    <button disabled={!itemCount} className='checkout-button' onClick={() => { processCheckout(cart.id) }}>Checkout</button>
+                    <button disabled={ !showReviewOrder || !itemCount } className='checkout-button' onClick={() => { processCheckout(cart.id) }}>Checkout</button>
                 </div>
             </div>
         </div>
