@@ -22,7 +22,7 @@ const SingleProduct = (props) => {
       }
     }
   };
-console.log(cart);
+  
   useEffect(() => {
       getProduct();
   }, [id, products, cart]);

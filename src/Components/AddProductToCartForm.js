@@ -12,12 +12,10 @@ const AddProductToCartForm = (props) => {
     if (token) {
       if(disabled){
         const newQuantity = +cartProduct.quantity + 1;
-        console.log(newQuantity);
         if(newQuantity > product.quantity){
           return setError("cart has hit stock limit.")
         }
         const update = await updateQuantityFetch(token, id, product.id, newQuantity)
-        console.log(update)
         cartProduct.quantity = newQuantity
         return;
       }
