@@ -28,6 +28,7 @@ const fetchCartProducts = async(token, cartId) => {
 }
 
 const updateQuantityFetch = async (token, cartId, productId, quantity) => {
+  console.log(quantity);
   const response = await fetch(`${MAIN_URL}api/cart-products`, {
     method: "PATCH",
     headers: {
