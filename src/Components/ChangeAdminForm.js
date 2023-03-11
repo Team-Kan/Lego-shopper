@@ -28,15 +28,16 @@ const ChangeAdminForm = (props) => {
           </form>
           <div>
           <p className='p-2'>
-            <span className='text-green-600 font-extrabold'>
+            <label className='text-green-600 font-extrabold'>
               id: 
-            </span> 
+            </label>
+             <br /> 
              {id}
           </p>
-          <p className='p-2 ml-2'> 
-            <span className='text-green-600 font-extrabold'>
+          <p className='p-2'> 
+            <label className='text-green-600 font-extrabold'>
               UserName: 
-            </span>
+            </label>
             <br /> 
             {username}
           </p>

@@ -17,7 +17,7 @@ const AddProductToCartForm = (props) => {
         }
         const update = await updateQuantityFetch(token, id, product.id, newQuantity)
         cartProduct.quantity = newQuantity
-        return;
+        return retrieveCartAndProducts();
       }
       const cart = await fetchCart(token);
       const addedProduct = await addProductToCartFetch({

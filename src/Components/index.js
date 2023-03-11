@@ -14,6 +14,7 @@ export { default as DeliveryInfo} from './DeliveryInfo';
 export { default as EditOrDeleteProduct} from './EditOrDeleteProduct';
 export { default as EditProductForm} from './EditProductForm';
 export { default as Home } from './Home.js';
+export { default as Loading } from './Loading.js';
 export { default as Login } from './Login.js';
 export { default as Nav } from './Nav.js';
 export { default as Products } from './Products.js';
