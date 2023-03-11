@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { addProductToCartFetch, fetchCart, updateQuantityFetch } from "../api";
 
 const AddProductToCartForm = (props) => {
-  const { product, retrieveCartAndProducts, disabled, setDisabled, cartProduct, cart } = props;
+  const { product, retrieveCartAndProducts, disabled, setDisabled, cartProduct, cart, setIsLoading } = props;
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState("")
   const {id} = cart;
   const handleSubmit = async (ev) => {
     ev.preventDefault();
+    setIsLoading(true);
     const token = window.localStorage.getItem("token");
     if (token) {
       if(disabled){
@@ -32,6 +33,9 @@ const AddProductToCartForm = (props) => {
         setQuantity(1)
       }
     }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 750);
   };
 
   return (

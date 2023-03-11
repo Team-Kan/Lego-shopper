@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { deleteProductFetch } from "../api";
 
 const DeleteProductForm = (props) => {
-  const {product, setDeleteProduct} = props; 
+  const {product, setDeleteProduct, setIsLoading} = props; 
   const [error, setError] = useState("")
 
   const handleDelete = async (ev) => {
     ev.preventDefault();
+    setIsLoading(true);
     if(!product.id){
       return setError("Please select a product")
     }
@@ -14,9 +15,15 @@ const DeleteProductForm = (props) => {
     const deleted = await deleteProductFetch(product.id, token);
    
     if(deleted.error){
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 500);
       return setError(deleted.error);
     }
     setDeleteProduct(false)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 500);
     return deleted
   }
   return (

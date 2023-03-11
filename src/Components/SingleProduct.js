@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import { AddProductToCartForm } from ".";
 
 const SingleProduct = (props) => {
-  const { retrieveCartAndProducts, products, cart } = props;
+  const { retrieveCartAndProducts, products, cart, setIsLoading } = props;
   const [product, setProduct] = useState({});
   const [disabled, setDisabled] = useState(false)
   const [cartProduct, setCartProduct] = useState({})
   const id = useParams().id;
 
   const getProduct = async () => {
+    setIsLoading(true)
     const singleProduct = products.find(product => product.id === +id);
     if (singleProduct) {
       setProduct(singleProduct);
@@ -21,6 +22,9 @@ const SingleProduct = (props) => {
         }
       }
     }
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 500);
   };
   
   useEffect(() => {
@@ -58,6 +62,7 @@ const SingleProduct = (props) => {
                   cart={cart} 
                   disabled={disabled} 
                   setDisabled={setDisabled}
+                  setIsLoading={setIsLoading}
                 />
               ) : (
                 <div 

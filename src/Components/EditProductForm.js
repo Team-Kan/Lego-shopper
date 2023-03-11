@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { editProductFetch } from "../api";
 
 const EditProductForm = (props) => {
-  const { product, collections, setEditProduct } = props;
+  const { product, collections, setEditProduct, setIsLoading } = props;
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -14,6 +14,7 @@ const EditProductForm = (props) => {
 
   const handleEdit = async (ev, id) => {
     ev.preventDefault();
+    setIsLoading(true)
     const token = window.localStorage.getItem("token");
     const editProduct = await editProductFetch({
       id: product.id,
@@ -27,8 +28,14 @@ const EditProductForm = (props) => {
       quantity,
     });
     if (editProduct.error) {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 500);
       return setError(editProduct.message);
     }
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 500);
     setEditProduct(false);
     return editProduct;
   };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DeleteProductForm, EditProductForm } from ".";
 
 const EditOrDeleteProduct = (props) => {
-  const { products, collections } = props;
+  const { products, collections, setIsLoading } = props;
   // const products =[]
   const [editProduct, setEditProduct] = useState(false);
   const [deleteProduct, setDeleteProduct] = useState(false);
@@ -77,6 +77,7 @@ const EditOrDeleteProduct = (props) => {
           <EditProductForm
             product={product}
             setEditProduct={setEditProduct}
+            setIsLoading={setIsLoading}
             collections={collections}
           />
         ) : null}
@@ -86,6 +87,7 @@ const EditOrDeleteProduct = (props) => {
           <DeleteProductForm
             product={product}
             setDeleteProduct={setDeleteProduct}
+            setIsLoading={setIsLoading}
           />
         ) : null}
       </div>

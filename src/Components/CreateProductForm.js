@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createProductFetch } from "../api";
 
 const CreateProductForm = (props) => {
-  const { collections } = props;
+  const { collections, setIsLoading } = props;
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -14,6 +14,7 @@ const CreateProductForm = (props) => {
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
+    setIsLoading(true)
     const token = window.localStorage.getItem("token");
     const submitProduct = {
       name,
@@ -26,7 +27,11 @@ const CreateProductForm = (props) => {
     };
     const newProduct = await createProductFetch(token, submitProduct);
     if (newProduct.error) {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 500);
       return setError(newProduct.error);
+
     }
 
     setName("");
@@ -37,6 +42,9 @@ const CreateProductForm = (props) => {
     setPieceCount("");
     setQuantity("");
 
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
     return newProduct;
   };
   return (
