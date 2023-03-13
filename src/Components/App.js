@@ -10,6 +10,7 @@ import {
   CheckoutPage,
   SingleProduct,
   Collections,
+  Loading,
 } from ".";
 import {
   fetchAllProducts,
@@ -29,6 +30,7 @@ const App = () => {
   const [tax, setTax] = useState(0);
   const [shipping, setShipping] = useState("$9.95");
   const [finalTotal, setFinalTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const pathname = location.pathname;
 
@@ -112,7 +114,7 @@ const App = () => {
 
   useEffect(() => {
    retrieveCartAndProducts();
-  }, [auth])
+  }, [auth]);
 
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -122,6 +124,7 @@ const App = () => {
 
   return (
     <div>
+      {isLoading ? <Loading /> : null}
       <Nav auth={auth} logout={logout} itemCount={itemCount} />
       {pathname.startsWith("/collections/") ||
       pathname.startsWith("/product/") ? (
@@ -145,6 +148,7 @@ const App = () => {
               collections={collections}
               showAllCollections={showAllCollections}
               products={products}
+              setIsLoading={setIsLoading}
             />
           }
         />
@@ -157,6 +161,7 @@ const App = () => {
               itemCount={itemCount}
               total={total}
               retrieveCartAndProducts={retrieveCartAndProducts}
+              setIsLoading={setIsLoading}
             />
           }
         />
@@ -172,6 +177,7 @@ const App = () => {
               finalTotal={finalTotal}
               retrieveCartAndProducts={retrieveCartAndProducts}
               showAllProducts={showAllProducts}
+              setIsLoading={setIsLoading}
             />
           }
         />
@@ -182,6 +188,7 @@ const App = () => {
               retrieveCartAndProducts={retrieveCartAndProducts}
               products={products}
               cart={cart}
+              setIsLoading={setIsLoading}
             />
           }
         />

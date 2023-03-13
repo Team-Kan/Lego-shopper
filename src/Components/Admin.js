@@ -9,7 +9,7 @@ import {
 const { fetchAllUsers, getUser } = require("../api");
 
 const Admin = (props) => {
-const { auth, collections, showAllCollections, products } = props;    
+const { auth, collections, showAllCollections, products, setIsLoading } = props;    
 const [users, setUsers] = useState([]);
 const nav = useNavigate();
 
@@ -34,10 +34,24 @@ useEffect(() => {
     <div>
       <h2>Welcome Admin {auth.username}</h2>
       <div className='grid grid-cols-1 grid-rows-1 sm:gap-10 lg:grid-cols-2 justify-items-center'>
-        <CreateProductForm collections={collections}/>
-        <ChangeAdminForm users={users} displayAllUsers={displayAllUsers}/>
-        <EditOrDeleteProduct products={products} collections={collections}/>
-        <CreateCollectionForm showAllCollections={showAllCollections}/>
+        <CreateProductForm 
+          collections={collections} 
+          setIsLoading={setIsLoading}
+        />
+        <ChangeAdminForm 
+          users={users} 
+          displayAllUsers={displayAllUsers} 
+          setIsLoading={setIsLoading}
+        />
+        <EditOrDeleteProduct 
+          products={products} 
+          collections={collections} 
+          setIsLoading={setIsLoading}
+        />
+        <CreateCollectionForm 
+          showAllCollections={showAllCollections} 
+          setIsLoading={setIsLoading}
+        />
       </div>
 
     </div>

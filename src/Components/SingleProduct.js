@@ -3,27 +3,33 @@ import { useParams } from "react-router-dom";
 import { AddProductToCartForm } from ".";
 
 const SingleProduct = (props) => {
-  const { retrieveCartAndProducts, products, cart } = props;
+  const { retrieveCartAndProducts, products, cart, setIsLoading } = props;
   const [product, setProduct] = useState({});
   const [disabled, setDisabled] = useState(false)
+  const [cartProduct, setCartProduct] = useState({})
   const id = useParams().id;
 
   const getProduct = async () => {
+    setIsLoading(true)
     const singleProduct = products.find(product => product.id === +id);
     if (singleProduct) {
       setProduct(singleProduct);
-      if(cart.id){
+      if(cart.products){
         const productInCart = cart.products.find(product => product.id === singleProduct.id);
         if(productInCart){
-          setDisabled(true)
+          setCartProduct(productInCart)
+          setDisabled(true);
         }
       }
     }
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 500);
   };
-console.log(cart);
+  
   useEffect(() => {
-    getProduct();
-  }, [id, products]);
+      getProduct();
+  }, [id, products, cart]);
 
   return (
     <div className="flex md:justify-center items-center">
@@ -51,12 +57,19 @@ console.log(cart);
               {product.quantity ? (
                 <AddProductToCartForm 
                   product={product} 
-                  retrieveCartAndProducts={retrieveCartAndProducts} 
+                  retrieveCartAndProducts={retrieveCartAndProducts}
+                  cartProduct={cartProduct}
+                  cart={cart} 
                   disabled={disabled} 
                   setDisabled={setDisabled}
+                  setIsLoading={setIsLoading}
                 />
               ) : (
-                <div>Out of Stock, check in later!</div>
+                <div 
+                  className="w-1/3 min-w-fit h-full pl-2 pr-2 bg-[#3E363F] border-r-2 border-l-white text-green-200"
+                >
+                  Out of Stock, check in later!
+                </div>
               )}
             </div>
           </div>

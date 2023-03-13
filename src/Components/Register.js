@@ -44,6 +44,7 @@ const Register = ({ attemptLogin }) => {
         <input
           className='border-green-700 border-2 rounded-md p-2 shadow-sm shadow-green-600 w-96'
           placeholder='password'
+          type="password"
           value={ password }
           onChange = { ev => setPassword(ev.target.value) }
         />

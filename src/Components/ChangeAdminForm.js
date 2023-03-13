@@ -2,15 +2,19 @@ import React from 'react'
 import { editUsersAdminPriv } from '../api';
 
 const ChangeAdminForm = (props) => {
-  const {users, displayAllUsers} = props;
+  const {users, displayAllUsers, setIsLoading} = props;
   const admins = users.filter(({isAdmin}) => isAdmin);
   const notAdmins = users.filter(({isAdmin}) => !isAdmin);
  
   const handleEdit = async ({id, token, isAdmin,}) => {
+    setIsLoading(true);
     const edit = await editUsersAdminPriv({token, isAdmin, id})
     if(edit.id){
       displayAllUsers(token);
     }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   }
 
   const userInfo = (array, whichUsers, label) => {
@@ -28,15 +32,16 @@ const ChangeAdminForm = (props) => {
           </form>
           <div>
           <p className='p-2'>
-            <span className='text-green-600 font-extrabold'>
+            <label className='text-green-600 font-extrabold'>
               id: 
-            </span> 
+            </label>
+             <br /> 
              {id}
           </p>
-          <p className='p-2 ml-2'> 
-            <span className='text-green-600 font-extrabold'>
+          <p className='p-2'> 
+            <label className='text-green-600 font-extrabold'>
               UserName: 
-            </span>
+            </label>
             <br /> 
             {username}
           </p>
