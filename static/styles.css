@@ -249,7 +249,7 @@ li{
   text-align: center;
 }
 
-.container{
+.banner_container{
   margin: 0;
   padding: 0;
   width: 100%;
@@ -275,6 +275,7 @@ li{
   opacity: 0;
   transition: 7s;
   animation-timing-function: ease-in-out;
+  align-content: center;
 }
 
 
