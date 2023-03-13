@@ -43,9 +43,24 @@ const App = () => {
 
   const retrieveCartAndProducts = async () => {
     const token = window.localStorage.getItem("token");
+    let cart;
     if (token) {
-      const cart = await fetchCart(token);
-      if (cart.products) {
+      cart = await fetchCart(token);
+    } else {
+      cart = await JSON.parse(window.localStorage.getItem("cart"));
+      if(!cart){
+        const newCart = {
+          id: "guest",
+          isActive: true,
+          products: [],
+          userId: "guest",
+        }
+        window.localStorage.setItem("cart", JSON.stringify(newCart));
+        cart = await JSON.parse(window.localStorage.getItem("cart"));
+      }
+
+    }
+      if (cart.products.length) {
         cart.products.sort((a, b) => a.cartProductId - b.cartProductId);
         const items = cart.products.reduce(
           (acc, curr) => acc + curr.quantity,
@@ -84,15 +99,6 @@ const App = () => {
         setFinalTotal(0);
       }
       setCart(cart);
-    } else {
-      setCart({})
-      setItemCount(0);
-      setTotal(0);
-      setTax(0);
-      setShipping("$9.95");
-      setFinalTotal(0);
-    }
-    //else, setup local cart for the guest user
   };
 
   const showAllProducts = async () => {
@@ -109,7 +115,7 @@ const App = () => {
     attemptLogin();
     showAllProducts();
     showAllCollections();
-    retrieveCartAndProducts();
+    // retrieveCartAndProducts();
   }, []);
 
   useEffect(() => {
