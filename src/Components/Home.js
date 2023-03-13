@@ -6,7 +6,7 @@ const Home = (props)=> {
   const {products, collections} = props;
   return (
     <div>
-      <div className='container'>
+      <div className='banner_container'>
         <div className='banner'>
           <div className='banner-text'>
             <h1>Welcome to reKANstructed!</h1>
