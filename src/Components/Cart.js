@@ -49,7 +49,7 @@ const Cart = (props) => {
     <div>
       <br/>
       <div className='cart-container'> 
-        <Link to="/">Back to Shopping</Link>
+        <Link to="/" className="cart-links">Back to Shopping</Link>
         <div className = 'cart-product-container'>
           {cart.products && cart.products.length > 0 ? (
             <ul>

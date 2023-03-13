@@ -11,7 +11,6 @@ const CheckoutPage = (props) => {
     const [showReviewOrder, setReviewOrder] = useState(false);
     const token = window.localStorage.getItem('token');
 
-    console.log(showReviewOrder)
     const processCheckout = async (cartId) => {
         const products = [];
         for(let i = 0; i< cart.products.length; i++) {
@@ -32,7 +31,7 @@ const CheckoutPage = (props) => {
         <div>
             <br/>
             <div className='cart-container'>
-            <Link to="/cart">Back to Cart</Link>
+            <Link to="/cart" className="cart-links">Back to Cart</Link>
                 <div className='cart-product-container'>
                     { showDeliveryForm ? (
                       <DeliveryInfo  setDeliveryForm={setDeliveryForm} setPaymentForm={setPaymentForm}/>
