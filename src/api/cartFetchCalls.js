@@ -61,12 +61,11 @@ const deleteCartProduct = async(token, cartId, productId) => {
   return result;
 }
 
-const checkoutCart = async(token, cartId, products) => {  
+const checkoutCart = async(cartId, products) => {  
   const response = await fetch(`${MAIN_URL}api/cart/${cartId}`, {
     method: "PATCH", 
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
     }, 
     body: JSON.stringify({
       products: products

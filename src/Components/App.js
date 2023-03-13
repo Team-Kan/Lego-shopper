@@ -46,26 +46,27 @@ const App = () => {
     const token = window.localStorage.getItem("token");
     let cart;
     if (token) {
+      
+      const onlineCart = await fetchCart(token);
       const localCart = await JSON.parse(window.localStorage.getItem("cart"))
-      console.log(localCart);
-      if(localCart.products.length){
-        const onlineCart = await fetchCart(token);
-        const onlineCartProductIds = onlineCart.products.map(product => product.id);
-        const newProducts = localCart.products.filter(({id}) => onlineCartProductIds.indexOf(id) === -1);
-        console.log(newProducts)
-        if(newProducts.length){
-          await Promise.all(newProducts.map(async (product) => {
-            addProductToCartFetch({
-              cartId: onlineCart.id,
-              productId: product.id,
-              quantity: product.quantity,
-              token: token,
-            })
-           
-          }))
+      if(localCart){
+        if(localCart.products.length){
+          const onlineCartProductIds = onlineCart.products.map(product => product.id);
+          const newProducts = localCart.products.filter(({id}) => onlineCartProductIds.indexOf(id) === -1);
+          if(newProducts.length){
+            await Promise.all(newProducts.map(async (product) => {
+              addProductToCartFetch({
+                cartId: onlineCart.id,
+                productId: product.id,
+                quantity: product.quantity,
+                token: token,
+              })
+             
+            }))
+          }
         }
-        cart = await fetchCart(token)
       }
+      cart = await fetchCart(token);
     } else {
       cart = await JSON.parse(window.localStorage.getItem("cart"));
       if(!cart){
