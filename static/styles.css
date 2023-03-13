@@ -239,21 +239,20 @@ li{
   border-radius: 10px;
 }
 
-.name-div {
+.name-input {
   margin: 0 1rem;
 }
 
-.name-input {
-  background-color: blue;
-}
-
-.city-state-div  input, select {
+.state-dropdownlist {
   margin: 0 1rem;
 }
 
 .city-input {
-  /* //min-width: 350px; */
-  background-color: yellow;
+  margin: 0 1rem;
+}
+
+.zipcode-input {
+  margin: 0 1rem;
 }
 
 .checkout-form-button {

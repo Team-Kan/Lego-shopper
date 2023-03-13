@@ -10,28 +10,44 @@ const DeliveryInfo = (props) => {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zipcode, setZipcode] = useState('');
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
+
+    const nextPage = async(ev) => {
+      ev.preventDefault(); 
+      const fields = [firstName, lastName, street, city, state, zipcode, email];
+      const result = fields.filter(field => field === '');
+      console.log(result);
+      if(result.length !== 0) {
+        setError("You must fill out all fields");
+      } else {
+        setDeliveryForm(false); 
+        setPaymentForm(true); 
+        setError('');
+      }
+    }
 
     return (
         <form 
           onSubmit={(ev) => { 
-            ev.preventDefault(); 
-            setDeliveryForm(false); 
-            setPaymentForm(true); 
+            nextPage(ev);
           }}
           className="checkout-form"
         >
           <h1>Delivery Options</h1>
-          <div className='name-div'>
+          <div>
             <p>First Name</p>
             <input 
-              className = 'name-input'
+              className='name-input'
+              minLength='2'
               placeholder="First Name"
               value={firstName}
               onChange={(ev) => setFirstName(ev.target.value)}
             />
             <p>Last Name</p>
             <input 
-              className = 'name-input'
+              className='name-input'
+              minLength='2'
               placeholder="Last Name"
               value={lastName}
               onChange={(ev) => setLastName(ev.target.value)}
@@ -48,20 +64,22 @@ const DeliveryInfo = (props) => {
             value={secondLine}
             onChange={(ev) => setSecondLine(ev.target.value)}
           />
-          <div className = 'city-state-div'>
+          <div>
           <p>City</p>
           <input 
-            className = 'city-input'
+            className='city-input'
+            minLength='2'
             value={city}
             onChange={(ev) => setCity(ev.target.value)}
           />
           <p>State</p>
           <select
+            className='state-dropdownlist'
             placeholder="State"
             value={state}
             onChange={(ev) => setState(ev.target.value)}
           >
-            <option value='any'></option>
+            <option value=''>--select a state--</option>
             { 
               states.map((state, idx) => {
                 return (
@@ -72,11 +90,21 @@ const DeliveryInfo = (props) => {
           </select>
           <p>Zipcode</p>
           <input 
+            className='zipcode-input'
+            minLength='5'
+            maxLength='10'
             value={zipcode}
             onChange={(ev) => setZipcode(ev.target.value)}
           />
           </div>
+          <p>Email Address</p>
+          <input 
+            value={email}
+            minLength='5'
+            onChange={(ev) => setEmail(ev.target.value)}
+          />
           <button className="checkout-form-button" type='submit'>Next: Payment Details</button>
+          { error }
         </form>
     )
 }
