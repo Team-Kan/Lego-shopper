@@ -239,6 +239,23 @@ li{
   border-radius: 10px;
 }
 
+.name-div {
+  margin: 0 1rem;
+}
+
+.name-input {
+  background-color: blue;
+}
+
+.city-state-div  input, select {
+  margin: 0 1rem;
+}
+
+.city-input {
+  /* //min-width: 350px; */
+  background-color: yellow;
+}
+
 .checkout-form-button {
   color: white;
   background-color: blue;

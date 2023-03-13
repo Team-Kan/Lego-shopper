@@ -6,6 +6,7 @@ const DeliveryInfo = (props) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [street, setStreet] = useState('');
+    const [secondLine, setSecondLine] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zipcode, setZipcode] = useState('');
@@ -20,15 +21,17 @@ const DeliveryInfo = (props) => {
           className="checkout-form"
         >
           <h1>Delivery Options</h1>
-          <div>
+          <div className='name-div'>
             <p>First Name</p>
             <input 
+              className = 'name-input'
               placeholder="First Name"
               value={firstName}
               onChange={(ev) => setFirstName(ev.target.value)}
             />
             <p>Last Name</p>
             <input 
+              className = 'name-input'
               placeholder="Last Name"
               value={lastName}
               onChange={(ev) => setLastName(ev.target.value)}
@@ -36,13 +39,19 @@ const DeliveryInfo = (props) => {
           </div>
           <p>Street Address</p>
           <input 
-            placeholder="Street Address"
+            placeholder="Street Address Line 1"
             value={street}
             onChange={(ev) => setStreet(ev.target.value)}
           />
+          <input 
+            placeholder="Street Address Line 2"
+            value={secondLine}
+            onChange={(ev) => setSecondLine(ev.target.value)}
+          />
+          <div className = 'city-state-div'>
           <p>City</p>
           <input 
-            placeholder="City"
+            className = 'city-input'
             value={city}
             onChange={(ev) => setCity(ev.target.value)}
           />
@@ -52,6 +61,7 @@ const DeliveryInfo = (props) => {
             value={state}
             onChange={(ev) => setState(ev.target.value)}
           >
+            <option value='any'></option>
             { 
               states.map((state, idx) => {
                 return (
@@ -62,10 +72,10 @@ const DeliveryInfo = (props) => {
           </select>
           <p>Zipcode</p>
           <input 
-            placeholder="Zipcode"
             value={zipcode}
             onChange={(ev) => setZipcode(ev.target.value)}
           />
+          </div>
           <button className="checkout-form-button" type='submit'>Next: Payment Details</button>
         </form>
     )

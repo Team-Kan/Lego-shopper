@@ -20,7 +20,7 @@ const CheckoutPage = (props) => {
             obj.quantity = product.stock - product.quantity;
             products.push(obj);
         }
-        await checkoutCart(token, cartId, products);
+        await checkoutCart(cartId, products);
         await showAllProducts();
         await retrieveCartAndProducts();
         console.log('checkout complete');
