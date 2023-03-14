@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import AddProductToCartForm from "./AddProductToCartForm";
 
 
 const Products = (props) => {
-  const{products} = props;
+  const{products, cart, retrieveCartAndProducts, setIsLoading} = props;
 
   return (
     <div className="product_container">
@@ -15,6 +16,8 @@ const Products = (props) => {
               imageUrl,
               quantity,
             } = product;
+            const cartProduct = cart.products.filter(({id}) => id === product.id)
+            if(cartProduct)
             return (
               <Link to={`/product/${product.id}`} key={product.id}>
                 <div  className='single_product'>
@@ -23,6 +26,14 @@ const Products = (props) => {
                 <li>Name:{name}</li>
                 <li>Price: {price}</li>
                 <li>Currently: {quantity ? `${quantity} In Stock`: "Out of Stock"}</li>
+                <AddProductToCartForm  
+                  product={product} 
+                  retrieveCartAndProducts={retrieveCartAndProducts}
+                  disabled={!!cartProduct.length}
+                  cartProduct={cartProduct.length ? cartProduct[0] : null}
+                  cart={cart}
+                  setIsLoading={setIsLoading}
+                />
                 </ul>
               </div>
               </Link>

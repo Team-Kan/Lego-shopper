@@ -8,7 +8,7 @@ const SingleProduct = (props) => {
   const [disabled, setDisabled] = useState(false)
   const [cartProduct, setCartProduct] = useState({})
   const id = useParams().id;
-
+console.log(product)
   const getProduct = async () => {
     setIsLoading(true)
     const singleProduct = products.find(product => product.id === +id);
@@ -52,6 +52,9 @@ const SingleProduct = (props) => {
             </div>
             <h4 className="w-1/3 min-w-fit pl-2 pr-2 bg-[#3E363F] border-r-2 border-white text-green-200">
               Total number of <br /> pieces: {product.pieceCount}
+              <br />
+              <br />
+              price: {product.price}
             </h4>
             <div>
               {product.quantity ? (

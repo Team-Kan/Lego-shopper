@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 const Login = ({ attemptLogin })=> {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState("")
   const navigate = useNavigate();
 
   const login = async({ username, password})=> {
@@ -26,6 +27,7 @@ const Login = ({ attemptLogin })=> {
       }
       else {
         console.log(data);
+        setError(data.error)
       }
     });
   };
@@ -53,6 +55,7 @@ const Login = ({ attemptLogin })=> {
           value={ password }
           onChange = { ev => setPassword(ev.target.value) }
         />
+        <div>{error}</div>
         <button 
           className="bg-green-500 rounded-md active:bg-green-600 active:translate-y-1 shadow-md shadow-green-600"
         >

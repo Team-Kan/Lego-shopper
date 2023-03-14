@@ -32,13 +32,13 @@ const PaymentInfo = (props) => {
       <label>Security Code:</label>
       <input
         value={securityCode}
-        maxLength="3"
+        maxLength="4"
         onChange={(ev) => setSecurityCode(ev.target.value)}
       />
       <label>Zipcode</label>
       <input 
         value={zipcode} 
-        maxLength="5" 
+        maxLength="10" 
         onChange={(ev) => setZipcode(ev.target.value)} 
       />
       <button className="checkout-form-button" type="submit">
