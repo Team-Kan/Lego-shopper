@@ -164,6 +164,10 @@ li{
   padding-top: 1rem;
 }
 
+.cart-links {
+  height: 2rem;
+}
+
 .cart-container {
   display: flex;
   justify-content: space-around;
@@ -230,9 +234,25 @@ li{
   display: flex;
 }
 
-.checkout-form input {
+.checkout-form input, select {
   border: solid 1px #029602;
   border-radius: 10px;
+}
+
+.name-input {
+  margin: 0 1rem;
+}
+
+.state-dropdownlist {
+  margin: 0 1rem;
+}
+
+.city-input {
+  margin: 0 1rem;
+}
+
+.zipcode-input {
+  margin: 0 1rem;
 }
 
 .checkout-form-button {
