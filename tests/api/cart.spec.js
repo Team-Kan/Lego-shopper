@@ -3,7 +3,9 @@ const tearDown = require("../tearDown");
 const request = require("supertest");
 const app = require("../../server/app");
 const { createUser, authenticate } = require("../../server/db");
-const { createCart } = require("../../server/db/cart");
+const { createProduct } = require("../../server/db/product");
+const { createCollection } = require("../../server/db/collection");
+
 
 beforeAll(async () => {
   await setup();
@@ -52,9 +54,20 @@ describe('testing checkout', () => {
       password: "bob_password",
     });
     console.log(cart);
+    const collection = await createCollection({ name: "New releases"});
+    const product = await createProduct({
+      name: "sample5",
+      description: "this is it",
+      collectionId: collection.id,
+      price: 19.99,
+      imageUrl: "gg",
+      pieceCount: 101,
+      quantity: 3,
+    });
     const response = await request(app)
       .patch(`/api/cart/${cart.id}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${token}`)
+      .send({ products: [{id: product.id, quantity: 1}]});
     console.log(response.body);
     expect(response.body.isActive).toBe(false);
   })
