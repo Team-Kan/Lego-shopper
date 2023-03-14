@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { addProductToCartFetch, fetchCart, updateQuantityFetch } from "../api";
 
 const AddProductToCartForm = (props) => {
@@ -6,7 +7,6 @@ const AddProductToCartForm = (props) => {
     product,
     retrieveCartAndProducts,
     disabled,
-    setDisabled,
     cartProduct,
     cart,
     setIsLoading,
@@ -14,6 +14,10 @@ const AddProductToCartForm = (props) => {
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState("");
   const { id } = cart;
+  const location = useLocation();
+  const pathname = location.pathname;
+
+
   const localCart = () => {
     let newProduct = {
       id: product.id,
@@ -41,7 +45,6 @@ const AddProductToCartForm = (props) => {
       cart.products.push(newProduct);
       console.log(cart);
       window.localStorage.setItem("cart", JSON.stringify(cart));
-      setDisabled(true);
       return retrieveCartAndProducts();
     }
   };
@@ -68,7 +71,6 @@ const AddProductToCartForm = (props) => {
       token,
     });
     if (addedProduct) {
-      setDisabled(true);
       setQuantity(1);
       return retrieveCartAndProducts();
     }
@@ -88,9 +90,9 @@ const AddProductToCartForm = (props) => {
   };
 
   return (
-    <form className="flex bg-[#3E363F] rounded-r-md h-full text-green-200">
-      <label className="mt-0">Current Stock: {product.quantity}</label>
-      <div className="w-40 flex justify-center">
+    <form className={pathname === "/" ? "single_product" : "flex bg-[#3E363F] rounded-r-md h-full text-green-200"}>
+      {pathname === "/" ? null : <label className="mt-0">Current Stock: {product.quantity}</label>}
+      <div className={pathname === "/" ? "" : "w-40 flex justify-center"}>
         <button
           className={`pl-3 pr-3 bg-red-400 text-red-200 rounded-md  ${
             !disabled
@@ -106,7 +108,7 @@ const AddProductToCartForm = (props) => {
           -
         </button>
         <input
-          className="w-10 ml-3 mr-3 border-2 border-green-500 rounded-md text-center"
+          className={"w-10 ml-3 mr-3 border-2 border-green-500 rounded-md text-center"}
           type="number"
           value={quantity}
           disabled={true}

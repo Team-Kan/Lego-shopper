@@ -3,7 +3,7 @@ import Products from './Products';
 import Collections from './Collections';
 
 const Home = (props)=> {
-  const {products, collections} = props;
+  const {products, collections, cart, retrieveCartAndProducts, setIsLoading} = props;
   return (
     <div>
       <div className='banner_container'>
@@ -14,7 +14,12 @@ const Home = (props)=> {
         </div>
       </div>
       <Collections collections={collections} />
-      <Products products={products}/>
+      <Products 
+        products={products} 
+        cart={cart} 
+        retrieveCartAndProducts={retrieveCartAndProducts}
+        setIsLoading={setIsLoading}
+      />
     </div>
   );
 };

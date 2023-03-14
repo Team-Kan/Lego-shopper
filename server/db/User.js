@@ -8,6 +8,11 @@ const createUser = async ({ username, password }) => {
   // we are now not returning the password
   // We are now hashing the passwords before they are sent to the database
   try {
+    if(!username || !password){
+      const error = new Error("Please enter a username and password")
+      error.status = 400;
+      throw error;
+    }
     // const regex = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     // // This is used to make sure the username is an email
     // if(!regex.test(username)){
@@ -61,6 +66,12 @@ const getUserByToken = async (token) => {
 
 const authenticate = async ({ username, password }) => {
   try {
+    if(!username || !password){
+      const error = new Error("Please enter a username and password")
+      error.status = 400;
+      throw error;
+    }
+
     const SQL = `
       SELECT id, username, "isAdmin"
       FROM users
@@ -69,8 +80,8 @@ const authenticate = async ({ username, password }) => {
     const hash = bcrypt.hashSync(password, salt)
     const {rows: [user]} = await client.query(SQL, [username, hash]);
   
-    if (!user.id) {
-      const error = Error("not authorized");
+    if (!user) {
+      const error = Error("Password or username are incorrect");
       error.status = 401;
       throw error;
     }

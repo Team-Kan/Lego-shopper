@@ -160,7 +160,15 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Home products={products} collections={collections} />}
+          element={
+            <Home 
+              retrieveCartAndProducts={retrieveCartAndProducts} 
+              cart={cart} 
+              products={products} 
+              collections={collections} 
+              setIsLoading={setIsLoading}
+            />
+          }
         />
         <Route path="/login" element={<Login attemptLogin={attemptLogin} />} />
         <Route
