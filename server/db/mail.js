@@ -1,5 +1,6 @@
 //database function/transporter for nodemailer
 //https://nodemailer.com/about/
+//https://github.com/danielforkner/nodemailer-microservice/blob/main/mailFunctions.js
 
 const nodemailer = require("nodemailer");
 
