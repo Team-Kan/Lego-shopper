@@ -187,7 +187,16 @@ const App = () => {
             />
           }
         />
-        <Route path="/collections/:id" element={<Collection />} />
+        <Route 
+          path="/collections/:id" 
+          element={
+            <Collection 
+              cart={cart}
+              retrieveCartAndProducts={retrieveCartAndProducts}
+              setIsLoading={setIsLoading}
+              />
+            } 
+          />
         <Route
           path="/cart"
           element={

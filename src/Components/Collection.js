@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchCollectionProducts } from "../api";
+import AddProductToCartForm from "./AddProductToCartForm";
 
-const Collection = () => {
+const Collection = (props) => {
+  const {cart, retrieveCartAndProducts, setIsLoading} = props;
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
   const id = Number(useParams().id);
@@ -37,6 +39,10 @@ const Collection = () => {
               imageUrl,
               quantity,
             } = product;
+            let cartProduct;
+            if(cart.products.length){
+              cartProduct = cart.products.filter(({id}) => id === product.id)
+           }  
             return (
               <Link to={`/product/${product.id}`} key={product.id}>
                 <div  className='single_product'>
@@ -45,6 +51,14 @@ const Collection = () => {
                 <li>Name:{name}</li>
                 <li>Price: {price}</li>
                 <li>Currently: {quantity ? `${quantity} In Stock`: "Out of Stock"}</li>
+                <AddProductToCartForm
+                product={product}
+                retrieveCartAndProducts={retrieveCartAndProducts}
+                disabled={cartProduct}
+                cartProduct={cartProduct ? cartProduct[0] : null}
+                cart={cart}
+                setIsLoading={setIsLoading}
+                />
                 </ul>
               </div>
               </Link>
