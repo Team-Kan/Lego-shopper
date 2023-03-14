@@ -270,7 +270,7 @@ li{
   position: absolute;
   object-fit: contain;
   animation-name: fade-out;
-  animation-duration: 20s;
+  animation-duration: 19s;
   animation-iteration-count: infinite;
   opacity: 0;
   transition: 7s;
@@ -302,7 +302,7 @@ li{
   }
   100%{
     opacity: 0;
-    transform:scale(95%);
+    transform:scale(97%);
   }
 }
 

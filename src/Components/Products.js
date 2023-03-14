@@ -16,8 +16,10 @@ const Products = (props) => {
               imageUrl,
               quantity,
             } = product;
-            const cartProduct = cart.products.filter(({id}) => id === product.id)
-            if(cartProduct)
+            let cartProduct;
+            if(cart.products.length){
+               cartProduct = cart.products.filter(({id}) => id === product.id)
+            }            
             return (
               <Link to={`/product/${product.id}`} key={product.id}>
                 <div  className='single_product'>
@@ -29,8 +31,8 @@ const Products = (props) => {
                 <AddProductToCartForm  
                   product={product} 
                   retrieveCartAndProducts={retrieveCartAndProducts}
-                  disabled={!!cartProduct.length}
-                  cartProduct={cartProduct.length ? cartProduct[0] : null}
+                  disabled={cartProduct}
+                  cartProduct={cartProduct ? cartProduct[0] : null}
                   cart={cart}
                   setIsLoading={setIsLoading}
                 />
