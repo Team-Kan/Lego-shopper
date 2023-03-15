@@ -89,28 +89,25 @@ const App = () => {
         );
         setItemCount(items);
 
-        const cost = (
-          Math.round(
-            100 *
+        const cost = (  
               cart.products.reduce(
                 (acc, curr) => acc + curr.price * curr.quantity,
                 0
               )
-          ) / 100
         ).toFixed(2);
         setTotal(cost);
 
-        const tax = Math.round((100 * (0.06 * cost)) / 100).toFixed(2);
+        const tax = (0.06 * cost).toFixed(2);
         setTax(tax);
 
         if (cost > 35) {
           setShipping("Free");
-          setFinalTotal(Math.round(100*(Number(tax) + Number(cost))/100).toFixed(2));
+          setFinalTotal((Number(tax) + Number(cost)).toFixed(2));
         } else if (cost < 35 && cost > 0) {
           setShipping("$9.95");
-          setFinalTotal(Math.round(100*(Number(tax) + Number(cost) + 9.95)/100).toFixed(2));
+          setFinalTotal((Number(tax) + Number(cost) + 9.95).toFixed(2));
         } else {
-          setFinalTotal(Math.round(100*(Number(tax) + Number(cost))/100).toFixed(2));
+          setFinalTotal((Number(tax) + Number(cost)).toFixed(2));
         }
       } else {
         setItemCount(0);
