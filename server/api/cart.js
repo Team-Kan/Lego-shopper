@@ -36,17 +36,20 @@ router.get("/inactive", tokenAuth, async (res, req, next) => {
 router.patch("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { products } = req.body;
+    const { products, name, email, total } = req.body;
+    let htmlStr = '';
     products.forEach(async(product) => {
-      await editProduct({id: product.id, quantity: product.quantity });
+      await editProduct({id: product.id, quantity: product.updatedStock });
+      htmlStr += product.html;
+      console.log(htmlStr);
     })
     if(id !== "guest"){
       const checkout = await checkoutCart(id);
       console.log(checkout);
-      sendMail('We did it!', { name: "name string", email: "actninswitch@gmail.com", products: "Hello"});
+      sendMail('We did it!', { name, email, htmlStr, total });
       res.send(checkout);
     } else {
-      sendMail('We did it!', { name: "name string", email: "actninswitch@gmail.com", products: "Hello"});
+      sendMail('We did it!', { name, email, htmlStr, total });
       res.send({id, isActive: false});
     }
   } catch (error) {

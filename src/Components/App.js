@@ -51,7 +51,7 @@ const App = () => {
       const localCart = await JSON.parse(window.localStorage.getItem("cart"))
       if(localCart){
         if(localCart.products.length){
-          const onlineCartProductIds = onlineCart.products.map(product => product.id);
+          const onlineCartProductIds = onlineCart.products.length ? onlineCart.products.map(product => product.id) : [];
           const newProducts = localCart.products.filter(({id}) => onlineCartProductIds.indexOf(id) === -1);
           if(newProducts.length){
             await Promise.all(newProducts.map(async (product) => {
@@ -105,12 +105,12 @@ const App = () => {
 
         if (cost > 35) {
           setShipping("Free");
-          setFinalTotal(Number(tax) + Number(cost));
+          setFinalTotal(Math.round(100*(Number(tax) + Number(cost))/100).toFixed(2));
         } else if (cost < 35 && cost > 0) {
           setShipping("$9.95");
-          setFinalTotal(Number(tax) + Number(cost) + 9.99);
+          setFinalTotal(Math.round(100*(Number(tax) + Number(cost) + 9.95)/100).toFixed(2));
         } else {
-          setFinalTotal(Number(tax) + Number(cost));
+          setFinalTotal(Math.round(100*(Number(tax) + Number(cost))/100).toFixed(2));
         }
       } else {
         setItemCount(0);

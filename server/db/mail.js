@@ -25,7 +25,7 @@ const sendMailHandler = async(client, content) => {
         const emailInfo = {
             from: process.env.EMAIL,
             to: `${content.email}`,
-            subject: `message from ${client}`, //"Order Confirmation from REKANSTRUCTED",
+            subject: "Order Confirmation from REKANSTRUCTED",
             html: getHTMLMessage(client, content),
         }
 
@@ -45,12 +45,13 @@ const sendMailHandler = async(client, content) => {
 
 const getHTMLMessage = (client, content) => {
     return `
-    <h1>Hi!</h1>
+    <h1>Hi, ${content.name}!</h1>
     <h1>Thank you for your order!</h1>
+    <img src="https://media.giphy.com/media/l4q7VhGsL6BnXJrc4/giphy.gif"/>
     <p>Order details: </p>
-    <p>Hello world</p>
+    <ul>${content.htmlStr}</ul>
+    <p>Order total: $${content.total}</p>
     `;
-    //${content.products}
 }
 
 module.exports = { sendMail };
