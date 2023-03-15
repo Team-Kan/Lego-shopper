@@ -18,7 +18,10 @@ const Products = (props) => {
             } = product;
             let cartProduct;
             if(cart.products.length){
-               cartProduct = cart.products.filter(({id}) => id === product.id)
+              cartProduct = cart.products.filter(({id}) => id === product.id)
+              if(!cartProduct.length){
+                cartProduct = null
+              } 
             }            
             return (
               <Link to={`/product/${product.id}`} key={product.id}>

@@ -11,15 +11,19 @@ const Cart = (props) => {
     if (quantity - 1 === 0) {
       return;
     } else {
+      if(token){
       quantity--;
       const response = await updateQuantityFetch(token, cart.id, productId, quantity);
       if (!response.error) {
-        await retrieveCartAndProducts();
+        return await retrieveCartAndProducts();
       } else {
-        console.log("error decreasing quantity");
+        return console.log("error decreasing quantity");
       }
+    } else {
+      
     }
   }
+}
 
   const increaseQuantity = async (productId, stock, quantity) => {
     if (quantity < stock) {
