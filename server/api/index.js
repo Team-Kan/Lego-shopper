@@ -11,4 +11,6 @@ router.use("/cart", require("./cart"));
 
 router.use("/cart-products", require("./cart_product"));
 
+router.use("/mail", require("./mail"));
+
 module.exports = router;
