@@ -206,6 +206,7 @@ const App = () => {
               total={total}
               retrieveCartAndProducts={retrieveCartAndProducts}
               setIsLoading={setIsLoading}
+              products={products}
             />
           }
         />
