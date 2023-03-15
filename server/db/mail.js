@@ -13,19 +13,19 @@ const sendMailHandler = async(client, content) => {
     return new Promise((resolve, reject) => {
     
         const transport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
+            host: 'smtp.gmail.com',
             port: 587,
             secure: false,
             auth: {
                 user: process.env.EMAIL,
-                pass: process.env.EMAIL_PASSWORD,
+                pass: process.env.EMAIL_PASSWORD
             }
         });
 
         const emailInfo = {
             from: process.env.EMAIL,
-            to: `${client.email}`,
-            subject: "Order Confirmation from REKANSTRUCTED",
+            to: `${content.email}`,
+            subject: `message from ${client}`, //"Order Confirmation from REKANSTRUCTED",
             html: getHTMLMessage(client, content),
         }
 
@@ -43,13 +43,14 @@ const sendMailHandler = async(client, content) => {
 }
 
 
-const getHTMLMessage = async (client, content) => {
+const getHTMLMessage = (client, content) => {
     return `
-    <h1>Hi, ${client.name}!</h1>
+    <h1>Hi!</h1>
     <h1>Thank you for your order!</h1>
     <p>Order details: </p>
-    <ul>${content.products}</ul>
+    <p>Hello world</p>
     `;
+    //${content.products}
 }
 
 module.exports = { sendMail };

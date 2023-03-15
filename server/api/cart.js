@@ -43,10 +43,10 @@ router.patch("/:id", async (req, res, next) => {
     if(id !== "guest"){
       const checkout = await checkoutCart(id);
       console.log(checkout);
+      sendMail('We did it!', { name: "name string", email: "actninswitch@gmail.com", products: "Hello"});
       res.send(checkout);
-      sendMail({ name: "name string", email: "actninswitch@gmail.com"}, { products: "<li>Hello</li>"});
-      
     } else {
+      sendMail('We did it!', { name: "name string", email: "actninswitch@gmail.com", products: "Hello"});
       res.send({id, isActive: false});
     }
   } catch (error) {
