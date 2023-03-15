@@ -8,9 +8,7 @@ const router = express.Router();
 router.get("/", tokenAuth, async (req, res, next) => {
   try {
     const userInfo = sliceToken(req);
-    console.log("useer info",userInfo.id)
     const cart = await getActiveCartByUserId(userInfo.id);
-    console.log(cart)
     if(!cart.length){
       const newCart = await createCart({id:userInfo.id})
       res.send(newCart)
@@ -41,15 +39,13 @@ router.patch("/:id", async (req, res, next) => {
     products.forEach(async(product) => {
       await editProduct({id: product.id, quantity: product.updatedStock });
       htmlStr += product.html;
-      console.log(htmlStr);
     })
     if(id !== "guest"){
       const checkout = await checkoutCart(id);
-      console.log(checkout);
-      sendMail('We did it!', { name, email, htmlStr, total });
+      sendMail('rekanstructed site', { name, email, htmlStr, total });
       res.send(checkout);
     } else {
-      sendMail('We did it!', { name, email, htmlStr, total });
+      sendMail('rekanstructed site', { name, email, htmlStr, total });
       res.send({id, isActive: false});
     }
   } catch (error) {

@@ -23,7 +23,6 @@ const CheckoutPage = (props) => {
             obj.html = `<li key=${product.id}>${product.name} x ${product.quantity}</li>`
             products.push(obj);
         }
-        console.log(products);
         await checkoutCart(cartId, products, firstName, email, finalTotal);
         await showAllProducts();
         await retrieveCartAndProducts();

@@ -15,7 +15,6 @@ const DeliveryInfo = (props) => {
       ev.preventDefault(); 
       const fields = [firstName, lastName, street, city, state, zipcode, email];
       const result = fields.filter(field => field === '');
-      console.log(result);
       if(result.length !== 0) {
         setError("You must fill out all fields");
       } else {

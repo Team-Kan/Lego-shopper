@@ -12,7 +12,6 @@ const PaymentInfo = (props) => {
     ev.preventDefault(); 
     const fields = [fullName, cardNum, zipcode, securityCode];
     const result = fields.filter(field => field === '');
-    console.log(result);
     if(result.length !== 0) {
       setError("You must fill out all fields");
     } else {
