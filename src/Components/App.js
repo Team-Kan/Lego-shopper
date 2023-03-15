@@ -51,7 +51,7 @@ const App = () => {
       const localCart = await JSON.parse(window.localStorage.getItem("cart"))
       if(localCart){
         if(localCart.products.length){
-          const onlineCartProductIds = onlineCart.products.map(product => product.id);
+          const onlineCartProductIds = onlineCart.products.length ? onlineCart.products.map(product => product.id) : [];
           const newProducts = localCart.products.filter(({id}) => onlineCartProductIds.indexOf(id) === -1);
           if(newProducts.length){
             await Promise.all(newProducts.map(async (product) => {
@@ -89,28 +89,25 @@ const App = () => {
         );
         setItemCount(items);
 
-        const cost = (
-          Math.round(
-            100 *
+        const cost = (  
               cart.products.reduce(
                 (acc, curr) => acc + curr.price * curr.quantity,
                 0
               )
-          ) / 100
         ).toFixed(2);
         setTotal(cost);
 
-        const tax = Math.round((100 * (0.06 * cost)) / 100).toFixed(2);
+        const tax = (0.06 * cost).toFixed(2);
         setTax(tax);
 
         if (cost > 35) {
           setShipping("Free");
-          setFinalTotal(Number(tax) + Number(cost));
+          setFinalTotal((Number(tax) + Number(cost)).toFixed(2));
         } else if (cost < 35 && cost > 0) {
           setShipping("$9.95");
-          setFinalTotal(Number(tax) + Number(cost) + 9.99);
+          setFinalTotal((Number(tax) + Number(cost) + 9.95).toFixed(2));
         } else {
-          setFinalTotal(Number(tax) + Number(cost));
+          setFinalTotal((Number(tax) + Number(cost)).toFixed(2));
         }
       } else {
         setItemCount(0);

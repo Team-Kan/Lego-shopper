@@ -9,6 +9,8 @@ const CheckoutPage = (props) => {
     const [showDeliveryForm, setDeliveryForm] = useState(true);
     const [showPaymentForm, setPaymentForm] = useState(false);
     const [showReviewOrder, setReviewOrder] = useState(false);
+    const [firstName, setFirstName] = useState('');
+    const [email, setEmail] = useState('');
     const token = window.localStorage.getItem('token');
 
     const processCheckout = async (cartId) => {
@@ -17,11 +19,11 @@ const CheckoutPage = (props) => {
             const obj = {};
             const product = cart.products[i];
             obj.id = product.id;
-            obj.quantity = product.stock - product.quantity;
+            obj.updatedStock = product.stock - product.quantity;
+            obj.html = `<li key=${product.id}>${product.name} x ${product.quantity}</li>`
             products.push(obj);
         }
-        console.log(products);
-        await checkoutCart(cartId, products);
+        await checkoutCart(cartId, products, firstName, email, finalTotal);
         await showAllProducts();
         await retrieveCartAndProducts();
         console.log('checkout complete');
@@ -35,8 +37,14 @@ const CheckoutPage = (props) => {
             <Link to="/cart" className="cart-links">Back to Cart</Link>
                 <div className='cart-product-container'>
                     { showDeliveryForm ? (
-                      <DeliveryInfo  setDeliveryForm={setDeliveryForm} setPaymentForm={setPaymentForm}/>
-                    )
+                      <DeliveryInfo  
+                        firstName={firstName} 
+                        setFirstName={setFirstName} 
+                        email={email} 
+                        setEmail={setEmail} 
+                        setDeliveryForm={setDeliveryForm} 
+                        setPaymentForm={setPaymentForm}
+                        />)
                     : null }
                     { showPaymentForm ? (
                       <PaymentInfo setPaymentForm={setPaymentForm} setReviewOrder={setReviewOrder}/>
