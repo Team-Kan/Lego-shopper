@@ -8,7 +8,6 @@ const SingleProduct = (props) => {
   const [disabled, setDisabled] = useState(false)
   const [cartProduct, setCartProduct] = useState({})
   const id = useParams().id;
-console.log(product)
   const getProduct = async () => {
     setIsLoading(true)
     const singleProduct = products.find(product => product.id === +id);

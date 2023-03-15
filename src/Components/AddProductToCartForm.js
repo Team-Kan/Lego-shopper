@@ -27,6 +27,7 @@ const AddProductToCartForm = (props) => {
       imageUrl: product.imageUrl,
       pieceCount: product.pieceCount,
       price: product.price,
+      stock: product.quantity,
       quantity: quantity,
     };
     if (disabled) {
@@ -43,7 +44,6 @@ const AddProductToCartForm = (props) => {
       }
     } else {
       cart.products.push(newProduct);
-      console.log(cart);
       window.localStorage.setItem("cart", JSON.stringify(cart));
       return retrieveCartAndProducts();
     }

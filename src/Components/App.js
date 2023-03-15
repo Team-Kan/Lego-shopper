@@ -46,7 +46,6 @@ const App = () => {
     const token = window.localStorage.getItem("token");
     let cart;
     if (token) {
-      
       const onlineCart = await fetchCart(token);
       const localCart = await JSON.parse(window.localStorage.getItem("cart"))
       if(localCart){
@@ -65,6 +64,7 @@ const App = () => {
             }))
           }
         }
+        window.localStorage.removeItem("cart")
       }
       cart = await fetchCart(token);
     } else {
@@ -133,7 +133,6 @@ const App = () => {
     attemptLogin();
     showAllProducts();
     showAllCollections();
-    // retrieveCartAndProducts();
   }, []);
 
   useEffect(() => {

@@ -45,7 +45,6 @@ const Collection = (props) => {
               if(!cartProduct.length){
                 cartProduct = null
               }
-              console.log(cartProduct)
            }  
             return (
               <Link to={`/product/${product.id}`} key={product.id}>

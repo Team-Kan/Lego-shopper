@@ -26,7 +26,6 @@ const Login = ({ attemptLogin })=> {
         navigate('/');
       }
       else {
-        console.log(data);
         setError(data.error)
       }
     });
