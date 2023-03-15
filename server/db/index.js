@@ -386,6 +386,50 @@ const createInitialProducts = async () => {
         quantity: 17,
       }),
       createProduct({
+        name: "LEGO Harry Potter Gryffindor House Banner ",
+        description: 
+          "Gryffindor fans can display their love for the Hogwarts house with this LEGO® Harry Potter™ toy, featuring a Hogwarts crest that opens for play",
+        collectionId: 5,
+        price: 34.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81BEq5ZYlWL._AC_SL1500_.jpg",
+        pieceCount: 285,
+        quantity: 17,
+      }),
+      createProduct({
+        name: "LEGO Harry Potter Slytherin House Banner ",
+        description: 
+          "Slytherin fans can display their love for the Hogwarts house with this LEGO® Harry Potter™ toy, featuring a Hogwarts crest that opens for play",
+        collectionId: 5,
+        price: 34.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81r-V49FZPL._AC_SL1500_.jpg",
+        pieceCount: 349,
+        quantity: 17,
+      }),
+      createProduct({
+        name: "LEGO Harry Potter and The Goblet of Fire Hungarian Horntail Triwizard Challenge",
+        description: 
+          "This Hungarian Horntail Triwizard Challenge playset includes 4 minifigures, all with wands: Harry Potter, Fleur Delacour, Cedric Diggory and Viktor Krum—and inside the buildable champions tent is a bed, 2 cups, small shelf and a magic potion bottle",
+        collectionId: 5,
+        price: 63.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/91XZwxiQCCL._AC_SL1500_.jpg",
+        pieceCount: 265,
+        quantity: 17,
+      }),
+      createProduct({
+        name: "LEGO Harry Potter Hogwarts Castle",
+        description: 
+          "Hogwarts Castle features the Great Hall with buildable ‘stained glass windows', house banners, benches, tables, flaming torches and moving staircases",
+        collectionId: 5,
+        price: 469.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/915Vf8UDU3L._AC_SL1500_.jpg",
+        pieceCount: 6020,
+        quantity: 3,
+      }),
+      createProduct({
         name: "LEGO® Marvel™ Super Heroes The Guardians' Ship",
         description: 
           "Indulge a kid's passion for the Guardians of the Galaxy™ and the Marvel Avengers™ movies with the stunning LEGO® Marvel The Guardians' Ship",
