@@ -20,9 +20,6 @@ const Register = ({ attemptLogin }) => {
       attemptLogin();
       navigate('/');
     }
-    else {
-      console.log(user);
-    }
   };
 
   const _register = (ev)=> {

@@ -7,45 +7,69 @@ const Cart = (props) => {
   const token = window.localStorage.getItem('token');
   const navigate = useNavigate();
 
-  const decreaseQuantity = async (productId, quantity) => {
-    if (quantity - 1 === 0) {
+  const localCartChangeValue = (product, value) => {
+    console.log(product);
+    const productId = cart.products.indexOf(product);
+    cart.products[productId].quantity += value;
+    window.localStorage.setItem("cart", JSON.stringify(cart));
+    retrieveCartAndProducts();
+  }
+
+  const localCartRemoval = (product) => {
+    const productId = cart.products.indexOf(product);
+    cart.products.splice(productId, 1);
+    window.localStorage.setItem("cart", JSON.stringify(cart));
+    retrieveCartAndProducts();
+  }
+
+  const decreaseQuantity = async (product) => {
+    if (product.quantity - 1 === 0) {
       return;
     } else {
       if(token){
-      quantity--;
-      const response = await updateQuantityFetch(token, cart.id, productId, quantity);
+      product.quantity--;
+      const response = await updateQuantityFetch(token, cart.id, product.id, product.quantity);
       if (!response.error) {
         return await retrieveCartAndProducts();
       } else {
         return console.log("error decreasing quantity");
       }
     } else {
-      
+      localCartChangeValue(product, -1)
     }
   }
 }
 
-  const increaseQuantity = async (productId, stock, quantity) => {
+  const increaseQuantity = async (productId, stock, quantity, product) => {
     if (quantity < stock) {
-      quantity++;
-      const response = await updateQuantityFetch(token, cart.id, productId, quantity);
-      if (!response.error) {
-        await retrieveCartAndProducts();
+      if(token){
+        quantity++;
+        const response = await updateQuantityFetch(token, cart.id, productId, quantity);
+        if (!response.error) {
+          await retrieveCartAndProducts();
+        } else {
+          console.log("error increasing quantity");
+        }
       } else {
-        console.log("error increasing quantity");
+        localCartChangeValue(product, 1)
       }
     } else {
+      console.log("here");
       return;
     }
   }
 
-  const removeItem = async(productId) => {
-    const response = await deleteCartProduct(token, cart.id, productId);
-    console.log(response);
-    if (!response.error) {
-      await retrieveCartAndProducts();
+  const removeItem = async(product) => {
+    if(token){
+      const response = await deleteCartProduct(token, cart.id, product.id);
+      console.log(response);
+      if (!response.error) {
+        await retrieveCartAndProducts();
+      } else {
+        console.log("issue");
+      }
     } else {
-      console.log("issue");
+      localCartRemoval(product)
     }
   }
 
@@ -68,12 +92,12 @@ const Cart = (props) => {
                         <p>{product.stock} IN STOCK</p>
                       </li>
                       <button className = 'quantity-button' 
-                      onClick={() => { decreaseQuantity(product.id, product.quantity) }}>-</button>
+                      onClick={() => { decreaseQuantity(product) }}>-</button>
                       <p>{product.quantity}</p>
                       <button className = 'quantity-button'
-                      onClick={() => { increaseQuantity(product.id, product.stock, product.quantity) }}>+</button>
+                      onClick={() => { increaseQuantity(product.id, product.stock, product.quantity, product) }}>+</button>
                       <p></p>
-                      <button onClick={() => { removeItem(product.id)}}>Remove</button>
+                      <button onClick={() => { removeItem(product)}}>Remove</button>
                     </div>
                   )
                 })

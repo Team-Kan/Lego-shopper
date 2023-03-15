@@ -46,12 +46,11 @@ const App = () => {
     const token = window.localStorage.getItem("token");
     let cart;
     if (token) {
-      
       const onlineCart = await fetchCart(token);
       const localCart = await JSON.parse(window.localStorage.getItem("cart"))
       if(localCart){
         if(localCart.products.length){
-          const onlineCartProductIds = onlineCart.products.map(product => product.id);
+          const onlineCartProductIds = onlineCart.products.length ? onlineCart.products.map(product => product.id) : [];
           const newProducts = localCart.products.filter(({id}) => onlineCartProductIds.indexOf(id) === -1);
           if(newProducts.length){
             await Promise.all(newProducts.map(async (product) => {
@@ -65,6 +64,7 @@ const App = () => {
             }))
           }
         }
+        window.localStorage.removeItem("cart")
       }
       cart = await fetchCart(token);
     } else {
@@ -136,7 +136,6 @@ const App = () => {
     attemptLogin();
     showAllProducts();
     showAllCollections();
-    // retrieveCartAndProducts();
   }, []);
 
   useEffect(() => {
