@@ -2,6 +2,7 @@ const express = require("express");
 const { checkoutCart, getActiveCartByUserId, getInactiveCartsByUserId, createCart } = require("../db/cart");
 const { editProduct } = require("../db/product");
 const { tokenAuth, sliceToken } = require("./utils");
+const { sendMail } = require("../db/mail");
 const router = express.Router();
 
 router.get("/", tokenAuth, async (req, res, next) => {
@@ -43,6 +44,8 @@ router.patch("/:id", async (req, res, next) => {
       const checkout = await checkoutCart(id);
       console.log(checkout);
       res.send(checkout);
+      const response = await sendMail({ name: "name string", email: "actninswitch@gmail.com"}, { products: "<li>Hello</li>"});
+      console.log(response);
     } else {
       res.send({id, isActive: false});
     }

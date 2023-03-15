@@ -2,7 +2,6 @@ const setup = require("../setup");
 const tearDown = require("../tearDown");
 const request = require("supertest");
 const app = require("../../server/app");
-const { exportAllDeclaration } = require("@babel/types");
 
 beforeAll(async () => {
     await setup();
