@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { checkoutCart } from '../api/cartFetchCalls';
 import {PaymentInfo, DeliveryInfo} from '.';
 
@@ -11,6 +12,7 @@ const CheckoutPage = (props) => {
     const [showReviewOrder, setReviewOrder] = useState(false);
     const [firstName, setFirstName] = useState('');
     const [email, setEmail] = useState('');
+    const navigate = useNavigate()
     const token = window.localStorage.getItem('token');
 
     const processCheckout = async (cartId) => {
@@ -24,11 +26,21 @@ const CheckoutPage = (props) => {
             products.push(obj);
         }
         await checkoutCart(cartId, products, firstName, email, finalTotal);
+        if(cartId === "guest"){
+          window.localStorage.removeItem("cart")
+        }
         await showAllProducts();
         await retrieveCartAndProducts();
         console.log('checkout complete');
     }
 
+  useEffect(() => {
+  if(!itemCount) {
+    navigate('/cart'); 
+  } else {
+    return
+  }
+  }, [])
 
     return (
         <div>
