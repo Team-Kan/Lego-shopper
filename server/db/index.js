@@ -194,6 +194,50 @@ const createInitialProducts = async () => {
         quantity: 2,
       }),
       createProduct({
+        name: "LEGO NINJAGO Legacy Fire Dragon Attack",
+        description:
+          "Includes a golden Nya Legacy collectible minifigure with a small stand to celebrate the 10th anniversary of NINJAGO toys.",
+        collectionId: 2,
+        price: 64.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81qGWVlPu6L._AC_SL1500_.jpg",
+        pieceCount: 563,
+        quantity: 4,
+      }),
+      createProduct({
+        name: "LEGO NINJAGO Jay’s Titan Mech",
+        description:
+          "This giant LEGO NINJAGO mech character with a cockpit for Jay has a large dragon blade, 2 katana swords and 2 shooters mounted on its shoulders",
+        collectionId: 2,
+        price: 79.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/8176ul2XGfL._AC_SL1500_.jpg",
+        pieceCount: 794,
+        quantity: 10,
+      }),
+      createProduct({
+        name: "LEGO NINJAGO Hydro Bounty Building Set",
+        description:
+          "Includes 10 minifigures from the NINJAGO: Seabound TV series: Scuba Kai, Scuba Cole, Scuba Jay, Scuba Lloyd, Scuba Zane and Scuba Nya",
+        collectionId: 2,
+        price: 139.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/91khJHkZI8L._AC_SL1500_.jpg",
+        pieceCount: 1159,
+        quantity: 8,
+      }),
+      createProduct({
+        name: "LEGO NINJAGO Lloyd’s Golden Ultra Dragon",
+        description:
+          "Features 9 NINJAGO minifigures, including an exclusive Golden Oni Lloyd and all Golden Kai, Jay, Cole and Zane, all with golden swords",
+        collectionId: 2,
+        price: 149.99,
+        imageUrl:
+          "https://m.media-amazon.com/images/I/81XHXul489L._AC_SL1500_.jpg",
+        pieceCount: 989,
+        quantity: 8,
+      }),
+      createProduct({
         name: "LEGO® Architecture Great Pyramid of Giza Set",
         description:
           "Travel back in time to the 26th century BC. and discover the Great Pyramid of Giza and its surroundings with this LEGO set for adults",
