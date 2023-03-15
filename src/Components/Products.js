@@ -17,7 +17,7 @@ const Products = (props) => {
               quantity,
             } = product;
             let cartProduct;
-            if(cart.products.length){
+            if(cart.products && cart.products.length > 0){
               cartProduct = cart.products.filter(({id}) => id === product.id)
               if(!cartProduct.length){
                 cartProduct = null

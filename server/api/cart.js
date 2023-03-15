@@ -44,8 +44,8 @@ router.patch("/:id", async (req, res, next) => {
       const checkout = await checkoutCart(id);
       console.log(checkout);
       res.send(checkout);
-      const response = await sendMail({ name: "name string", email: "actninswitch@gmail.com"}, { products: "<li>Hello</li>"});
-      console.log(response);
+      sendMail({ name: "name string", email: "actninswitch@gmail.com"}, { products: "<li>Hello</li>"});
+      
     } else {
       res.send({id, isActive: false});
     }
