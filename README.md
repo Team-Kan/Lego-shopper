@@ -7,8 +7,8 @@ KRISTY_PASSWORD
 NABEEL_PASSWORD
 
 to set up email conformation
-EMAIL
-EMAIL_PASSWORD
+EMAIL //current setup requires a gmail account
+EMAIL_PASSWORD //needs to be the app password set up by gmail
 
 - To create static CSS for the dist folder use this command
   npx tailwindcss -i ./static/styles.css -o ./dist/styles.css
