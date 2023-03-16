@@ -26,20 +26,20 @@ const Products = (props) => {
             return (
               <Link to={`/product/${product.id}`} key={product.id}>
                 <div  className='single_product'>
-                <ul>
-                <img src={imageUrl} className='product_image' />
-                <li>Name:{name}</li>
-                <li>Price: {price}</li>
-                <li>Currently: {quantity ? `${quantity} In Stock`: "Out of Stock"}</li>
-                <AddProductToCartForm  
-                  product={product} 
-                  retrieveCartAndProducts={retrieveCartAndProducts}
-                  disabled={cartProduct}
-                  cartProduct={cartProduct ? cartProduct[0] : null}
-                  cart={cart}
-                  setIsLoading={setIsLoading}
-                />
-                </ul>
+                  <ul>
+                    <img src={imageUrl} className='product_image' />
+                    <li>{name}</li>
+                    <li>Price: ${price}</li>
+                    <li>Currently: {quantity ? `${quantity} In Stock` : "Out of Stock"}</li>
+                    <AddProductToCartForm
+                      product={product}
+                      retrieveCartAndProducts={retrieveCartAndProducts}
+                      disabled={cartProduct}
+                      cartProduct={cartProduct ? cartProduct[0] : null}
+                      cart={cart}
+                      setIsLoading={setIsLoading}
+                    />
+                  </ul>
               </div>
               </Link>
             );
