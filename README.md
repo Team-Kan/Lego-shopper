@@ -6,6 +6,10 @@ ANTHONY_PASSWORD
 KRISTY_PASSWORD
 NABEEL_PASSWORD
 
+to set up email conformation
+EMAIL
+EMAIL_PASSWORD
+
 - To create static CSS for the dist folder use this command
   npx tailwindcss -i ./static/styles.css -o ./dist/styles.css
 - npm run start:dev
