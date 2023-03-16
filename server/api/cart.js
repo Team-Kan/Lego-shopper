@@ -37,9 +37,10 @@ router.patch("/:id", async (req, res, next) => {
     const { products, name, email, total } = req.body;
     let htmlStr = '';
     products.forEach(async(product) => {
-      await editProduct({id: product.id, quantity: product.updatedStock });
       htmlStr += product.html;
+      await editProduct({id: product.id, quantity: product.updatedStock }); 
     })
+    
     if(id !== "guest"){
       const checkout = await checkoutCart(id);
       sendMail('rekanstructed site', { name, email, htmlStr, total });

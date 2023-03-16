@@ -25,8 +25,8 @@ const CheckoutPage = (props) => {
             obj.html = `<li key=${product.id}>${product.name} x ${product.quantity}</li>`
             products.push(obj);
         }
-        await checkoutCart(cartId, products, firstName, email, finalTotal);
-        if(cartId === "guest"){
+        const response = await checkoutCart(cartId, products, firstName, email, finalTotal);
+        if(cartId === "guest" && response.isActive === false){
           window.localStorage.removeItem("cart")
         }
         await showAllProducts();
