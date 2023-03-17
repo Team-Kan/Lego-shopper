@@ -81,7 +81,7 @@ const App = () => {
       }
 
     }
-      if (cart.products.length) {
+      if (cart.products && cart.products.length) {
         cart.products.sort((a, b) => a.cartProductId - b.cartProductId);
         const items = cart.products.reduce(
           (acc, curr) => acc + curr.quantity,
@@ -166,10 +166,10 @@ const App = () => {
             />
           }
         />
-        <Route path="/login" element={<Login attemptLogin={attemptLogin} />} />
+        <Route path="/login" element={<Login attemptLogin={attemptLogin} setIsLoading={setIsLoading}/>} />
         <Route
           path="/register"
-          element={<Register attemptLogin={attemptLogin} />}
+          element={<Register attemptLogin={attemptLogin} setIsLoading={setIsLoading}/>}
         />
         <Route
           path="/admin"

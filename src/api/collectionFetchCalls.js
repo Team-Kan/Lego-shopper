@@ -1,8 +1,5 @@
-// const MAIN_URL = "http://localhost:3000/"
-const MAIN_URL = "https://brick-db.onrender.com/"
-
 const fetchAllCollections = async () => {
-    const response = await fetch(`${MAIN_URL}api/collections`, {
+    const response = await fetch(`/api/collections`, {
         headers: {
             "Content-Type": "application/json",
         },
@@ -12,7 +9,7 @@ const fetchAllCollections = async () => {
 };
 
 const fetchCollectionProducts = async(id) => {
-    const response = await fetch(`${MAIN_URL}api/products/collection/${id}`, {
+    const response = await fetch(`/api/products/collection/${id}`, {
         headers: {
             "Content-Type": "application/json",
         },

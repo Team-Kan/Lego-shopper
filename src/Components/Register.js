@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 import { createUser } from '../api';
 
-const Register = ({ attemptLogin }) => {
+const Register = ({ attemptLogin, setIsLoading}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState("")
   const navigate = useNavigate();
 
   const register = async({ username, password})=> {
+    setIsLoading(true)
     const user = await createUser({username, password});
 
     if(user.error){
@@ -25,6 +26,9 @@ const Register = ({ attemptLogin }) => {
   const _register = (ev)=> {
     ev.preventDefault();
     register({ username, password });
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
   };
 
   return (

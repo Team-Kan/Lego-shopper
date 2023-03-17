@@ -1,8 +1,7 @@
 // const MAIN_URL = "http://localhost:3000/api/products"
-const MAIN_URL = "https://brick-db.onrender.com/api/products";
 
 const fetchAllProducts = async () => {
-    const response = await fetch(`${MAIN_URL}`, {
+    const response = await fetch(`/api/products`, {
         headers: {
             "Content-Type": "application/json",
         },
@@ -12,7 +11,7 @@ const fetchAllProducts = async () => {
 };
 
 const fetchProductById = async (id) => {
- const response = await fetch(`${MAIN_URL}/${id}`,{
+ const response = await fetch(`/api/products/${id}`,{
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -33,7 +32,7 @@ const editProductFetch = async ({
     imageUrl,
     pieceCount,
     quantity,}) => {
-  const response = await fetch(`${MAIN_URL}/${id}`, {
+  const response = await fetch(`/api/products/${id}`, {
     method: "PATCH",
     headers: {
         "Content-Type": "application/json",
@@ -54,7 +53,7 @@ const editProductFetch = async ({
 }
 
 const deleteProductFetch = async (id, token) => {
-  const response = await fetch(`${MAIN_URL}/${id}`, {
+  const response = await fetch(`/api/products/${id}`, {
     method: "DELETE",
     headers: {
         "Content-Type": "application/json",
