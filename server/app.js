@@ -9,9 +9,6 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
 
-app.use('/dist', express.static(path.join(__dirname, '../dist')));
-app.use('/static', express.static(path.join(__dirname, '../static')));
-
 
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '../static/index.html')));
 
@@ -30,6 +27,9 @@ app.use((err, req, res, next)=> {
   res.status(err.status || 500).send({ error: err.message });
 });
 
+app.use('/dist', express.static(path.join(__dirname, '../dist')));
+app.use('/static', express.static(path.join(__dirname, '../static')));
+
 app.use((req, res) => {
   res.status(404).send(
     {success: false , message: "Request failed with status 404"} 
@@ -43,5 +43,8 @@ app.use((req, res) => {
       {success: false, message: "Request failed with status 500" }
     );
 });
+
+
+
 
 module.exports = app;
