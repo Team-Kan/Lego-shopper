@@ -1,25 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { loginUser } from '../api';
 
-const Login = ({ attemptLogin })=> {
+const Login = ({ attemptLogin, setIsLoading })=> {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState("")
   const navigate = useNavigate();
 
   const login = async({ username, password})=> {
-    fetch(
-      '/api/auth/',
-      {
-        method: 'POST',
-        body: JSON.stringify({ username, password}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-    .then( response => response.json())
-    .then( (data) => {
+    setIsLoading(true)
+    const data = await loginUser({username, password})
+
       if(data.token){
         window.localStorage.setItem('token', data.token);
         attemptLogin();
@@ -27,8 +19,10 @@ const Login = ({ attemptLogin })=> {
       }
       else {
         setError(data.error)
-      }
-    });
+      };
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 300);
   };
 
   const _login = (ev)=> {

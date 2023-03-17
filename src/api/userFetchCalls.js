@@ -17,6 +17,22 @@ const createUser = async ({username, password}) => {
       return results;
 }
 
+const loginUser = async ({username, password}) => {
+  const response = await fetch(
+    '/api/auth/',
+    {
+      method: 'POST',
+      body: JSON.stringify({ username, password}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    )
+  const results = await response.json();
+  
+  return results;
+}
+
 const getUser = async (token) => {
     const response = await fetch(
         `${MAIN_URL}api/auth/`,
@@ -50,6 +66,7 @@ const editUsersAdminPriv = async ({id, isAdmin, token}) => {
 
 module.exports={
     createUser,
+    loginUser,
     getUser,
     editUsersAdminPriv,
 }

@@ -4,7 +4,7 @@ const { syncAndSeed, client } = require('./db');
 const init = async()=> {
   try {
     await client.connect();
-    if(process.env.MODE === "initalSeed"){
+    if(process.env.MODE === "initialSeed"){
       await syncAndSeed();
     }
     const port = process.env.PORT || 3000;

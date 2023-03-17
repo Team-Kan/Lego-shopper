@@ -166,10 +166,10 @@ const App = () => {
             />
           }
         />
-        <Route path="/login" element={<Login attemptLogin={attemptLogin} />} />
+        <Route path="/login" element={<Login attemptLogin={attemptLogin} setIsLoading={setIsLoading} />} />
         <Route
           path="/register"
-          element={<Register attemptLogin={attemptLogin} />}
+          element={<Register attemptLogin={attemptLogin} setIsLoading={setIsLoading} />}
         />
         <Route
           path="/admin"
