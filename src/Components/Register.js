@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 import { createUser } from '../api';
 
-const Register = ({ attemptLogin }) => {
+const Register = ({ attemptLogin, setIsLoading }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState("")
   const navigate = useNavigate();
 
   const register = async({ username, password})=> {
+    setIsLoading(true);
     const user = await createUser({username, password});
 
     if(user.error){
+      setIsLoading(false)
       return setError(user.error);
     }
     
@@ -20,6 +22,9 @@ const Register = ({ attemptLogin }) => {
       attemptLogin();
       navigate('/');
     }
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 300);
   };
 
   const _register = (ev)=> {
