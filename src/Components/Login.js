@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-const Login = ({ attemptLogin })=> {
+const Login = ({ attemptLogin, setIsLoading })=> {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState("")
   const navigate = useNavigate();
 
   const login = async({ username, password})=> {
+    setIsLoading(true)
     fetch(
       '/api/auth/',
       {
@@ -29,11 +30,15 @@ const Login = ({ attemptLogin })=> {
         setError(data.error)
       }
     });
+
   };
 
   const _login = (ev)=> {
     ev.preventDefault();
     login({ username, password });
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 300);
   };
 
   return (

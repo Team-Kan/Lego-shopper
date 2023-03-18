@@ -9,7 +9,6 @@ const { createCollection } = require("../../server/db/collection");
 
 beforeAll(async () => {
   await setup();
-  let cart = {};
 });
 
 afterAll(async () => {
@@ -28,7 +27,7 @@ describe("CreateCart(userId)", () => {
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.body).toEqual(
-      expect.objectContaining({ id: 1, userId: 1 })
+      expect.objectContaining({ id, userId: 1 })
     );
   });
 
@@ -62,13 +61,15 @@ describe('testing checkout', () => {
       price: 19.99,
       imageUrl: "gg",
       pieceCount: 101,
-      quantity: 3,
+      quantity: 15,
     });
+    console.log(product)
+    // products, name, email, total
     const response = await request(app)
       .patch(`/api/cart/${cart.id}`)
       .set("Authorization", `Bearer ${token}`)
-      .send({ products: [{id: product.id, quantity: 1}]});
-    console.log(response.body);
+      .send({ products: [{id: product.id, quantity: 1, updatedStock: product.quantity - 1, html:"<li>Mini-figurine</>"}], name: "Doe", email: process.env.EMAIL, total: "1.00"});
+    console.log(response.body)
     expect(response.body.isActive).toBe(false);
   })
 });

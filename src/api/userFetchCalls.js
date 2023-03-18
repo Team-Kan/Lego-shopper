@@ -1,9 +1,6 @@
-// const MAIN_URL = "http://localhost:3000"
-const MAIN_URL = "https://brick-db.onrender.com/"
-
 const createUser = async ({username, password}) => {
     const response = await fetch(
-        `${MAIN_URL}api/auth/register`,
+        `/api/auth/register`,
         {
           method: 'POST',
           body: JSON.stringify({ username, password}),
@@ -19,7 +16,7 @@ const createUser = async ({username, password}) => {
 
 const getUser = async (token) => {
     const response = await fetch(
-        `${MAIN_URL}api/auth/`,
+        `/api/auth/`,
         {
           method: 'GET',
           headers: {
@@ -34,7 +31,7 @@ const getUser = async (token) => {
 
 const editUsersAdminPriv = async ({id, isAdmin, token}) => {
   const response = await fetch(
-    `${MAIN_URL}api/auth/${id}`, {
+    `/api/auth/${id}`, {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json',

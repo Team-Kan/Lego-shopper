@@ -1,8 +1,5 @@
-// const MAIN_URL = "http://localhost:3000/"
-const MAIN_URL = "https://brick-db.onrender.com/"
-
 const fetchCart = async (token) => {
-  const response = await fetch(`${MAIN_URL}api/cart`, {
+  const response = await fetch(`/api/cart`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -14,7 +11,7 @@ const fetchCart = async (token) => {
 }
 
 const fetchCartProducts = async(token, cartId) => {
-  const response = await fetch(`${MAIN_URL}api/cart-products`, {
+  const response = await fetch(`/api/cart-products`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -29,8 +26,8 @@ const fetchCartProducts = async(token, cartId) => {
 }
 
 const updateQuantityFetch = async (token, cartId, productId, quantity) => {
-  console.log(quantity);
-  const response = await fetch(`${MAIN_URL}api/cart-products`, {
+
+  const response = await fetch(`/api/cart-products`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +44,7 @@ const updateQuantityFetch = async (token, cartId, productId, quantity) => {
 }
 
 const deleteCartProduct = async(token, cartId, productId) => {
-  const response = await fetch(`${MAIN_URL}api/cart-products`, {
+  const response = await fetch(`/api/cart-products`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -63,7 +60,7 @@ const deleteCartProduct = async(token, cartId, productId) => {
 }
 
 const checkoutCart = async(cartId, products, name, email, total) => {  
-  const response = await fetch(`${MAIN_URL}api/cart/${cartId}`, {
+  const response = await fetch(`/api/cart/${cartId}`, {
     method: "PATCH", 
     headers: {
       "Content-Type": "application/json",
@@ -87,7 +84,7 @@ const addProductToCartFetch = async ({
   quantity,
   token,
 }) => {
-  const response = await fetch(`http://localhost:3000/api/cart-products`, {
+  const response = await fetch(`/api/cart-products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

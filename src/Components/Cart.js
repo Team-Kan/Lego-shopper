@@ -8,7 +8,6 @@ const Cart = (props) => {
   const navigate = useNavigate();
 
   const localCartChangeValue = (product, value) => {
-    console.log(product);
     const productId = cart.products.indexOf(product);
     cart.products[productId].quantity += value;
     window.localStorage.setItem("cart", JSON.stringify(cart));
@@ -54,7 +53,6 @@ const Cart = (props) => {
         localCartChangeValue(product, 1)
       }
     } else {
-      console.log("here");
       return;
     }
   }
@@ -62,7 +60,7 @@ const Cart = (props) => {
   const removeItem = async(product) => {
     if(token){
       const response = await deleteCartProduct(token, cart.id, product.id);
-      console.log(response);
+
       if (!response.error) {
         await retrieveCartAndProducts();
       } else {

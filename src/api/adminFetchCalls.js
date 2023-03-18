@@ -1,8 +1,7 @@
-// const MAIN_URL = "http://localhost:3000/"
-const MAIN_URL = "https://brick-db.onrender.com/"
+
 
 const fetchAllUsers = async (token) => {
-    const response = await fetch(`${MAIN_URL}api/auth/admin`, {
+    const response = await fetch(`/api/auth/admin`, {
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
@@ -13,7 +12,7 @@ const fetchAllUsers = async (token) => {
 };
 
 const createProductFetch = async (token, newProduct) => {
-  const response = await fetch(`${MAIN_URL}api/products/create`, {
+  const response = await fetch(`/api/products/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +26,7 @@ const createProductFetch = async (token, newProduct) => {
 }
 
 const createCollectionFetch = async (token, name) => {
-  const response = await fetch(`${MAIN_URL}api/collections`, {
+  const response = await fetch(`/api/collections`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

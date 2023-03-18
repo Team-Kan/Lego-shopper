@@ -17,11 +17,6 @@ const createProduct = async ({
   quantity,
 }) => {
   try {
-    if(!name, !description || !collectionId || !price || !imageUrl || !pieceCount || !quantity){
-      const error = new Error("Make sure to add everything before creating a product")
-      error.status = 401;
-      throw error;
-    }
     const {
       rows: [product],
     } = await client.query(
