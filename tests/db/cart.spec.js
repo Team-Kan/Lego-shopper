@@ -27,8 +27,8 @@ let laurenProduct2 = {
   pieceCount: 10000,
   quantity: 1,
 };
-let productId1 = 0;
-let productId2 = 1;
+let productId1 = 1;
+let productId2 = 2;
 let quantity1 = 1;
 let quantity2 = 1;
 
