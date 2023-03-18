@@ -91,7 +91,7 @@ const AddProductToCartForm = (props) => {
 
   return (
     <form className={pathname === "/" || pathname.startsWith("/collections/") ? "single_product" : "flex bg-[#3E363F] rounded-r-md h-full text-green-200"}>
-      {pathname === "/" ? null : <label className="mt-0">Current Stock: {product.quantity}</label>}
+      {pathname.startsWith("/product/") ?  <label className="mt-0">Current Stock: {product.quantity}</label> : null}
       <div className={pathname === "/" || pathname.startsWith("/collections/")  ? "" : "w-40 flex justify-center"}>
         <button
           className={`pl-3 pr-3 bg-red-400 text-red-200 rounded-md  ${
