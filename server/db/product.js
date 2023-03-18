@@ -32,7 +32,6 @@ const createProduct = async ({
       error.status = 400
       throw error
     }
-    console.log(product);
   
     return product;
   } catch (error) {

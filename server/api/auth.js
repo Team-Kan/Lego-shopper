@@ -42,11 +42,10 @@ router.get("/admin",tokenAuth, adminCheck, async(req, res, next) => {
     next(error);
   }
 })
-// TODO
+
 router.patch("/:id", tokenAuth, adminCheck, async (req, res, next) => {
   try {
     const {id} = req.params;
-    console.log(id)
     const  {isAdmin} = req.body;
 
     const user = await editIsAdmin({id, isAdmin})
