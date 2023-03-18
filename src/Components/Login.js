@@ -13,10 +13,10 @@ const Login = ({ attemptLogin, setIsLoading })=> {
       '/api/auth/',
       {
         method: 'POST',
-        body: JSON.stringify({ username, password}),
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({ username, password}),
       }
     )
     .then( response => response.json())

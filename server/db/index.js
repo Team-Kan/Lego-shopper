@@ -69,12 +69,12 @@ const createInitialUsers = async () => {
     }),
   ]);
 
-  console.log("--- seeded users ---");
-  console.log(anthony);
-  console.log(nabeel);
   await editIsAdmin(nabeel);
   await editIsAdmin(kristy);
   await editIsAdmin(anthony);
+  console.log("--- seeded users ---");
+  console.log(anthony);
+  console.log(nabeel);
 
   return { nabeel, kristy, anthony };
 };
