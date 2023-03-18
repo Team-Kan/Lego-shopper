@@ -1,5 +1,5 @@
 const fetchCart = async (token) => {
-  const response = await fetch(`api/cart`, {
+  const response = await fetch(`/api/cart`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
