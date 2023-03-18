@@ -76,7 +76,6 @@ const getInactiveCartsByUserId = async (id) => {
     `, [id]);
     
     let carts = attachProductsToCart(rows);
-    console.log(carts);
     carts = Object.values(carts);
     
     return carts;  
