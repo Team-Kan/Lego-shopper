@@ -27,7 +27,7 @@ const fetchCartProducts = async(token, cartId) => {
 
 const updateQuantityFetch = async (token, cartId, productId, quantity) => {
 
-  const response = await fetch(`api/cart-products`, {
+  const response = await fetch(`/api/cart-products`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const updateQuantityFetch = async (token, cartId, productId, quantity) => {
 }
 
 const deleteCartProduct = async(token, cartId, productId) => {
-  const response = await fetch(`api/cart-products`, {
+  const response = await fetch(`/api/cart-products`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const deleteCartProduct = async(token, cartId, productId) => {
 }
 
 const checkoutCart = async(cartId, products, name, email, total) => {  
-  const response = await fetch(`api/cart/${cartId}`, {
+  const response = await fetch(`/api/cart/${cartId}`, {
     method: "PATCH", 
     headers: {
       "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const addProductToCartFetch = async ({
   quantity,
   token,
 }) => {
-  const response = await fetch(`http://localhost:3000/api/cart-products`, {
+  const response = await fetch(`/api/cart-products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
