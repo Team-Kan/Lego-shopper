@@ -40,7 +40,7 @@ const Admin = (props) => {
 
   return (
     <div>
-      <h2>Welcome Admin {auth.username}</h2>
+      <h2 className=" bg-[#006600] text-white p-2">Welcome {auth.username}</h2>
       <div className="grid grid-cols-1 grid-rows-1 sm:gap-10 lg:grid-cols-2 justify-items-center">
         <CreateProductForm
           collections={collections}
