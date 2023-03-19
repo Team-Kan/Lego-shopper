@@ -8,6 +8,8 @@ export {
 export {
     fetchAllCollections,
     fetchCollectionProducts,
+    editCollectionFetch,
+    deleteCollectionFetch
 } from "./collectionFetchCalls";
 
 export {
