@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const saltRounds = process.env.SALT_ROUNDS;
 const salt = bcrypt.genSaltSync(+saltRounds);
 
+
 const createUser = async ({ username, password }) => {
   // we are now not returning the password
   // We are now hashing the passwords before they are sent to the database
@@ -77,7 +78,7 @@ const authenticate = async ({ username, password }) => {
       WHERE username = $1 
     `, [username])
     const isEqual = await bcrypt.compare(password, pass.password);
-    
+
     if(isEqual){
     const SQL = `
       SELECT id, username, "isAdmin"
