@@ -2,10 +2,10 @@ import React from "react";
 import { editUsersAdminPriv } from "../api";
 
 const ChangeAdminForm = (props) => {
-  const { users, displayAllUsers, setIsLoading } = props;
+  const { auth, users, displayAllUsers, setIsLoading } = props;
   const admins = users.filter(({ isAdmin }) => isAdmin);
   const notAdmins = users.filter(({ isAdmin }) => !isAdmin);
-
+  
   const handleEdit = async ({ id, token, isAdmin }) => {
     setIsLoading(true);
     const edit = await editUsersAdminPriv({ token, isAdmin, id });
@@ -34,6 +34,7 @@ const ChangeAdminForm = (props) => {
                   <input
                     type="checkbox"
                     value={id}
+                    disabled={id === auth.id}
                     onClick={(ev) => handleEdit({ id, token, isAdmin })}
                   />
                 </form>
