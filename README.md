@@ -5,6 +5,7 @@ JWT
 ANTHONY_PASSWORD
 KRISTY_PASSWORD
 NABEEL_PASSWORD
+MODE=development
 
 to set up email conformation
 EMAIL //current setup requires a gmail account
