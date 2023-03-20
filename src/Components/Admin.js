@@ -48,6 +48,7 @@ const Admin = (props) => {
           showAllProducts={showAllProducts}
         />
         <ChangeAdminForm
+          auth={auth}
           users={users}
           displayAllUsers={displayAllUsers}
           setIsLoading={setIsLoading}

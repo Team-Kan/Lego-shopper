@@ -35,19 +35,15 @@ nav {
 .collections_brick {
   background-color: #006600;
   margin: 0;
-  padding: 0;
   height: 8rem;
 }
 
 .collections_brick ul {
   list-style-type: none;
-  overflow-x: scroll;
-  overflow-y: hidden;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin: 0;
-  padding: 0;
   height: 8rem;
   gap: 1rem;
 }
@@ -72,6 +68,7 @@ nav {
   color: white;
   text-align: center;
   vertical-align: middle;
+  margin: 0.5rem;
 }
 
 .collections_brick a:hover {
@@ -380,5 +377,26 @@ li{
     background-position: 50% 80% ;
     object-fit: contain;
     background-repeat: none;
+  }
+}
+
+@media(max-width: 850px) {
+  .collections_brick ul {
+    justify-content: flex-start;
+  }
+  .collections_brick {
+    padding: 8px 0 0 0;
+    height: 10rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  .collections_brick::-webkit-scrollbar {
+    width: 8px;
+    padding: 0;
+  }
+  
+  .collections_brick::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background:  black;
   }
 }
