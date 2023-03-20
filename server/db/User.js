@@ -71,14 +71,21 @@ const authenticate = async ({ username, password }) => {
       error.status = 400;
       throw error;
     }
-
+    const {rows: [pass]} = await client.query(`
+      SELECT password
+      FROM users
+      WHERE username = $1 
+    `, [username])
+    const isEqual = await bcrypt.compare(password, pass.password);
+    console.log(isEqual);
+    if(isEqual){
     const SQL = `
       SELECT id, username, "isAdmin"
       FROM users
       WHERE username = $1 and password = $2
     `;
-    const hash = bcrypt.hashSync(password, salt)
-    const {rows: [user]} = await client.query(SQL, [username, hash]);
+    
+    const {rows: [user]} = await client.query(SQL, [username, pass.password]);
   
     if (!user) {
       const error = Error("Password or username are incorrect");
@@ -86,6 +93,11 @@ const authenticate = async ({ username, password }) => {
       throw error;
     }
     return jwt.sign(user, process.env.JWT);
+  } else {
+    const error = Error("Password or username are incorrect");
+    error.status = 401;
+    throw error;
+  }
   } catch (error) {
     throw error;
   }
