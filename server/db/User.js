@@ -77,7 +77,7 @@ const authenticate = async ({ username, password }) => {
       WHERE username = $1 
     `, [username])
     const isEqual = await bcrypt.compare(password, pass.password);
-    console.log(isEqual);
+    
     if(isEqual){
     const SQL = `
       SELECT id, username, "isAdmin"
