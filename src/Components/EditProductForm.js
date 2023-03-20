@@ -114,6 +114,7 @@ const EditProductForm = (props) => {
       ) : (
         <div>Please select A product</div>
       )}
+      <div>{error}</div>
       <button
         className="pl-4 pr-4 mb-4 bg-green-600 rounded-lg shadow-md shadow-green-700 hover:animate-pulse active:bg-green-800 active:animate-none active:translate-y-1"
         onClick={(ev) => setEditProduct(false)}

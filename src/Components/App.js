@@ -178,6 +178,7 @@ const App = () => {
               auth={auth}
               collections={collections}
               showAllCollections={showAllCollections}
+              showAllProducts={showAllProducts}
               products={products}
               setIsLoading={setIsLoading}
             />

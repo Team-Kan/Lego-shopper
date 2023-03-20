@@ -7,14 +7,14 @@ const CreateCollectionForm = (props) => {
   const [error, setError] = useState("");
 
   const handleSubmit = async (ev) => {
-    setIsLoading(true)
+    setIsLoading(true);
     const token = window.localStorage.getItem("token");
     ev.preventDefault();
 
     const newCollection = await createCollectionFetch(token, name);
     if (newCollection.error) {
       setTimeout(() => {
-        setIsLoading(false)
+        setIsLoading(false);
       }, 500);
       return setError(newCollection.error);
     }
@@ -23,7 +23,7 @@ const CreateCollectionForm = (props) => {
     setName("");
     showAllCollections();
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
     }, 500);
     return newCollection;
   };

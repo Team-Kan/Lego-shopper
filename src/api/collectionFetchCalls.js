@@ -18,7 +18,36 @@ const fetchCollectionProducts = async(id) => {
     return result;
 }
 
+const editCollectionFetch = async (token, name, id) => {
+  const response = await fetch(`/api/collections/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({ name })
+  })
+  
+  const results = await response.json();
+  return results
+}
+
+const deleteCollectionFetch = async (token, id) => {
+    const response = await fetch(`/api/collections/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+    })
+  
+    const results = await response.json();
+    return results;
+}
+
 module.exports = {
     fetchAllCollections,
-    fetchCollectionProducts
+    fetchCollectionProducts,
+    editCollectionFetch,
+    deleteCollectionFetch
 };
