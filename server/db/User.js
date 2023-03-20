@@ -77,8 +77,14 @@ const authenticate = async ({ username, password }) => {
       FROM users
       WHERE username = $1 
     `, [username])
-    const isEqual = await bcrypt.compare(password, pass.password);
+    
+    if(!pass){
+      const error = Error("User was not found");
+      error.status = 400;
+      throw error;
+    }
 
+    const isEqual = await bcrypt.compare(password, pass.password);
     if(isEqual){
     const SQL = `
       SELECT id, username, "isAdmin"
