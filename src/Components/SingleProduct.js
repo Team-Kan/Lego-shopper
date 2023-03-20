@@ -53,7 +53,7 @@ const SingleProduct = (props) => {
               Total number of <br /> pieces: {product.pieceCount}
               <br />
               <br />
-              price: {product.price}
+              price: ${product.price}
             </h4>
             <div>
               {product.quantity ? (

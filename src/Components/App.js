@@ -19,7 +19,7 @@ import {
   getUser,
   addProductToCartFetch,
 } from "../api";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 const App = () => {
   const [auth, setAuth] = useState({});
@@ -34,6 +34,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const pathname = location.pathname;
+  const navigate = useNavigate();
 
   const attemptLogin = () => {
     const token = window.localStorage.getItem("token");
@@ -143,6 +144,7 @@ const App = () => {
     window.localStorage.removeItem("token");
     setAuth({});
     setCart({});
+    navigate('/');
   };
 
   return (
