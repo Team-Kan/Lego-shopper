@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { deleteProductFetch } from "../api";
+import { deleteProductFetch } from "../../api";
 
 const DeleteProductForm = (props) => {
   const {product, setDeleteProduct, setIsLoading} = props; 

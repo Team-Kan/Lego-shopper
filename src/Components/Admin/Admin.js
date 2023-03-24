@@ -6,8 +6,8 @@ import {
   CreateProductForm,
   CreateCollectionForm,
   ChangeAdminForm,
-} from ".";
-const { fetchAllUsers, getUser } = require("../api");
+} from "."
+const { fetchAllUsers, getUser } = require("../../api");
 
 const Admin = (props) => {
   const {

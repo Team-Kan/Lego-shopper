@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { editProductFetch } from "../api";
+import { editProductFetch } from "../../api";
 
 const EditProductForm = (props) => {
   const { product, collections, setEditProduct, setIsLoading } = props;

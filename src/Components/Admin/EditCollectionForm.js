@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { editCollectionFetch } from "../api";
+import { editCollectionFetch } from "../../api";
 
 const EditCollectionForm = (props) => {
   const {

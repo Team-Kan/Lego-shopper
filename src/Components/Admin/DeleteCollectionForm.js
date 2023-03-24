@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { deleteCollectionFetch } from "../api";
+import { deleteCollectionFetch } from "../../api";
 
 const DeleteCollectionForm = (props) => {
   const [error, setError] = useState("");

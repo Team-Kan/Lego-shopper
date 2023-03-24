@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createCollectionFetch } from "../api";
+import { createCollectionFetch } from "../../api";
 
 const CreateCollectionForm = (props) => {
   const { showAllCollections, setIsLoading } = props;
