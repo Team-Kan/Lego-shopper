@@ -1,5 +1,5 @@
 import React from "react";
-import { editUsersAdminPriv } from "../api";
+import { editUsersAdminPriv } from "../../api";
 
 const ChangeAdminForm = (props) => {
   const { auth, users, displayAllUsers, setIsLoading } = props;

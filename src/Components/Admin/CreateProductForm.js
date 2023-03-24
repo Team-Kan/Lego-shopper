@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createProductFetch } from "../api";
+import { createProductFetch } from "../../api";
 
 const CreateProductForm = (props) => {
   const { collections, setIsLoading, showAllProducts } = props;
@@ -40,6 +40,7 @@ const CreateProductForm = (props) => {
     setImageUrl("");
     setPieceCount("");
     setQuantity("");
+    setError("");
     showAllProducts();
     setTimeout(() => {
       setIsLoading(false);
