@@ -10,6 +10,13 @@ const tokenAuth = (req, res, next) => {
       name: "Need to login",
     });
   } else {
+    const userInfo = sliceToken(req);
+    if(!userInfo.id){
+      res.status(401).send({
+        message: "token was not accepted",
+        error: "invalid token"
+      })
+    }
     next();
   }
 };
