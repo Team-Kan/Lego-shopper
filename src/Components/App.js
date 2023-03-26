@@ -11,6 +11,7 @@ import {
   SingleProduct,
   Collections,
   Loading,
+  OrderHistory,
 } from ".";
 import {
   fetchAllProducts,
@@ -18,6 +19,7 @@ import {
   fetchCart,
   getUser,
   addProductToCartFetch,
+  getOrderHistory,
 } from "../api";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
@@ -32,6 +34,7 @@ const App = () => {
   const [shipping, setShipping] = useState("$9.95");
   const [finalTotal, setFinalTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [orderHistory, setOrderHistory] = useState([]);
   const location = useLocation();
   const pathname = location.pathname;
   const navigate = useNavigate();
@@ -43,10 +46,18 @@ const App = () => {
     }
   };
 
+  const recieveOrderHistory = async () => {
+    const token = window.localStorage.getItem("token");
+    const history = await getOrderHistory(token);
+    console.log("hist",history)
+    setOrderHistory(history)
+  }
+
   const retrieveCartAndProducts = async () => {
     const token = window.localStorage.getItem("token");
     let cart;
     if (token) {
+      recieveOrderHistory()
       const onlineCart = await fetchCart(token);
       const localCart = await JSON.parse(window.localStorage.getItem("cart"))
       if(localCart){
@@ -235,6 +246,10 @@ const App = () => {
               setIsLoading={setIsLoading}
             />
           }
+        />
+        <Route 
+          path="/order-history"
+          element={<OrderHistory orderHistory={orderHistory}/>}
         />
       </Routes>
     </div>

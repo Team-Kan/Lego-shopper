@@ -97,6 +97,17 @@ const addProductToCartFetch = async ({
   return results;
 };
 
+const getOrderHistory = async (token) => {
+  const response = await fetch(`/api/cart/inactive`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  });
+  const result = await response.json();
+  return result;
+}
 
 const states = [
   'Alabama',
@@ -158,5 +169,6 @@ module.exports = {
   deleteCartProduct, 
   checkoutCart,
   addProductToCartFetch, 
-  states
+  states,
+  getOrderHistory,
 };
