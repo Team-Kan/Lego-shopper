@@ -20,7 +20,7 @@ const getUser = async (token) => {
         {
           method: 'GET',
           headers: {
-            'authorization': token 
+            'Authorization': `Bearer ${token}` 
           }
         }
       )

@@ -15,7 +15,9 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", tokenAuth, async (req, res, next) => {
   try {
-    res.send(await getUserByToken(req.headers.authorization));
+    let token = req.header("Authorization")
+    token = token.slice(7);
+    res.send(await getUserByToken(token));
   } catch (ex) {
     next(ex);
   }
