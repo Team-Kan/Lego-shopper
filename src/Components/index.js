@@ -11,6 +11,7 @@ export { default as Home } from "./Home";
 export { default as Loading } from "./Loading";
 export { default as Login } from "./Login";
 export { default as Nav } from "./Nav";
+export { default as OrderHistory } from "./OrderHistory";
 export { default as Products } from "./Products";
 export { default as PaymentInfo } from "./PaymentInfo";
 export { default as Register } from "./Register";

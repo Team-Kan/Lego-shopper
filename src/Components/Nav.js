@@ -12,7 +12,7 @@ const Nav = (props) => {
         to="/"
         className={
           pathName === "/"
-            ? "underline rounded-md p-2 md:p-4  ml-1 bg-green-300 hover:bg-[#029602] text-black"
+            ? "underline rounded-md p-2 md:p-4 ml-1 bg-green-300 hover:bg-[#029602] text-black"
             : " rounded-md p-2 md:p-4  ml-1 bg-[#006600] hover:bg-[#029602] text-white"
         }
       >
@@ -23,7 +23,7 @@ const Nav = (props) => {
           to="/admin"
           className={
             pathName === "/admin"
-              ? "underline rounded-md p-2 md:p-4  ml-1 bg-green-300 hover:bg-[#029602] text-black"
+              ? "underline rounded-md p-2 md:p-4 ml-1 bg-green-300 hover:bg-[#029602] text-black"
               : " rounded-md p-2 md:p-4  ml-1 bg-[#006600] hover:bg-[#029602] text-white"
           }
         >
@@ -33,11 +33,21 @@ const Nav = (props) => {
       {auth.id ? (
         <>
           <button
-            className=" rounded-md p-2 md:p-4  ml-1 bg-[#006600] hover:bg-[#029602] text-white"
+            className=" rounded-md p-2 md:p-4 ml-1 bg-[#006600] hover:bg-[#029602] text-white"
             onClick={logout}
           >
             Logout {auth.username}
           </button>
+          <Link
+            to="/order-history"
+            className={
+              pathName === "/order-history"
+                ? "underline rounded-md p-2 md:p-4 ml-1 bg-green-300 hover:bg-[#029602] text-black"
+                : " rounded-md p-2 md:p-4 ml-1 bg-[#006600] hover:bg-[#029602] text-white"
+            }
+          >
+            Order History
+          </Link>
         </>
       ) : (
         <>
@@ -45,7 +55,7 @@ const Nav = (props) => {
             to="/login"
             className={
               pathName === "/login"
-                ? "underline rounded-md p-2 md:p-4  ml-1 bg-green-300 hover:bg-[#029602] text-black"
+                ? "underline rounded-md p-2 md:p-4 ml-1 bg-green-300 hover:bg-[#029602] text-black"
                 : " rounded-md p-2 md:p-4  ml-1 bg-[#006600] hover:bg-[#029602] text-white"
             }
           >
@@ -55,7 +65,7 @@ const Nav = (props) => {
             to="/register"
             className={
               pathName === "/register"
-                ? "underline rounded-md p-2 md:p-4  ml-1 bg-green-300 hover:bg-[#029602] text-black"
+                ? "underline rounded-md p-2 md:p-4 ml-1 bg-green-300 hover:bg-[#029602] text-black"
                 : " rounded-md p-2 md:p-4  ml-1 bg-[#006600] hover:bg-[#029602] text-white"
             }
           >

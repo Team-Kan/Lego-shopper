@@ -19,13 +19,13 @@ router.get("/", tokenAuth, async (req, res, next) => {
   }
 });
 
-router.get("/inactive", tokenAuth, async (res, req, next) => {
+router.get("/inactive", tokenAuth, async (req, res, next) => {
   try {
     const {id} = sliceToken(req);
 
     const orderHistory = await getInactiveCartsByUserId(id);
 
-    return orderHistory
+    res.send(orderHistory) 
   } catch (error) {
     next(error)
   }
