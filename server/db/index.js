@@ -1,7 +1,4 @@
 const client = require("./client");
-const { createCollection } = require("./collection");
-const { createCart } = require("./cart");
-const { createProduct } = require("./product");
 const { addProductToCart } = require("./cart_product");
 
 const {
@@ -10,6 +7,33 @@ const {
   authenticate,
   editIsAdmin,
 } = require("./User");
+
+const {
+  createCart,
+  getActiveCartByUserId,
+  getInactiveCartsByUserId,
+  checkoutCart,
+  calcultateOrder,
+} = require("./cart");
+
+const {
+  createCollection,
+  getAllCollections,
+  deleteCollection,
+  editCollection,
+} = require("./collection");
+
+const {
+  createProduct,
+  getAllProducts,
+  getProductsByCollectionId,
+  getProductById,
+  getProductByName,
+  deleteProduct,
+  editProduct,
+} = require("./product");
+
+const {sendMail} = require("./mail")
 
 const syncTables = async () => {
   const SQL = `
@@ -550,7 +574,24 @@ module.exports = {
   syncAndSeed,
   createUser,
   syncTables,
-  authenticate,
   getUserByToken,
   client,
+  getAllProducts,
+  getProductsByCollectionId,
+  getProductById,
+  getProductByName,
+  deleteProduct,
+  editProduct,
+  authenticate,
+  editIsAdmin,
+  createCart,
+  getActiveCartByUserId,
+  getInactiveCartsByUserId,
+  checkoutCart,
+  createCollection,
+  getAllCollections,
+  deleteCollection,
+  editCollection,
+  sendMail,
+  calcultateOrder
 };
