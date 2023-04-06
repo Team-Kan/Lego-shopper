@@ -13,7 +13,7 @@ const {
   getActiveCartByUserId,
   getInactiveCartsByUserId,
   checkoutCart,
-  calcultateOrder,
+  calculateOrder,
 } = require("./cart");
 
 const {
@@ -593,5 +593,5 @@ module.exports = {
   deleteCollection,
   editCollection,
   sendMail,
-  calcultateOrder
+  calculateOrder
 };

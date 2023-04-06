@@ -7,7 +7,7 @@ const {
   getActiveCartByUserId, 
   getInactiveCartsByUserId, 
   createCart,
-  calcultateOrder,
+  calculateOrder,
 } = require("../db/");
 const router = express.Router();
 
@@ -29,7 +29,7 @@ router.post("/total", async(req, res, next) => {
   try {
     const {cart} = req.body;
 
-    const totalInfo = calcultateOrder(cart)
+    const totalInfo = calculateOrder(cart)
 
     res.send(totalInfo)
   } catch (error) {

@@ -101,7 +101,7 @@ const checkoutCart = async(id) => {
     
 }
 
-const calcultateOrder = (cart) => {
+const calculateOrder = (cart) => {
   let items = 0;
   let cost = 0;
   let tax = 0;
@@ -140,5 +140,5 @@ module.exports = {
     getActiveCartByUserId,
     getInactiveCartsByUserId,
     checkoutCart,
-    calcultateOrder
+    calculateOrder
 }
