@@ -31,5 +31,6 @@ export {
   deleteCartProduct,
   addProductToCartFetch,
   getOrderHistory,
-  states
+  states,
+  getTotalForCart
 } from "./cartFetchCalls"

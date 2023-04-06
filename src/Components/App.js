@@ -20,6 +20,7 @@ import {
   getUser,
   addProductToCartFetch,
   getOrderHistory,
+  getTotalForCart,
 } from "../api";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
@@ -78,7 +79,8 @@ const App = () => {
         }
         window.localStorage.removeItem("cart")
       }
-      cart = await fetchCart(token);
+      cart = await fetchCart(token)
+      
     } else {
       cart = await JSON.parse(window.localStorage.getItem("cart"));
       if(!cart){
@@ -93,42 +95,19 @@ const App = () => {
       }
 
     }
-      if (cart.products && cart.products.length) {
-        cart.products.sort((a, b) => a.cartProductId - b.cartProductId);
-        const items = cart.products.reduce(
-          (acc, curr) => acc + curr.quantity,
-          0
-        );
-        setItemCount(items);
-
-        const cost = (  
-              cart.products.reduce(
-                (acc, curr) => acc + curr.price * curr.quantity,
-                0
-              )
-        ).toFixed(2);
-        setTotal(cost);
-
-        const tax = (0.06 * cost).toFixed(2);
-        setTax(tax);
-
-        if (cost > 35) {
-          setShipping("Free");
-          setFinalTotal((Number(tax) + Number(cost)).toFixed(2));
-        } else if (cost < 35 && cost > 0) {
-          setShipping("$9.95");
-          setFinalTotal((Number(tax) + Number(cost) + 9.95).toFixed(2));
-        } else {
-          setFinalTotal((Number(tax) + Number(cost)).toFixed(2));
-        }
-      } else {
-        setItemCount(0);
-        setTotal(0);
-        setTax(0);
-        setShipping("$9.95");
-        setFinalTotal(0);
-      }
-      setCart(cart);
+     setCart(cart);
+     const {
+      itemCount,
+      cost, 
+      tax, 
+      shipping, 
+      finalTotal
+     } = await getTotalForCart(cart)
+      setItemCount(itemCount);
+      setTotal(cost);
+      setTax(tax);
+      setShipping(shipping);
+      setFinalTotal(finalTotal);
   };
 
   const showAllProducts = async () => {

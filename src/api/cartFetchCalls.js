@@ -109,6 +109,20 @@ const getOrderHistory = async (token) => {
   return result;
 }
 
+const getTotalForCart = async (cart) => {
+  const response = await fetch('/api/cart/total', {
+    method: "POST",
+    headers:{
+      "Content-Type" : "application/json",
+    },
+    body: JSON.stringify({ cart })
+  });
+
+  const results = await response.json();
+  
+  return results;
+}
+
 const states = [
   'Alabama',
 'Alaska',
@@ -171,4 +185,5 @@ module.exports = {
   addProductToCartFetch, 
   states,
   getOrderHistory,
+  getTotalForCart,
 };

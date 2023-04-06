@@ -6,6 +6,8 @@ ANTHONY_PASSWORD
 KRISTY_PASSWORD
 NABEEL_PASSWORD
 MODE=development
+STRIPE_KEY
+STRIPE_SECRET_END
 
 to set up email conformation
 EMAIL //current setup requires a gmail account

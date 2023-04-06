@@ -1,8 +1,14 @@
 const express = require("express");
-const { checkoutCart, getActiveCartByUserId, getInactiveCartsByUserId, createCart } = require("../db/cart");
-const { editProduct } = require("../db/product");
 const { tokenAuth, sliceToken } = require("./utils");
-const { sendMail } = require("../db/mail");
+const { 
+  sendMail, 
+  editProduct, 
+  checkoutCart, 
+  getActiveCartByUserId, 
+  getInactiveCartsByUserId, 
+  createCart,
+  calculateOrder,
+} = require("../db/");
 const router = express.Router();
 
 router.get("/", tokenAuth, async (req, res, next) => {
@@ -18,6 +24,19 @@ router.get("/", tokenAuth, async (req, res, next) => {
     next(error);
   }
 });
+
+router.post("/total", async(req, res, next) => {
+  try {
+    const {cart} = req.body;
+
+    const totalInfo = calculateOrder(cart)
+
+    res.send(totalInfo)
+  } catch (error) {
+    next(error)
+  }
+
+})
 
 router.get("/inactive", tokenAuth, async (req, res, next) => {
   try {
