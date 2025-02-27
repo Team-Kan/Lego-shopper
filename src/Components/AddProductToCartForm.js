@@ -17,7 +17,6 @@ const AddProductToCartForm = (props) => {
   const location = useLocation();
   const pathname = location.pathname;
 
-
   const localCart = () => {
     let newProduct = {
       id: product.id,
@@ -36,7 +35,7 @@ const AddProductToCartForm = (props) => {
         setError("cart has hit stock limit.");
       } else {
         const productIndex = cart.products.indexOf(
-          cart.products.find(({ id }) => id === product.id)
+          cart.products.find(({ id }) => id === product.id),
         );
         cart.products[productIndex].quantity = newQuantity;
         window.localStorage.setItem("cart", JSON.stringify(cart));
@@ -58,7 +57,7 @@ const AddProductToCartForm = (props) => {
         token,
         id,
         product.id,
-        newQuantity
+        newQuantity,
       );
       cartProduct.quantity = newQuantity;
       return retrieveCartAndProducts();
@@ -90,9 +89,23 @@ const AddProductToCartForm = (props) => {
   };
 
   return (
-    <form className={pathname === "/" || pathname.startsWith("/collections/") ? "single_product" : "flex bg-[#3E363F] rounded-r-md h-full text-green-200"}>
-      {pathname.startsWith("/product/") ?  <label className="mt-0">Current Stock: {product.quantity}</label> : null}
-      <div className={pathname === "/" || pathname.startsWith("/collections/")  ? "" : "w-40 flex justify-center"}>
+    <form
+      className={
+        pathname === "/" || pathname.startsWith("/collections/")
+          ? "single_product"
+          : "flex bg-[#3E363F] rounded-r-md h-full text-green-200"
+      }
+    >
+      {pathname.startsWith("/product/") ? (
+        <label className="mt-0">Current Stock: {product.quantity}</label>
+      ) : null}
+      <div
+        className={
+          pathname === "/" || pathname.startsWith("/collections/")
+            ? ""
+            : "w-40 flex justify-center"
+        }
+      >
         <button
           className={`pl-3 pr-3 bg-red-400 text-red-200 rounded-md  ${
             !disabled
@@ -108,7 +121,9 @@ const AddProductToCartForm = (props) => {
           -
         </button>
         <input
-          className={"w-10 ml-3 mr-3 border-2 border-green-500 rounded-md text-center"}
+          className={
+            "w-10 ml-3 mr-3 border-2 border-green-500 rounded-md text-center"
+          }
           type="number"
           value={quantity}
           disabled={true}

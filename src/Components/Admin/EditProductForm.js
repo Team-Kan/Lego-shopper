@@ -14,7 +14,7 @@ const EditProductForm = (props) => {
 
   const handleEdit = async (ev, id) => {
     ev.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     const token = window.localStorage.getItem("token");
     const editProduct = await editProductFetch({
       id: product.id,
@@ -29,12 +29,12 @@ const EditProductForm = (props) => {
     });
     if (editProduct.error) {
       setTimeout(() => {
-        setIsLoading(false)
+        setIsLoading(false);
       }, 500);
       return setError(editProduct.message);
     }
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
     }, 500);
     setEditProduct(false);
     return editProduct;

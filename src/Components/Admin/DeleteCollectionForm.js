@@ -3,7 +3,8 @@ import { deleteCollectionFetch } from "../../api";
 
 const DeleteCollectionForm = (props) => {
   const [error, setError] = useState("");
-  const { setDeleteCollection, showAllCollections, setIsLoading, collection } = props;
+  const { setDeleteCollection, showAllCollections, setIsLoading, collection } =
+    props;
   const handleDelete = async (ev) => {
     ev.preventDefault();
     setIsLoading(true);
@@ -19,7 +20,7 @@ const DeleteCollectionForm = (props) => {
       }, 500);
       return setError(deleted.error);
     }
-    showAllCollections()
+    showAllCollections();
     setDeleteCollection(false);
     setTimeout(() => {
       setIsLoading(false);

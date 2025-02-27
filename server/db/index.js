@@ -561,13 +561,13 @@ const createInitialCartProducts = async (firstCart, products) => {
 
 const syncAndSeed = async () => {
   await syncTables();
-  const { anthony, lucy } = await createInitialUsers();
+  // const { anthony, lucy } = await createInitialUsers();
   await createInitialCollections();
   const products = await createInitialProducts();
-  const firstCart = await createCart({ id: anthony.id });
+  // const firstCart = await createCart({ id: anthony.id });
   console.log("---- seeded Cart -----");
-  console.log(firstCart);
-  await createInitialCartProducts(firstCart, products);
+  // console.log(firstCart);
+  // await createInitialCartProducts(firstCart, products);
 };
 
 module.exports = {

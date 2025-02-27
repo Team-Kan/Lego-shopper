@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "tailwind" : "npx tailwindcss -o dist/styles.css",
     "build": "webpack",
-    "build:dev": "npm run build -- --watch --mode=development",
+    "build:dev": "npm run tailwind & npm run build -- --watch --mode=development",
     "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run build:dev",
     "test": "jest --detectOpenHandles",
     "test:db": "jest db --detectOpenHandles",

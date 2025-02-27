@@ -5,7 +5,7 @@ const ChangeAdminForm = (props) => {
   const { auth, users, displayAllUsers, setIsLoading } = props;
   const admins = users.filter(({ isAdmin }) => isAdmin);
   const notAdmins = users.filter(({ isAdmin }) => !isAdmin);
-  
+
   const handleEdit = async ({ id, token, isAdmin }) => {
     setIsLoading(true);
     const edit = await editUsersAdminPriv({ token, isAdmin, id });

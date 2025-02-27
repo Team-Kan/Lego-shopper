@@ -5,29 +5,31 @@ import { AddProductToCartForm } from ".";
 const SingleProduct = (props) => {
   const { retrieveCartAndProducts, products, cart, setIsLoading } = props;
   const [product, setProduct] = useState({});
-  const [disabled, setDisabled] = useState(false)
-  const [cartProduct, setCartProduct] = useState({})
+  const [disabled, setDisabled] = useState(false);
+  const [cartProduct, setCartProduct] = useState({});
   const id = useParams().id;
   const getProduct = async () => {
-    setIsLoading(true)
-    const singleProduct = products.find(product => product.id === +id);
+    setIsLoading(true);
+    const singleProduct = products.find((product) => product.id === +id);
     if (singleProduct) {
       setProduct(singleProduct);
-      if(cart.products){
-        const productInCart = cart.products.find(product => product.id === singleProduct.id);
-        if(productInCart){
-          setCartProduct(productInCart)
+      if (cart.products) {
+        const productInCart = cart.products.find(
+          (product) => product.id === singleProduct.id,
+        );
+        if (productInCart) {
+          setCartProduct(productInCart);
           setDisabled(true);
         }
       }
     }
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
     }, 500);
   };
-  
+
   useEffect(() => {
-      getProduct();
+    getProduct();
   }, [id, products, cart]);
 
   return (
@@ -57,26 +59,24 @@ const SingleProduct = (props) => {
             </h4>
             <div>
               {product.quantity ? (
-                <AddProductToCartForm 
-                  product={product} 
+                <AddProductToCartForm
+                  product={product}
                   retrieveCartAndProducts={retrieveCartAndProducts}
                   cartProduct={cartProduct}
-                  cart={cart} 
-                  disabled={disabled} 
+                  cart={cart}
+                  disabled={disabled}
                   setDisabled={setDisabled}
                   setIsLoading={setIsLoading}
                 />
               ) : (
-                <div 
-                  className="w-1/3 min-w-fit h-full pl-2 pr-2 bg-[#3E363F] border-r-2 border-l-white text-green-200"
-                >
+                <div className="w-1/3 min-w-fit h-full pl-2 pr-2 bg-[#3E363F] border-r-2 border-l-white text-green-200">
                   Out of Stock, check in later!
                 </div>
               )}
             </div>
           </div>
         </div>
-      ) : null }
+      ) : null}
     </div>
   );
 };

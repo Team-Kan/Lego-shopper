@@ -50,64 +50,62 @@ const App = () => {
   const recieveOrderHistory = async () => {
     const token = window.localStorage.getItem("token");
     const history = await getOrderHistory(token);
-    console.log("hist",history)
-    setOrderHistory(history)
-  }
+    console.log("hist", history);
+    setOrderHistory(history);
+  };
 
   const retrieveCartAndProducts = async () => {
     const token = window.localStorage.getItem("token");
     let cart;
     if (token) {
-      recieveOrderHistory()
+      recieveOrderHistory();
       const onlineCart = await fetchCart(token);
-      const localCart = await JSON.parse(window.localStorage.getItem("cart"))
-      if(localCart){
-        if(localCart.products.length){
-          const onlineCartProductIds = onlineCart.products.length ? onlineCart.products.map(product => product.id) : [];
-          const newProducts = localCart.products.filter(({id}) => onlineCartProductIds.indexOf(id) === -1);
-          if(newProducts.length){
-            await Promise.all(newProducts.map(async (product) => {
-              addProductToCartFetch({
-                cartId: onlineCart.id,
-                productId: product.id,
-                quantity: product.quantity,
-                token: token,
-              })
-             
-            }))
+      const localCart = await JSON.parse(window.localStorage.getItem("cart"));
+      if (localCart) {
+        if (localCart.products.length) {
+          const onlineCartProductIds = onlineCart.products.length
+            ? onlineCart.products.map((product) => product.id)
+            : [];
+          const newProducts = localCart.products.filter(
+            ({ id }) => onlineCartProductIds.indexOf(id) === -1,
+          );
+          if (newProducts.length) {
+            await Promise.all(
+              newProducts.map(async (product) => {
+                addProductToCartFetch({
+                  cartId: onlineCart.id,
+                  productId: product.id,
+                  quantity: product.quantity,
+                  token: token,
+                });
+              }),
+            );
           }
         }
-        window.localStorage.removeItem("cart")
+        window.localStorage.removeItem("cart");
       }
-      cart = await fetchCart(token)
-      
+      cart = await fetchCart(token);
     } else {
       cart = await JSON.parse(window.localStorage.getItem("cart"));
-      if(!cart){
+      if (!cart) {
         const newCart = {
           id: "guest",
           isActive: true,
           products: [],
           userId: "guest",
-        }
+        };
         window.localStorage.setItem("cart", JSON.stringify(newCart));
         cart = await JSON.parse(window.localStorage.getItem("cart"));
       }
-
     }
-     setCart(cart);
-     const {
-      itemCount,
-      cost, 
-      tax, 
-      shipping, 
-      finalTotal
-     } = await getTotalForCart(cart)
-      setItemCount(itemCount);
-      setTotal(cost);
-      setTax(tax);
-      setShipping(shipping);
-      setFinalTotal(finalTotal);
+    setCart(cart);
+    const { itemCount, cost, tax, shipping, finalTotal } =
+      await getTotalForCart(cart);
+    setItemCount(itemCount);
+    setTotal(cost);
+    setTax(tax);
+    setShipping(shipping);
+    setFinalTotal(finalTotal);
   };
 
   const showAllProducts = async () => {
@@ -127,14 +125,14 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-   retrieveCartAndProducts();
+    retrieveCartAndProducts();
   }, [auth]);
 
   const logout = () => {
     window.localStorage.removeItem("token");
     setAuth({});
     setCart({});
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -149,19 +147,26 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Home 
-              retrieveCartAndProducts={retrieveCartAndProducts} 
-              cart={cart} 
-              products={products} 
-              collections={collections} 
+            <Home
+              retrieveCartAndProducts={retrieveCartAndProducts}
+              cart={cart}
+              products={products}
+              collections={collections}
               setIsLoading={setIsLoading}
             />
           }
         />
-        <Route path="/login" element={<Login attemptLogin={attemptLogin} setIsLoading={setIsLoading}/>} />
+        <Route
+          path="/login"
+          element={
+            <Login attemptLogin={attemptLogin} setIsLoading={setIsLoading} />
+          }
+        />
         <Route
           path="/register"
-          element={<Register attemptLogin={attemptLogin} setIsLoading={setIsLoading}/>}
+          element={
+            <Register attemptLogin={attemptLogin} setIsLoading={setIsLoading} />
+          }
         />
         <Route
           path="/admin"
@@ -176,16 +181,16 @@ const App = () => {
             />
           }
         />
-        <Route 
-          path="/collections/:id" 
+        <Route
+          path="/collections/:id"
           element={
-            <Collection 
+            <Collection
               cart={cart}
               retrieveCartAndProducts={retrieveCartAndProducts}
               setIsLoading={setIsLoading}
-              />
-            } 
-          />
+            />
+          }
+        />
         <Route
           path="/cart"
           element={
@@ -226,9 +231,9 @@ const App = () => {
             />
           }
         />
-        <Route 
+        <Route
           path="/order-history"
-          element={<OrderHistory orderHistory={orderHistory}/>}
+          element={<OrderHistory orderHistory={orderHistory} />}
         />
       </Routes>
     </div>
