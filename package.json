@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "tailwind" : "npx tailwindcss -o dist/styles.css",
-    "build": "webpack",
+    "build": "webpack & npm run tailwind",
     "build:dev": "npm run tailwind & npm run build -- --watch --mode=development",
     "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run build:dev",
+    "start": "node server/index.js",
     "test": "jest --detectOpenHandles",
     "test:db": "jest db --detectOpenHandles",
     "test:api": "jest api --detectOpenHandles"
