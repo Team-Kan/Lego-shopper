@@ -7,7 +7,7 @@
     "tailwind" : "npx tailwindcss -o dist/styles.css",
     "build": "webpack & npm run tailwind",
     "build:dev": "npm run tailwind & npm run build -- --watch --mode=development",
-    "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run build:dev",
+    "start:dev": "npm run build:dev & nodemon server/index.js --ignore dist/ --ignore src/",
     "start": "node server/index.js",
     "test": "jest --detectOpenHandles",
     "test:db": "jest db --detectOpenHandles",
