@@ -10,22 +10,28 @@ const OrderHistory = (props) => {
         <ul className="w-8/12 mt-4">
           {orderHistory.map((order) => {
             return (
-              <li key={order.id} className="bg-slate-100 p-4 m-6 max-h-[30rem] overflow-scroll">
+              <li
+                key={order.id}
+                className="bg-slate-100 p-4 m-6 max-h-[30rem] overflow-scroll"
+              >
                 <ul>
                   {order.products.map((product) => {
                     return (
-                      <li key={product.id} className=" border-2 p-1 m-1 hover:shadow-sm hover:shadow-green-700">
-                        <Link to={`/product/${product.id}`}>  
-                        <div>
-                          <span>{product.name} </span>
-                          <div className="flex">
-                            <img
-                              className="h-16 w-16 border-2 border-green-600 mr-2"
-                              src={product.imageUrl}
-                            />
-                            <span>amount purchased: {product.quantity}</span>
+                      <li
+                        key={product.id}
+                        className=" border-2 p-1 m-1 hover:shadow-sm hover:shadow-green-700"
+                      >
+                        <Link to={`/product/${product.id}`}>
+                          <div>
+                            <span>{product.name} </span>
+                            <div className="flex">
+                              <img
+                                className="h-16 w-16 border-2 border-green-600 mr-2"
+                                src={product.imageUrl}
+                              />
+                              <span>amount purchased: {product.quantity}</span>
+                            </div>
                           </div>
-                        </div>
                         </Link>
                       </li>
                     );

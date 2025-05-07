@@ -1,36 +1,32 @@
 export {
-    fetchAllProducts,
-    fetchProductById,
-    editProductFetch,
-    deleteProductFetch,
+  fetchAllProducts,
+  fetchProductById,
+  editProductFetch,
+  deleteProductFetch,
 } from "./productFetchCalls";
 
 export {
-    fetchAllCollections,
-    fetchCollectionProducts,
-    editCollectionFetch,
-    deleteCollectionFetch
+  fetchAllCollections,
+  fetchCollectionProducts,
+  editCollectionFetch,
+  deleteCollectionFetch,
 } from "./collectionFetchCalls";
 
-export {
- createUser,
- getUser,
- editUsersAdminPriv
-} from "./userFetchCalls";
+export { createUser, getUser, editUsersAdminPriv } from "./userFetchCalls";
 
 export {
-    fetchAllUsers,
-    createProductFetch,
-    createCollectionFetch,
+  fetchAllUsers,
+  createProductFetch,
+  createCollectionFetch,
 } from "./adminFetchCalls";
 
 export {
-  fetchCart, 
+  fetchCart,
   fetchCartProducts,
   updateQuantityFetch,
   deleteCartProduct,
   addProductToCartFetch,
   getOrderHistory,
   states,
-  getTotalForCart
-} from "./cartFetchCalls"
+  getTotalForCart,
+} from "./cartFetchCalls";

@@ -6,7 +6,7 @@ import {
   CreateProductForm,
   CreateCollectionForm,
   ChangeAdminForm,
-} from "."
+} from ".";
 const { fetchAllUsers, getUser } = require("../../api");
 
 const Admin = (props) => {
@@ -63,10 +63,10 @@ const Admin = (props) => {
             showAllCollections={showAllCollections}
             setIsLoading={setIsLoading}
           />
-          <EditOrDeleteCollection 
+          <EditOrDeleteCollection
             collections={collections}
             showAllCollections={showAllCollections}
-            setIsLoading={setIsLoading} 
+            setIsLoading={setIsLoading}
           />
         </div>
       </div>

@@ -25,7 +25,6 @@ const EditOrDeleteCollection = (props) => {
     setCollection(addedCollection[0]);
   };
 
-
   return (
     <div className="bg-white mb-6 min-h-[20rem] border-2 flex flex-col justify-center items-center border-green-600 rounded-md w-11/12 shadow-md shadow-green-700">
       <EditOrDeleteTemp
@@ -38,8 +37,8 @@ const EditOrDeleteCollection = (props) => {
       />
       {editCollection ? (
         <div className="w-full flex justify-center items-center">
-          <EditCollectionForm 
-            showAllCollections={showAllCollections} 
+          <EditCollectionForm
+            showAllCollections={showAllCollections}
             collection={collection}
             setEditCollection={setEditCollection}
             setIsLoading={setIsLoading}
@@ -48,8 +47,8 @@ const EditOrDeleteCollection = (props) => {
       ) : null}
       {deleteCollection ? (
         <div>
-          <DeleteCollectionForm 
-            setDeleteCollection={setDeleteCollection} 
+          <DeleteCollectionForm
+            setDeleteCollection={setDeleteCollection}
             showAllCollections={showAllCollections}
             setIsLoading={setIsLoading}
             collection={collection}
